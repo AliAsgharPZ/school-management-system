@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props) {
   const post = await db.blogPost.findUnique({ where: { slug }, select: { title: true, excerpt: true } });
   let siteLang = "fa";
   try { siteLang = (await cookies()).get("bahar_site_lang")?.value?.trim() || "fa"; } catch { /* fa */ }
-  const S = siteStringsFor(siteLang).siteStrings;
+  const S = (await siteStringsFor(siteLang)).siteStrings;
   const notFound = S["site.blog.postNotFound"] ?? SITE_CATALOG["site.blog.postNotFound"] ?? "پست یافت نشد";
   if (!post) return { title: `${notFound} | بهار` };
   return { title: `${post.title} | ${S["site.blog.title"] ?? SITE_CATALOG["site.blog.title"] ?? "بلاگ بهار"}`, description: post.excerpt ?? undefined };
@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }: Props) {
     : [];
   let siteLang = "fa";
   try { siteLang = (await cookies()).get("bahar_site_lang")?.value?.trim() || "fa"; } catch { /* fa */ }
-  const site = siteStringsFor(siteLang);
+  const site = await siteStringsFor(siteLang);
   const S = site.siteStrings;
   const tx = (k: string, fb: string): string => S[k] ?? SITE_CATALOG[k] ?? fb;
 

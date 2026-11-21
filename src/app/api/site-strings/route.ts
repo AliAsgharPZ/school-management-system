@@ -9,7 +9,7 @@ import { siteStringsFor, SITE_LANGS } from "@/lib/langs/shipped";
 export async function GET(req: NextRequest) {
   try {
     const code = (req.nextUrl.searchParams.get("lang") || "fa").toLowerCase();
-    const resolved = siteStringsFor(code);
+    const resolved = await siteStringsFor(code);
     return apiOk({
       code: resolved.code,
       direction: resolved.direction,

@@ -40,6 +40,6 @@ export default async function Home() {
     browserLang = acceptLangCode((await headers()).get("accept-language"), SITE_LANGS.map((l) => l.code));
     siteLang = cookieLang || browserLang;
   } catch { /* دیفالت فارسی */ }
-  const site = siteStringsFor(siteLang);
-  return <Landing isLoggedIn={isLoggedIn} androidUrl={androidUrl} windowsUrl={windowsUrl} shadEnabled={shadEnabled} siteLang={site.code} browserLang={browserLang} siteDir={site.direction} siteStrings={site.siteStrings} longStrings={longStringsFor(siteLang).longStrings} siteLangs={SITE_LANGS} />;
+  const site = await siteStringsFor(siteLang);
+  return <Landing isLoggedIn={isLoggedIn} androidUrl={androidUrl} windowsUrl={windowsUrl} shadEnabled={shadEnabled} siteLang={site.code} browserLang={browserLang} siteDir={site.direction} siteStrings={site.siteStrings} longStrings={(await longStringsFor(siteLang)).longStrings} siteLangs={SITE_LANGS} />;
 }

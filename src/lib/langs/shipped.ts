@@ -1,33 +1,16 @@
-import { CATALOG_KEYS, LONG_CATALOG, LONG_KEYS, SITE_CATALOG, SITE_KEYS, validateLanguagePack, validateLongPack, validateSitePack } from "../langs";
-import enPack from "./packs/en.json";
-import arPack from "./packs/ar.json";
-import trPack from "./packs/tr.json";
-import frPack from "./packs/fr.json";
-import esPack from "./packs/es.json";
-import dePack from "./packs/de.json";
-import itPack from "./packs/it.json";
-import ptPack from "./packs/pt.json";
-import urPack from "./packs/ur.json";
-import azPack from "./packs/az.json";
-import hiPack from "./packs/hi.json";
-import zhPack from "./packs/zh.json";
-import jaPack from "./packs/ja.json";
-import koPack from "./packs/ko.json";
-import bnPack from "./packs/bn.json";
-import ruPack from "./packs/ru.json";
-import akPack from "./packs/ak.json";
-import abPack from "./packs/ab.json";
-import anPack from "./packs/an.json";
-import asPack from "./packs/as.json";
-import aaPack from "./packs/aa.json";
-import amPack from "./packs/am.json";
-import bePack from "./packs/be.json";
-import bgPack from "./packs/bg.json";
-import bhPack from "./packs/bh.json";
-import biPack from "./packs/bi.json";
-import afPack from "./packs/af.json";
-import ayPack from "./packs/ay.json";
-import baPack from "./packs/ba.json";
+import {
+  CATALOG_KEYS,
+  LONG_CATALOG,
+  LONG_KEYS,
+  SITE_CATALOG,
+  SITE_KEYS,
+  validateLanguagePack,
+  validateLongPack,
+  validateSitePack,
+} from "../langs";
+
+import langManifest from "./manifest.json";
+import { loadLangPack } from "../shipped-assets";
 
 /* ============================================================
    بهار | بسته‌های زبانِ همراه سامانه (shipped packs) — ۱۳ بسته، راند ۳
@@ -40,6 +23,15 @@ import baPack from "./packs/ba.json";
    بازمی‌گردند. فهرست نام همهٔ زبان‌های جهان (بدون ترجمه) جداگانه در
    ./world.ts است و بستهٔ کامل شمرده نمی‌شود.
    ============================================================ */
+
+type LangManifestEntry = {
+  code: string;
+  name: string;
+  nativeName: string;
+  direction: "rtl" | "ltr";
+};
+
+const LANG_MANIFEST = langManifest as LangManifestEntry[];
 
 export type ShippedLangPack = {
   code: string;
@@ -62,77 +54,199 @@ export type ShippedLangPack = {
   longMissingKeys: string[];
 };
 
-function build(pack: { code: string; name: string; nativeName: string; direction: string; strings: Record<string, string>; siteStrings?: Record<string, string>; longStrings?: Record<string, string> }): ShippedLangPack {
+type LanguagePackInput = {
+  code: string;
+  name: string;
+  nativeName: string;
+  direction: string;
+  strings: Record<string, string>;
+  siteStrings?: Record<string, string>;
+  longStrings?: Record<string, string>;
+};
+
+function build(pack: LanguagePackInput): ShippedLangPack {
   const result = validateLanguagePack(pack);
   const siteResult = validateSitePack(pack);
   const longResult = validateLongPack(pack.longStrings);
-  const missingKeys = CATALOG_KEYS.filter((k) => !(k in pack.strings));
+
+  const missingKeys = CATALOG_KEYS.filter(
+    (k) => !(k in pack.strings),
+  );
+
   const siteStrings = pack.siteStrings ?? {};
-  const siteMissingKeys = SITE_KEYS.filter((k) => !(k in siteStrings));
+  const siteMissingKeys = SITE_KEYS.filter(
+    (k) => !(k in siteStrings),
+  );
+
   const longStrings = pack.longStrings ?? {};
-  const longMissingKeys = LONG_KEYS.filter((k) => !(k in longStrings));
+  const longMissingKeys = LONG_KEYS.filter(
+    (k) => !(k in longStrings),
+  );
+
   return {
-    code: pack.code, name: pack.name, nativeName: pack.nativeName,
+    code: pack.code,
+    name: pack.name,
+    nativeName: pack.nativeName,
     direction: pack.direction as "rtl" | "ltr",
-    strings: pack.strings, keyCount: result.stats.keyCount, coverage: result.stats.coverage, missingKeys,
-    siteStrings, siteKeyCount: siteResult.stats.keyCount, siteCoverage: siteResult.stats.coverage, siteMissingKeys,
-    longStrings, longKeyCount: longResult.stats.keyCount, longCoverage: longResult.stats.coverage, longMissingKeys,
+
+    strings: pack.strings,
+    keyCount: result.stats.keyCount,
+    coverage: result.stats.coverage,
+    missingKeys,
+
+    siteStrings,
+    siteKeyCount: siteResult.stats.keyCount,
+    siteCoverage: siteResult.stats.coverage,
+    siteMissingKeys,
+
+    longStrings,
+    longKeyCount: longResult.stats.keyCount,
+    longCoverage: longResult.stats.coverage,
+    longMissingKeys,
   };
 }
 
-export const SHIPPED_LANG_PACKS: ShippedLangPack[] = [
-  build(enPack as never), build(arPack as never), build(trPack as never), build(frPack as never),
-  build(esPack as never), build(dePack as never), build(itPack as never), build(ptPack as never),
-  build(urPack as never), build(azPack as never), build(hiPack as never), build(zhPack as never),
-  build(jaPack as never),
-  build(koPack as never),
-  build(bnPack as never),
-  build(ruPack as never),
-  build(akPack as never),
-  build(abPack as never),
-  build(anPack as never),
-  build(asPack as never),
-  build(aaPack as never),
-  build(amPack as never),
-  build(bePack as never),
-  build(bgPack as never),
-  build(bhPack as never),
-  build(biPack as never),
-  build(afPack as never),
-  build(ayPack as never),
-  build(baPack as never),
-];
+const builtPackCache = new Map<string, Promise<ShippedLangPack>>();
 
-export function shippedLangPack(code: string): ShippedLangPack | null {
-  return SHIPPED_LANG_PACKS.find((p) => p.code === code.toLowerCase()) ?? null;
+function builtLangPack(code: string): Promise<ShippedLangPack> {
+  const normalized = code.toLowerCase();
+
+  const cached = builtPackCache.get(normalized);
+  if (cached) return cached;
+
+  const pending = loadLangPack(normalized)
+    .then((pack) => build(pack))
+    .catch((error) => {
+      builtPackCache.delete(normalized);
+      throw error;
+    });
+
+  builtPackCache.set(normalized, pending);
+
+  return pending;
+}
+
+let allPacksPromise: Promise<ShippedLangPack[]> | null = null;
+
+/** بارگذاری همهٔ بسته‌های همراه سامانه به ترتیب manifest. */
+export function getShippedLangPacks(): Promise<ShippedLangPack[]> {
+  if (!allPacksPromise) {
+    allPacksPromise = Promise.all(
+      LANG_MANIFEST.map((entry) => builtLangPack(entry.code)),
+    ).catch((error) => {
+      allPacksPromise = null;
+      throw error;
+    });
+  }
+
+  return allPacksPromise;
+}
+
+/** دریافت بستهٔ همراه سامانه بر اساس کد زبان. */
+export async function shippedLangPack(
+  code: string,
+): Promise<ShippedLangPack | null> {
+  if (!code) return null;
+
+  const normalized = code.toLowerCase();
+
+  const exists = LANG_MANIFEST.some(
+    (entry) => entry.code.toLowerCase() === normalized,
+  );
+
+  if (!exists) return null;
+
+  return builtLangPack(normalized);
 }
 
 /** جملات سایت برای یک زبان — فارسی پایه + ترجمهٔ بسته (فقدان = فارسی). */
-export function siteStringsFor(code: string): { code: string; direction: "rtl" | "ltr"; siteStrings: Record<string, string> } {
-  const pack = code && code.toLowerCase() !== "fa" ? shippedLangPack(code) : null;
-  if (!pack) return { code: "fa", direction: "rtl", siteStrings: SITE_CATALOG };
-  return { code: pack.code, direction: pack.direction, siteStrings: { ...SITE_CATALOG, ...pack.siteStrings } };
+export async function siteStringsFor(
+  code: string,
+): Promise<{
+  code: string;
+  direction: "rtl" | "ltr";
+  siteStrings: Record<string, string>;
+}> {
+  const pack =
+    code && code.toLowerCase() !== "fa"
+      ? await shippedLangPack(code)
+      : null;
+
+  if (!pack) {
+    return {
+      code: "fa",
+      direction: "rtl",
+      siteStrings: SITE_CATALOG,
+    };
+  }
+
+  return {
+    code: pack.code,
+    direction: pack.direction,
+    siteStrings: {
+      ...SITE_CATALOG,
+      ...pack.siteStrings,
+    },
+  };
 }
 
 /** متن‌های بلند برای یک زبان — فارسی پایه + ترجمهٔ بسته (فقدان = فارسی). */
-export function longStringsFor(code: string): { code: string; direction: "rtl" | "ltr"; longStrings: Record<string, string> } {
-  const pack = code && code.toLowerCase() !== "fa" ? shippedLangPack(code) : null;
-  if (!pack) return { code: "fa", direction: "rtl", longStrings: LONG_CATALOG };
-  return { code: pack.code, direction: pack.direction, longStrings: { ...LONG_CATALOG, ...pack.longStrings } };
+export async function longStringsFor(
+  code: string,
+): Promise<{
+  code: string;
+  direction: "rtl" | "ltr";
+  longStrings: Record<string, string>;
+}> {
+  const pack =
+    code && code.toLowerCase() !== "fa"
+      ? await shippedLangPack(code)
+      : null;
+
+  if (!pack) {
+    return {
+      code: "fa",
+      direction: "rtl",
+      longStrings: LONG_CATALOG,
+    };
+  }
+
+  return {
+    code: pack.code,
+    direction: pack.direction,
+    longStrings: {
+      ...LONG_CATALOG,
+      ...pack.longStrings,
+    },
+  };
 }
 
 /** زبان‌های قابل انتخاب در سایت عمومی (فارسی + بسته‌های همراه). */
-export const SITE_LANGS: { code: string; nativeName: string; direction: "rtl" | "ltr" }[] = [
-  { code: "fa", nativeName: "فارسی", direction: "rtl" },
-  ...SHIPPED_LANG_PACKS.map((p) => ({ code: p.code, nativeName: p.nativeName, direction: p.direction })),
+export const SITE_LANGS: {
+  code: string;
+  nativeName: string;
+  direction: "rtl" | "ltr";
+}[] = [
+  {
+    code: "fa",
+    nativeName: "فارسی",
+    direction: "rtl",
+  },
+  ...LANG_MANIFEST.map((pack) => ({
+    code: pack.code,
+    nativeName: pack.nativeName,
+    direction: pack.direction,
+  })),
 ];
 
 /** پوشش کاتالوگ به تفکیک دامنه (بخش پیش از نقطهٔ کلید). */
 export function catalogDomains(): Record<string, number> {
   const out: Record<string, number> = {};
+
   for (const k of CATALOG_KEYS) {
     const d = k.split(".")[0];
     out[d] = (out[d] ?? 0) + 1;
   }
+
   return out;
 }

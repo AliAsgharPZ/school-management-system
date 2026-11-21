@@ -1,54 +1,9 @@
 import type { CountryProfile } from "./types";
-import irPack from "./packs/ir.json";
-import irVillages from "./packs/ir-villages.json";
-import aePack from "./packs/ae.json";
-import saPack from "./packs/sa.json";
-import dePack from "./packs/de.json";
-import usPack from "./packs/us.json";
-import frPack from "./packs/fr.json";
-import itPack from "./packs/it.json";
-import caPack from "./packs/ca.json";
-import auPack from "./packs/au.json";
-import esPack from "./packs/es.json";
-import brPack from "./packs/br.json";
-import trPack from "./packs/tr.json";
-import gbPack from "./packs/gb.json";
-import sePack from "./packs/se.json";
-import krPack from "./packs/kr.json";
-import plPack from "./packs/pl.json";
-import nlPack from "./packs/nl.json";
-import bePack from "./packs/be.json";
-import afPack from "./packs/af.json";
-import pkPack from "./packs/pk.json";
-import iqPack from "./packs/iq.json";
-import azPack from "./packs/az.json";
-import cnPack from "./packs/cn.json";
-import jpPack from "./packs/jp.json";
-import egPack from "./packs/eg.json";
-import kzPack from "./packs/kz.json";
-import uzPack from "./packs/uz.json";
-import mnPack from "./packs/mn.json";
-import npPack from "./packs/np.json";
-import khPack from "./packs/kh.json";
-import adPack from "./packs/ad.json";
-import agPack from "./packs/ag.json";
-import aiPack from "./packs/ai.json";
-import alPack from "./packs/al.json";
-import aoPack from "./packs/ao.json";
-import amPack from "./packs/am.json";
-import arPack from "./packs/ar.json";
-import atPack from "./packs/at.json";
-import awPack from "./packs/aw.json";
-import bbPack from "./packs/bb.json";
-import axPack from "./packs/ax.json";
-import baPack from "./packs/ba.json";
-import bdPack from "./packs/bd.json";
-import bfPack from "./packs/bf.json";
-import bhPack from "./packs/bh.json";
-import bgcPack from "./packs/bg.json";
-import bjPack from "./packs/bj.json";
-import bmPack from "./packs/bm.json";
-import biPack from "./packs/bi.json";
+import countryManifest from "./manifest.json";
+import {
+  loadCountryPack,
+  loadIrVillages,
+} from "../shipped-assets";
 
 /* ============================================================
    بهار | بسته‌های کشورِ همراه سامانه (shipped packs)
@@ -68,56 +23,167 @@ export type ShippedPackSummary = {
   code: string;
   name: string;
   nativeName: string;
+  // direction و calendar هم از همان فایل واقعی هر کشور در manifest آمده‌اند،
+  // تا GET /api/countries بتواند از SHIPPED_SUMMARIES استفاده کند.
+  direction: string;
+  calendar: string;
   level: string; // سطح پوشش واقعی، نه ادعا
   provinces: number;
   cities: number;
   villages: number;
+  regions: number;
+  counties: number;
 };
 
-// روستاهای ایران در سطح استان (منبع: GeoNames — تفکیک شهرستان ندارد).
-export const IR_PROVINCE_VILLAGES: Record<string, string[]> = Object.fromEntries(
-  (irVillages as { provinces: { province: string; villages: string[] }[] }).provinces.map((p) => [p.province, p.villages]),
+type CountryManifestEntry = ShippedPackSummary;
+
+const COUNTRY_MANIFEST =
+  countryManifest as CountryManifestEntry[];
+
+export const SHIPPED_SUMMARIES: ShippedPackSummary[] =
+  COUNTRY_MANIFEST.map((entry) => ({
+    code: entry.code,
+    name: entry.name,
+    nativeName: entry.nativeName,
+    direction: entry.direction,
+    calendar: entry.calendar,
+    level: entry.level,
+    provinces: entry.provinces,
+    cities: entry.cities,
+    villages: entry.villages,
+    regions: entry.regions,
+    counties: entry.counties,
+  }));
+
+export const SHIPPED_CODES: string[] =
+  SHIPPED_SUMMARIES.map((pack) => pack.code);
+
+const iranSummary = SHIPPED_SUMMARIES.find(
+  (pack) => pack.code.toUpperCase() === "IR",
 );
-export const IR_PROVINCE_VILLAGE_COUNT = Object.values(IR_PROVINCE_VILLAGES).reduce((s, v) => s + v.length, 0);
 
-export function provinceVillagesFor(code: string, province: string): string[] {
-  if (code.toUpperCase() !== "IR") return [];
-  return IR_PROVINCE_VILLAGES[province] ?? [];
+if (!iranSummary) {
+  throw new Error(
+    "Invalid country manifest: the IR country summary is missing.",
+  );
 }
 
-function summarize(pack: CountryProfile): ShippedPackSummary {
-  const divisions = pack.divisions ?? [];
-  const cities = divisions.reduce((s, d) => s + d.cities.length, 0);
-  const cityVillages = divisions.reduce((s, d) => s + d.cities.reduce((t, c) => t + c.villages.length, 0), 0);
-  const provinceVillages = pack.code === "IR" ? IR_PROVINCE_VILLAGE_COUNT : 0;
-  const villages = cityVillages + provinceVillages;
-  const level = cityVillages > 0 ? "استان + شهر + روستا"
-    : provinceVillages > 0 ? "استان + شهر + روستا (روستاها در سطح استان)"
-    : cities > 0 ? "استان + شهر (روستا هنوز وارد نشده)" : "استان";
+// روستاهای ایران در سطح استان (منبع: GeoNames — تفکیک شهرستان ندارد).
+export const IR_PROVINCE_VILLAGE_COUNT = iranSummary.villages;
+
+let allPacksPromise: Promise<CountryProfile[]> | null = null;
+
+/** بارگذاری همهٔ بسته‌های کشور همراه سامانه، به ترتیب manifest. */
+export function getShippedPacks(): Promise<CountryProfile[]> {
+  if (!allPacksPromise) {
+    allPacksPromise = Promise.all(
+      SHIPPED_CODES.map((code) => loadCountryPack(code)),
+    ).catch((error) => {
+      allPacksPromise = null;
+      throw error;
+    });
+  }
+
+  return allPacksPromise;
+}
+
+/** دریافت بستهٔ کشور همراه سامانه بر اساس کد کشور. */
+export async function shippedPack(
+  code: string,
+): Promise<CountryProfile | null> {
+  if (!code) return null;
+
+  const normalized = code.toUpperCase();
+
+  if (!SHIPPED_CODES.some((item) => item.toUpperCase() === normalized)) {
+    return null;
+  }
+
+  return loadCountryPack(normalized);
+}
+
+/** روستاهای یک استان — فقط برای ایران؛ برای سایر کشورها آرایهٔ خالی. */
+export async function provinceVillagesFor(
+  code: string,
+  province: string,
+): Promise<string[]> {
+  if (code.toUpperCase() !== "IR") {
+    return [];
+  }
+
+  const data = await loadIrVillages();
+
+  const found = data.provinces.find(
+    (item) => item.province === province,
+  );
+
+  return found?.villages ?? [];
+}
+
+export async function placesFor(
+  code: string,
+  province?: string,
+  city?: string,
+): Promise<{
+  provinces: string[];
+  cities: string[];
+  villages: string[];
+  provinceVillages: number;
+} | null> {
+  const pack = await shippedPack(code);
+
+  if (!pack || !pack.divisions) {
+    return null;
+  }
+
+  const provinces = pack.divisions.map(
+    (division) => division.province,
+  );
+
+  if (!province) {
+    return {
+      provinces,
+      cities: [],
+      villages: [],
+      provinceVillages: 0,
+    };
+  }
+
+  const division = pack.divisions.find(
+    (item) => item.province === province,
+  );
+
+  if (!division) {
+    return {
+      provinces,
+      cities: [],
+      villages: [],
+      provinceVillages: 0,
+    };
+  }
+
+  const cities = division.cities.map((item) => item.name);
+  const provinceVillages = (
+    await provinceVillagesFor(code, province)
+  ).length;
+
+  if (!city) {
+    return {
+      provinces,
+      cities,
+      villages: [],
+      provinceVillages,
+    };
+  }
+
+  const found = division.cities.find(
+    (item) => item.name === city,
+  );
+
   return {
-    code: pack.code, name: pack.name, nativeName: pack.nativeName,
-    level, provinces: divisions.length, cities, villages,
+    provinces,
+    cities,
+    villages: found ? found.villages : [],
+    provinceVillages,
   };
-}
-
-export const SHIPPED_PACKS: CountryProfile[] = [irPack as CountryProfile, aePack as CountryProfile, saPack as CountryProfile, dePack as CountryProfile, usPack as CountryProfile, frPack as CountryProfile, itPack as CountryProfile, caPack as CountryProfile, auPack as CountryProfile, esPack as CountryProfile, brPack as CountryProfile, trPack as CountryProfile, gbPack as CountryProfile, sePack as CountryProfile, krPack as CountryProfile, plPack as CountryProfile, nlPack as CountryProfile, bePack as CountryProfile, afPack as CountryProfile, pkPack as CountryProfile, iqPack as CountryProfile, azPack as CountryProfile, cnPack as CountryProfile, jpPack as CountryProfile, egPack as CountryProfile, kzPack as CountryProfile, uzPack as CountryProfile, mnPack as CountryProfile, npPack as CountryProfile, khPack as CountryProfile, adPack as CountryProfile, agPack as CountryProfile, aiPack as CountryProfile, alPack as CountryProfile, aoPack as CountryProfile, amPack as CountryProfile, arPack as CountryProfile, atPack as CountryProfile, awPack as CountryProfile, bbPack as CountryProfile, axPack as CountryProfile, baPack as CountryProfile, bdPack as CountryProfile, bfPack as CountryProfile, bhPack as CountryProfile, bgcPack as CountryProfile, bjPack as CountryProfile, bmPack as CountryProfile, biPack as CountryProfile];
-export const SHIPPED_SUMMARIES: ShippedPackSummary[] = SHIPPED_PACKS.map(summarize);
-export const SHIPPED_CODES = SHIPPED_PACKS.map((p) => p.code);
-
-export function shippedPack(code: string): CountryProfile | null {
-  return SHIPPED_PACKS.find((p) => p.code === code.toUpperCase()) ?? null;
-}
-
-export function placesFor(code: string, province?: string, city?: string): { provinces: string[]; cities: string[]; villages: string[]; provinceVillages: number } | null {
-  const pack = shippedPack(code);
-  if (!pack || !pack.divisions) return null;
-  const provinces = pack.divisions.map((d) => d.province);
-  if (!province) return { provinces, cities: [], villages: [], provinceVillages: 0 };
-  const div = pack.divisions.find((d) => d.province === province);
-  if (!div) return { provinces, cities: [], villages: [], provinceVillages: 0 };
-  const cities = div.cities.map((c) => c.name);
-  const provinceVillages = provinceVillagesFor(code, province).length;
-  if (!city) return { provinces, cities, villages: [], provinceVillages };
-  const found = div.cities.find((c) => c.name === city);
-  return { provinces, cities, villages: found ? found.villages : [], provinceVillages };
 }

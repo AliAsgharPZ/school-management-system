@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { apiOk, ApiError, handleApiError, requireUser, readJson, rateLimit, ipOf, demoWriteBlock} from "@/lib/api";
 import { CATALOG_KEYS, validateLanguagePack, LANG_PACK_MAX_BYTES } from "@/lib/langs";
-import { SHIPPED_LANG_PACKS } from "@/lib/langs/shipped";
+import { getShippedLangPacks } from "@/lib/langs/shipped";
 
 export async function GET(req: NextRequest) {
   try {
@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
     // زبان‌های ACTIVE برای انتخاب کاربران — بسته‌های همراه سامانه (shipped)
     // + بسته‌های کاستوم فعالِ پایگاه داده. بدون این ترکیب، انتخاب‌گر زبان
     // فقط فارسی نشان می‌داد و ۱۱ بستهٔ همراه سامانه نامرئی بودند (باگ دیده‌شدن، راند ۳).
-    const shippedSelectable = SHIPPED_LANG_PACKS.map((p) => ({ code: p.code, name: p.name, nativeName: p.nativeName, direction: p.direction, source: "shipped" as const }));
+    const shippedSelectable = (await getShippedLangPacks()).map((p) => ({ code: p.code, name: p.name, nativeName: p.nativeName, direction: p.direction, source: "shipped" as const }));
     const shippedCodes = new Set(shippedSelectable.map((p) => p.code));
     const selectable = [
       ...shippedSelectable,

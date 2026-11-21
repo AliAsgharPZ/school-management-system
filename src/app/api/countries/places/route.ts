@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
   try {
     const q = new URL(req.url).searchParams;
     const code = (q.get("code") ?? "IR").toUpperCase();
-    const result = placesFor(code, q.get("province") ?? undefined, q.get("city") ?? undefined);
+    const result = await placesFor(code, q.get("province") ?? undefined, q.get("city") ?? undefined);
     if (!result) return apiErr(404, `بستهٔ کشور ${code} همراه سامانه نیست.`, "NOT_SHIPPED", { shipped: SHIPPED_CODES });
     return apiOk({ code, ...result });
   } catch (e) {

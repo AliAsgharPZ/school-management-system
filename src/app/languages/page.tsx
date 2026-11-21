@@ -7,7 +7,7 @@ import {
 import { cookies } from "next/headers";
 import { db } from "@/lib/db";
 import { CATALOG, SITE_CATALOG, LONG_CATALOG } from "@/lib/langs";
-import { siteStringsFor, longStringsFor, SHIPPED_LANG_PACKS } from "@/lib/langs/shipped";
+import { siteStringsFor, longStringsFor, getShippedLangPacks } from "@/lib/langs/shipped";
 import { SiteLangSelect } from "@/components/shared/site-lang-select";
 import { faDigits } from "@/lib/persian";
 import { getActiveCountryPublic } from "@/lib/country/server";
@@ -19,7 +19,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata() {
   let siteLang = "fa";
   try { siteLang = (await cookies()).get("bahar_site_lang")?.value?.trim() || "fa"; } catch { /* fa */ }
-  const S = siteStringsFor(siteLang).siteStrings;
+  const S = (await siteStringsFor(siteLang)).siteStrings;
   return {
     title: S["site.meta.languages.title"] ?? SITE_CATALOG["site.meta.languages.title"],
     description: S["site.meta.languages.desc"] ?? SITE_CATALOG["site.meta.languages.desc"],
@@ -80,12 +80,13 @@ export default async function LanguagesPage() {
   // گام‌ها، قواعد، متن‌های بلند و کاتالوگ کیت به زبان سایت بازدیدکننده (fallback فارسی)
   let siteLang = "fa";
   try { siteLang = (await cookies()).get("bahar_site_lang")?.value?.trim() || "fa"; } catch { /* fa */ }
-  const S = siteStringsFor(siteLang).siteStrings;
+  const S = (await siteStringsFor(siteLang)).siteStrings;
   const st = (k: string): string => S[k] ?? SITE_CATALOG[k] ?? k;
-  const L = longStringsFor(siteLang).longStrings;
+  const L = (await longStringsFor(siteLang)).longStrings;
   const tx = (k: string, fb: string): string => L[k] ?? S[k] ?? fb;
   const siteKeys = Object.entries(SITE_CATALOG).filter(([k, v]) => shadEnabled || !/شاد|shad/i.test(`${k} ${v}`));
   const longKeys = Object.entries(LONG_CATALOG).filter(([k, v]) => shadEnabled || !/شاد|shad/i.test(`${k} ${v}`));
+  const shippedPacks = await getShippedLangPacks();
 
   return (
     <div dir="rtl" className="min-h-screen bg-background flex flex-col text-foreground">
@@ -162,7 +163,7 @@ export default async function LanguagesPage() {
             {tx("site.kit.languages.shippedIntro", "این بسته‌ها با خود سامانه می‌آیند و نیاز به بارگذاری ندارند.")}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {SHIPPED_LANG_PACKS.map((p) => (
+            {shippedPacks.map((p) => (
               <div key={p.code} className="b-card-sm p-4 text-center">
                 <div className="text-lg font-bold truncate">{p.nativeName}</div>
                 <div className="text-xs text-steel mb-1">{p.name} · {p.direction === "ltr" ? tx("site.kit.languages.dirLtr", "چپ‌به‌راست") : tx("site.kit.languages.dirRtl", "راست‌به‌چپ")}</div>

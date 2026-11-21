@@ -21,7 +21,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata() {
   let siteLang = "fa";
   try { siteLang = (await cookies()).get("bahar_site_lang")?.value?.trim() || "fa"; } catch { /* fa */ }
-  const S = siteStringsFor(siteLang).siteStrings;
+  const S = (await siteStringsFor(siteLang)).siteStrings;
   return {
     title: S["site.meta.countries.title"] ?? SITE_CATALOG["site.meta.countries.title"],
     description: S["site.meta.countries.desc"] ?? SITE_CATALOG["site.meta.countries.desc"],
@@ -160,9 +160,9 @@ export default async function CountriesPage() {
   // گام‌ها، مستند فیلدها، نکات و متن‌های بلند کیت به زبان سایت بازدیدکننده (fallback فارسی)
   let siteLang = "fa";
   try { siteLang = (await cookies()).get("bahar_site_lang")?.value?.trim() || "fa"; } catch { /* fa */ }
-  const S = siteStringsFor(siteLang).siteStrings;
+  const S = (await siteStringsFor(siteLang)).siteStrings;
   const st = (k: string): string => S[k] ?? SITE_CATALOG[k] ?? k;
-  const L = longStringsFor(siteLang).longStrings;
+  const L = (await longStringsFor(siteLang)).longStrings;
   const tx = (k: string, fb: string): string => L[k] ?? S[k] ?? fb;
   const fieldKey = (n: string): string => n.toLowerCase().replace(/[^a-z0-9]+/g, ".").replace(/^\.|\.$/g, "");
   const fieldRule = (sec: string, f: { name: string; rule: string }): string => {

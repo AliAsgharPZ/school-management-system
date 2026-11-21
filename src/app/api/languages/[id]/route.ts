@@ -26,7 +26,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
       // بستهٔ همراه سامانه هم انتخاب‌پذیر است (قبلاً ۴۰۴ می‌داد و ترجیح
       // کاربر برای زبان‌های shipped هرگز ذخیره نمی‌شد — باگ دیده‌شدن، راند ۳).
       const { shippedLangPack } = await import("@/lib/langs/shipped");
-      const shipped = shippedLangPack(id);
+      const shipped = await shippedLangPack(id);
       if (shipped) {
         await db.user.update({ where: { id: me.id }, data: { langCode: shipped.code } });
         return apiOk({ langCode: shipped.code });

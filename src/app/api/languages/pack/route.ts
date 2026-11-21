@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
 
     // بازگشت به بستهٔ همراه سامانه — بدون این، انتخاب زبانِ shipped
     // همیشه به فارسی برمی‌گشت (باگ دیده‌شدن، راند ۳).
-    const shipped = shippedLangPack(code);
+    const shipped = await shippedLangPack(code);
     if (shipped) {
       return apiOk({
         code: shipped.code,

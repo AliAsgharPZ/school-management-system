@@ -1,0 +1,176 @@
+[
+  {
+    "code": "en",
+    "name": "انگلیسی",
+    "nativeName": "English",
+    "direction": "ltr"
+  },
+  {
+    "code": "ar",
+    "name": "عربی",
+    "nativeName": "العربية",
+    "direction": "rtl"
+  },
+  {
+    "code": "tr",
+    "name": "ترکی استانبولی",
+    "nativeName": "Türkçe",
+    "direction": "ltr"
+  },
+  {
+    "code": "fr",
+    "name": "فرانسوی",
+    "nativeName": "Français",
+    "direction": "ltr"
+  },
+  {
+    "code": "es",
+    "name": "اسپانیایی",
+    "nativeName": "Español",
+    "direction": "ltr"
+  },
+  {
+    "code": "de",
+    "name": "آلمانی",
+    "nativeName": "Deutsch",
+    "direction": "ltr"
+  },
+  {
+    "code": "it",
+    "name": "ایتالیایی",
+    "nativeName": "Italiano",
+    "direction": "ltr"
+  },
+  {
+    "code": "pt",
+    "name": "پرتغالی",
+    "nativeName": "Português",
+    "direction": "ltr"
+  },
+  {
+    "code": "ur",
+    "name": "اردو",
+    "nativeName": "اردو",
+    "direction": "rtl"
+  },
+  {
+    "code": "az",
+    "name": "آذربایجانی",
+    "nativeName": "Azərbaycanca",
+    "direction": "ltr"
+  },
+  {
+    "code": "hi",
+    "name": "هندی",
+    "nativeName": "हिन्दी",
+    "direction": "ltr"
+  },
+  {
+    "code": "zh",
+    "name": "چینی",
+    "nativeName": "中文",
+    "direction": "ltr"
+  },
+  {
+    "code": "ja",
+    "name": "ژاپنی",
+    "nativeName": "日本語",
+    "direction": "ltr"
+  },
+  {
+    "code": "ko",
+    "name": "کره‌ای",
+    "nativeName": "한국어",
+    "direction": "ltr"
+  },
+  {
+    "code": "bn",
+    "name": "بنگالی",
+    "nativeName": "বাংলা",
+    "direction": "ltr"
+  },
+  {
+    "code": "ru",
+    "name": "روسی",
+    "nativeName": "Русский",
+    "direction": "ltr"
+  },
+  {
+    "code": "ak",
+    "name": "آکان",
+    "nativeName": "Akan",
+    "direction": "ltr"
+  },
+  {
+    "code": "ab",
+    "name": "آبخازی",
+    "nativeName": "Abkhazian",
+    "direction": "ltr"
+  },
+  {
+    "code": "an",
+    "name": "آراگونی",
+    "nativeName": "Aragonés",
+    "direction": "ltr"
+  },
+  {
+    "code": "as",
+    "name": "آسامی",
+    "nativeName": "অসমীয়া",
+    "direction": "ltr"
+  },
+  {
+    "code": "aa",
+    "name": "آفاری",
+    "nativeName": "Afar",
+    "direction": "ltr"
+  },
+  {
+    "code": "am",
+    "name": "امهری",
+    "nativeName": "አማርኛ",
+    "direction": "ltr"
+  },
+  {
+    "code": "be",
+    "name": "بلاروسی",
+    "nativeName": "Беларуская",
+    "direction": "ltr"
+  },
+  {
+    "code": "bg",
+    "name": "بلغاری",
+    "nativeName": "Български",
+    "direction": "ltr"
+  },
+  {
+    "code": "bh",
+    "name": "بیهاری",
+    "nativeName": "बिहारी",
+    "direction": "ltr"
+  },
+  {
+    "code": "bi",
+    "name": "بیسلاما",
+    "nativeName": "Bislama",
+    "direction": "ltr"
+  },
+  {
+    "code": "af",
+    "name": "آفریکانس",
+    "nativeName": "Afrikaans",
+    "direction": "ltr"
+  },
+  {
+    "code": "ay",
+    "name": "آیمارا",
+    "nativeName": "Aymara",
+    "direction": "ltr"
+  },
+  {
+    "code": "ba",
+    "name": "باشقیری",
+    "nativeName": "Башҡортса",
+    "direction": "ltr"
+  }
+]

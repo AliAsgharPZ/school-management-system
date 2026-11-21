@@ -15,7 +15,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata() {
   let siteLang = "fa";
   try { siteLang = (await cookies()).get("bahar_site_lang")?.value?.trim() || "fa"; } catch { /* fa */ }
-  const S = siteStringsFor(siteLang).siteStrings;
+  const S = (await siteStringsFor(siteLang)).siteStrings;
   return {
     title: S["site.meta.blog.title"] ?? SITE_CATALOG["site.meta.blog.title"],
     description: S["site.meta.blog.desc"] ?? SITE_CATALOG["site.meta.blog.desc"],
@@ -74,7 +74,7 @@ export default async function BlogIndexPage({ searchParams }: Props) {
 
   let siteLang = "fa";
   try { siteLang = (await cookies()).get("bahar_site_lang")?.value?.trim() || "fa"; } catch { /* fa */ }
-  const site = siteStringsFor(siteLang);
+  const site = await siteStringsFor(siteLang);
   const S = site.siteStrings;
   const tx = (k: string, fb: string): string => S[k] ?? SITE_CATALOG[k] ?? fb;
 
