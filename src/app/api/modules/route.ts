@@ -6,7 +6,7 @@ import { requireUser, apiOk, apiErr, handleApiError, requireSchoolId } from "@/l
 const CODES = ["edu", "att", "fin", "par", "health", "trans", "lib", "extra", "admin", "welfare", "tech", "events"] as const;
 type Def = { slug: string; category: string; categoryCode: string; title: string; description: string; fields: string[]; roles: string[]; statuses: string[] };
 
-const DESIGNED_FILES = ["designed-batch1.json", "designed-batch2.json", "designed-batch3.json", "designed-batch4.json", "designed-batch5.json", "designed-batch6.json", "designed-batch7.json", "designed-batch8.json"] as const;
+const DESIGNED_FILES = ["designed-batch1.json", "designed-batch2.json", "designed-batch3.json", "designed-batch4.json", "designed-batch5.json", "designed-batch6.json", "designed-batch7.json", "designed-batch8.json", "designed-batch9.json"] as const;
 function loadDesigned(): Def[] {
   let out: Def[] = [];
   for (const name of DESIGNED_FILES) {
