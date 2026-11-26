@@ -527,6 +527,7 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
   background: var(--spring-soft);
   color: var(--ink-deep);
 }
+.dark .b-btn-spring:not(:disabled):hover { color: #051610; }
 .b-btn-spring:active {
   background: var(--spring-deep);
 }
