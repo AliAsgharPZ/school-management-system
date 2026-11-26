@@ -1,5 +1,5 @@
 # قرارداد کامپوننت‌های طراحی بهار
-نسخه: 3.0 · مکمل `docs/design-language.md`
+نسخه: 3.1 · مکمل `docs/design-language.md`
 
 این سند قرارداد رفتاری و بصری کامپوننت‌های مشترک است. کامپوننت فقط وقتی «آماده» است که ظاهر، API، دسترس‌پذیری، حالت‌های خطا و رفتار موبایل آن مشخص باشد.
 
@@ -149,3 +149,11 @@
 - selectorهای `:has`، sticky، overflow و z-index باید روی Chromium و WebKit تست شوند.
 - کلاس‌های قدیمی فقط پس از مهاجرت تمام مصرف‌کننده‌ها حذف شوند.
 - اصلاح باگ باید با تست بازتولیدکننده همراه باشد؛ «به نظر درست می‌آید» معیار پذیرش نیست.
+
+
+## 15. قرارداد اتصال به پوستهٔ بهار
+
+- پوستهٔ عملیاتی باید از `data-bahar-shell`، `data-bahar-sidebar`، `data-bahar-nav-link`، `data-bahar-topbar` و `data-bahar-main` استفاده کند.
+- KPIهای مشترک باید `data-tone` را از نوع معنایی خود expose کنند؛ CSS نباید با selectorهای مبتنی بر متن یا ترتیب فرزندان، رنگ یک KPI را حدس بزند.
+- variant اصلی Button با `primary` یا `default` مشخص می‌شود؛ variantهای secondary/outline/ghost نباید پس‌زمینهٔ سبز primary بگیرند.
+- استایل sticky header جدول فقط داخل scroll container جدول اعمال شود؛ جدول‌های عادی و چاپی نباید sticky شوند.
