@@ -9,7 +9,7 @@ import { Select, useConfirm } from "@/components/shared/pickers";
 import { enDigits, todayKey } from "@/lib/persian";
 import { useLang } from "@/lib/i18n";
 
-type StaffMark = { status: string; checkIn: string; checkOut: string };
+type StaffMark = { status: string; checkIn: string; checkOut: string; note: string };
 type StaffRow = {
   user: { id: string; firstName: string; lastName: string; role: string };
   record: { status: string; checkIn: string | null; checkOut: string | null; note: string | null } | null;
@@ -18,7 +18,7 @@ type MgrData = { manager: true; date: string; staff: StaffRow[] };
 type OwnData = {
   manager: false;
   date: string;
-  mine: Array<{ id: string; date: string; status: string; checkIn: string | null; checkOut: string | null }>;
+  mine: Array<{ id: string; date: string; status: string; checkIn: string | null; checkOut: string | null; note: string | null }>;
 };
 
 const STATUS_OPTIONS = [
@@ -63,7 +63,7 @@ export default function StaffAttendancePage() {
             next[row.user.id] = {
               status: row.record?.status ?? "",
               checkIn: row.record?.checkIn ?? "",
-              checkOut: row.record?.checkOut ?? "",
+              checkOut: row.record?.checkOut ?? "",\n              note: row.record?.note ?? "",
             };
           }
           setMarks(next);
@@ -89,7 +89,7 @@ export default function StaffAttendancePage() {
   function updateMark(userId: string, patch: Partial<StaffMark>) {
     setMarks((current) => ({
       ...current,
-      [userId]: { status: "", checkIn: "", checkOut: "", ...current[userId], ...patch },
+      [userId]: { status: "", checkIn: "", checkOut: "", note: "", ...current[userId], ...patch },
     }));
   }
 
@@ -120,7 +120,7 @@ export default function StaffAttendancePage() {
         userId,
         status: mark.status,
         checkIn: mark.checkIn || undefined,
-        checkOut: mark.checkOut || undefined,
+        checkOut: mark.checkOut || undefined,\n        note: mark.note || undefined,
       }));
     if (!records.length) {
       toast.error(t("common.errorShort"));
@@ -237,10 +237,10 @@ export default function StaffAttendancePage() {
           </div>
         ) : (
           data.staff.map((row) => {
-            const mark = marks[row.user.id] ?? { status: "", checkIn: "", checkOut: "" };
+            const mark = marks[row.user.id] ?? { status: "", checkIn: "", checkOut: "", note: "" };
             const fullName = `${row.user.firstName} ${row.user.lastName}`;
             return (
-              <div key={row.user.id} className="grid grid-cols-1 gap-3 p-4 md:grid-cols-[minmax(12rem,1fr)_12rem_9rem_9rem] md:items-center">
+              <div key={row.user.id} className="grid grid-cols-1 gap-3 p-4 md:grid-cols-[minmax(12rem,1fr)_12rem_8rem_8rem_minmax(12rem,1.2fr)] md:items-center">
                 <div className="min-w-0">
                   <b className="text-sm font-semibold">{fullName}</b>
                   <span className="block text-xs text-steel">{t(ROLE_TKEY[row.user.role] ?? row.user.role)}</span>
