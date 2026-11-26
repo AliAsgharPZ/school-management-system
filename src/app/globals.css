@@ -1467,7 +1467,7 @@ body { background: var(--background); }
   --spring: #00825e;
   --spring-deep: #006749;
   --spring-soft: #00b37d;
-  --spring-tint: #e5f3ed;
+  --spring-tint: #e2f3ec;
   --blossom: #e5548b;
   --blossom-tint: #fff0f5;
   --blossom-foreground: #3b1425;
@@ -1498,7 +1498,7 @@ body { background: var(--background); }
   --secondary-foreground: #24332b;
   --muted: #edf2ee;
   --muted-foreground: #586b60;
-  --accent: #e5f3ed;
+  --accent: #e2f3ec;
   --accent-foreground: #00583f;
   --destructive: #c9364c;
   --destructive-foreground: #ffffff;
