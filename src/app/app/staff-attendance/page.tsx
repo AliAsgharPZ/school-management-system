@@ -37,7 +37,8 @@ const ROLE_TKEY: Record<string, string> = {
 };
 
 export default function StaffAttendancePage() {
-  const { t } = useLang();\n  const confirm = useConfirm();
+  const { t } = useLang();
+  const confirm = useConfirm();
   const [data, setData] = useState<MgrData | OwnData | null>(null);
   const [date, setDate] = useState(todayKey());
   const [marks, setMarks] = useState<Record<string, StaffMark>>({});
@@ -153,7 +154,8 @@ export default function StaffAttendancePage() {
                         className="b-btn b-btn-ghost b-btn-sm text-destructive"
                         aria-label={t("staffAttendance.hzf-rkvrd")}
                         onClick={async () => {
-                          const accepted = await confirm({ title: t("staffAttendance.ayn-rkvrd-hzvr-hzf-shvd"), danger: true });\n                          if (!accepted) return;
+                          const accepted = await confirm({ title: t("staffAttendance.ayn-rkvrd-hzvr-hzf-shvd"), danger: true });
+                          if (!accepted) return;
                           try {
                             await apiDelete(`/api/staff-attendance?id=${encodeURIComponent(record.id)}`);
                             toast.success(t("staffAttendance.hzf-shd"));
