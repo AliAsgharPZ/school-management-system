@@ -86,10 +86,10 @@ export async function POST(req: NextRequest) {
       if (!STATUSES.includes(record.status as (typeof STATUSES)[number])) {
         return apiErr(400, "وضعیت حضور و غیاب معتبر نیست.", "INVALID_STATUS");
       }
-      if (record.checkIn && !/^([01]\\d|2[0-3]):[0-5]\\d$/.test(record.checkIn)) {
+      if (record.checkIn && !/^([01]\d|2[0-3]):[0-5]\d$/.test(record.checkIn)) {
         return apiErr(400, "ساعت ورود معتبر نیست.", "INVALID_CHECK_IN");
       }
-      if (record.checkOut && !/^([01]\\d|2[0-3]):[0-5]\\d$/.test(record.checkOut)) {
+      if (record.checkOut && !/^([01]\d|2[0-3]):[0-5]\d$/.test(record.checkOut)) {
         return apiErr(400, "ساعت خروج معتبر نیست.", "INVALID_CHECK_OUT");
       }
       if (record.checkIn && record.checkOut && record.checkOut < record.checkIn) {
