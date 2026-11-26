@@ -4,7 +4,9 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
-   بهار | Bahar School Management — Design Language v2\n   Minimal operational surfaces, balanced data density,\n   precise hierarchy and the proprietary Bahar spring palette.
+   بهار | Bahar School Management — Design Language v2
+   Minimal operational surfaces, balanced data density,
+   precise hierarchy and the proprietary Bahar spring palette.
    - Spring Green  #00825E  (custom primary)
    - Blossom Pink  #E5548B  (seasonal accent, used sparingly)
    ============================================================ */
@@ -521,7 +523,10 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
 .dark .b-btn-spring {
   color: #051610;
 }
-.b-btn-spring:not(:disabled):hover {\n  background: var(--spring-soft);\n  color: var(--ink-deep);\n}
+.b-btn-spring:not(:disabled):hover {
+  background: var(--spring-soft);
+  color: var(--ink-deep);
+}
 .b-btn-spring:active {
   background: var(--spring-deep);
 }
@@ -583,7 +588,8 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
   border: 1px solid var(--hairline-soft);
   border-radius: 18px;
 }
-.b-card-lg {\n  border-radius: 18px;
+.b-card-lg {
+  border-radius: 18px;
   border: 1px solid var(--hairline-soft);
   background: var(--card);
 }
@@ -597,9 +603,14 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
   border: 1px solid var(--hairline-soft);
   background: var(--card);
 }
-.b-card-ink {\n  background: var(--invert);\n  color: var(--invert-foreground);\n  border-radius: 18px;
+.b-card-ink {
+  background: var(--invert);
+  color: var(--invert-foreground);
+  border-radius: 18px;
 }
-.b-card-tint {\n  background: var(--spring-tint);\n  border-radius: 16px;
+.b-card-tint {
+  background: var(--spring-tint);
+  border-radius: 16px;
   border: 1px solid color-mix(in srgb, var(--spring) 14%, transparent);
 }
 .b-shadow-rail {
