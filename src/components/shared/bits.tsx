@@ -54,7 +54,7 @@ export function PageHeader({
   return (
     <header data-bahar-page-heading className="no-print flex flex-wrap items-center justify-between gap-4 mb-6">
       <div className="flex min-w-0 flex-col gap-1.5">
-        <h1 className="text-[24px] md:text-[30px] font-semibold leading-[1.35] text-ink">
+        <h1 className="text-[26px] md:text-[32px] font-bold leading-[1.3] tracking-[-0.035em] text-ink">
           {grad ? <span className="b-grad-text">{title}</span> : title}
         </h1>
         {desc && <p className="text-sm text-steel max-w-3xl leading-7">{desc}</p>}
@@ -83,7 +83,7 @@ export function StatCard({
   };
   return (
     <article data-bahar-kpi data-tone={tone} className="b-card-sm b-rise b-card-hover bahar-stat-card p-4 sm:p-5 flex items-center gap-3 sm:gap-4">
-      <span className={`bahar-stat-icon w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 ${tones[tone]}`}>
+      <span className={`bahar-stat-icon w-11 h-11 rounded-xl flex items-center justify-center shrink-0 shadow-sm ${tones[tone]}`}>
         <Icon className="w-5 h-5" />
       </span>
       <div className="flex flex-col min-w-0 gap-1">
