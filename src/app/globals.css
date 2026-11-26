@@ -1428,3 +1428,40 @@ aside a:not([aria-current="page"]):hover {
   #main-content .b-card-hover:hover,
   #main-content .bahar-stat-card:hover { transform: none; }
 }
+
+
+/* Shell refinements: nav state, rail rhythm, and persistent workspace header. */
+[data-bahar-shell] > .flex-1 > aside {
+  background: var(--card);
+  border-color: var(--hairline-soft);
+}
+[data-bahar-shell] > .flex-1 > aside > div {
+  background: var(--card);
+}
+[data-bahar-shell] > .flex-1 > aside a[aria-current="page"] {
+  color: var(--spring-deep);
+  font-weight: 800;
+}
+[data-bahar-shell] > .flex-1 > aside a[aria-current="page"] > span[style*="z-index"] {
+  background: var(--spring-tint);
+  border: 1px solid color-mix(in srgb, var(--spring) 13%, transparent);
+}
+[data-bahar-shell] > .flex-1 > aside a:not([aria-current="page"]) {
+  color: var(--steel);
+}
+[data-bahar-shell] > .flex-1 > aside a:not([aria-current="page"]):hover {
+  color: var(--spring-deep);
+  background: color-mix(in srgb, var(--spring-tint) 72%, transparent);
+}
+[data-bahar-shell] > .flex-1 > div > header {
+  background: color-mix(in srgb, var(--background) 88%, transparent);
+  backdrop-filter: blur(18px) saturate(150%);
+}
+[data-bahar-shell] header.lg\:hidden {
+  background: color-mix(in srgb, var(--background) 94%, transparent);
+  backdrop-filter: blur(16px) saturate(145%);
+}
+[data-bahar-shell] .b-card-sm:has(+ .b-card-sm) { margin-block-end: .15rem; }
+@media (min-width: 1024px) {
+  [data-bahar-shell] > .flex-1 > aside { box-shadow: 1px 0 0 color-mix(in srgb, var(--hairline-soft) 60%, transparent); }
+}
