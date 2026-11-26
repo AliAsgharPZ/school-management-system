@@ -1380,6 +1380,28 @@ body { background: var(--background); }
 }
 
 .dark {
+  /* Dark-mode tonal scales are remapped for dark surfaces */
+  --spring-50: #0e2a20;
+  --spring-100: #123729;
+  --spring-200: #1a4a36;
+  --spring-300: #27684b;
+  --spring-400: #3b9369;
+  --spring-500: #20c58c;
+  --spring-600: #43d6a0;
+  --spring-700: #65e2b2;
+  --spring-800: #a9ebcf;
+  --spring-900: #d2f5e4;
+  --spring-950: #ecfaf2;
+  --blossom-50: #2a101c;
+  --blossom-100: #3b1e2b;
+  --blossom-200: #5b2a40;
+  --blossom-300: #803c5a;
+  --blossom-400: #b64d7a;
+  --blossom-500: #f078a8;
+  --blossom-600: #f49bbe;
+  --blossom-700: #fac4d9;
+  --blossom-800: #fde1ec;
+  --blossom-900: #fff1f6;
   color-scheme: dark;
   --spring: #20c58c;
   --spring-deep: #65e2b2;
