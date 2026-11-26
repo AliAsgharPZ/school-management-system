@@ -40,13 +40,14 @@ export function PageHeader({
   grad?: boolean;
 }) {
   return (
-    <div className="b-rise no-print flex flex-wrap items-start justify-between gap-4 mb-6 md:mb-8">
-      <div className="flex flex-col gap-1.5">
-        <h1 className="text-[26px] md:text-[36px] font-bold leading-[1.28]">{grad ? <span className="b-grad-text">{title}</span> : title}</h1>
-        {desc && <p className="t-sm text-steel max-w-2xl">{desc}</p>}
+    <header data-bahar-page-heading className="b-rise no-print flex flex-wrap items-end justify-between gap-4 mb-7 md:mb-9">
+      <div className="flex min-w-0 flex-col gap-2">
+        <span className="h-1 w-10 rounded-full bg-blossom/80" aria-hidden="true" />
+        <h1 className="text-[26px] md:text-[34px] font-bold leading-[1.25] tracking-tight text-ink">{grad ? <span className="b-grad-text">{title}</span> : title}</h1>
+        {desc && <p className="t-sm text-steel max-w-2xl leading-7">{desc}</p>}
       </div>
-      {action && <div className="flex items-center gap-2 flex-wrap">{action}</div>}
-    </div>
+      {action && <div className="flex items-center gap-2 flex-wrap shrink-0">{action}</div>}
+    </header>
   );
 }
 
@@ -68,18 +69,16 @@ export function StatCard({
     warning: "bg-warning text-warning-foreground",
   };
   return (
-    <div className="b-card-sm b-rise b-card-hover p-4 sm:p-5 flex items-center gap-3 sm:gap-4">
-      <span className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 ${tones[tone]}`}>
+    <article className="b-card-sm b-rise b-card-hover bahar-stat-card p-4 sm:p-5 flex items-center gap-3 sm:gap-4">
+      <span className={`bahar-stat-icon w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 ${tones[tone]}`}>
         <Icon className="w-5 h-5" />
       </span>
-      {/* راند ۱۹: برچسب دیگر truncate تک‌خطی نیست — در گرید‌های باریک موبایل نصف متن
-          نمایش داده نمی‌شد؛ حالا تا دو خط با word-break می‌شکند و خوانده می‌شود. */}
-      <div className="flex flex-col min-w-0">
-        <span className="text-[20px] sm:text-[22px] font-bold leading-tight">{display}</span>
+      <div className="flex flex-col min-w-0 gap-1">
+        <span className="text-[22px] sm:text-[25px] font-bold leading-tight tracking-tight tabular-nums">{display}</span>
         <span className="text-[12px] text-steel leading-snug line-clamp-2 [word-break:break-word]">{label}</span>
         {hint && <span className="text-[12px] text-stone truncate">{hint}</span>}
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -120,12 +119,12 @@ export function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="b-card-sm p-10 flex flex-col items-center text-center gap-3">
-      <span className="w-14 h-14 rounded-full bg-spring-tint text-spring flex items-center justify-center">
+    <div className="b-card-sm bahar-empty-state p-10 flex flex-col items-center text-center gap-3">
+      <span className="w-14 h-14 rounded-[1.25rem] bg-spring-tint text-spring flex items-center justify-center">
         <Icon className="w-7 h-7" />
       </span>
-      <h3 className="font-bold text-[16px]">{title}</h3>
-      {desc && <p className="t-sm text-steel max-w-sm">{desc}</p>}
+      <h3 className="font-bold text-[16px] text-ink">{title}</h3>
+      {desc && <p className="t-sm text-steel max-w-sm leading-7">{desc}</p>}
       {action}
     </div>
   );
