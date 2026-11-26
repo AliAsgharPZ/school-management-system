@@ -4,11 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
-   بهار | Bahar School Management — Design Language v4
-   Meta design system (pills, 32px cards, hairlines, dual CTA)
-   re-themed with the proprietary Bahar spring palette,
-   Material 3 motion principles (capsules, spring physics,
-   origin-aware transitions) and Arad Dots2 display type.
+   بهار | Bahar School Management — Design Language v2\n   Minimal operational surfaces, balanced data density,\n   precise hierarchy and the proprietary Bahar spring palette.
    - Spring Green  #00825E  (custom primary)
    - Blossom Pink  #E5548B  (seasonal accent, used sparingly)
    ============================================================ */
