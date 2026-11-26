@@ -103,7 +103,8 @@ export default function StaffAttendancePage() {
     }
     const month = Number(match[2]);
     const day = Number(match[3]);
-    const maxDay = month <= 6 ? 31 : 30;\n    if (month < 1 || month > 12 || day < 1 || day > maxDay) {
+    const maxDay = month <= 6 ? 31 : 30;
+    if (month < 1 || month > 12 || day < 1 || day > maxDay) {
       toast.error(t("common.invalidDate"));
       setDateDraft(date);
       return;
