@@ -226,11 +226,20 @@ export default function StaffAttendancePage() {
           type="text"
           className="b-input !w-44 tabular-nums"
           dir="ltr"
-          value={date}
-          onChange={(event) => setDate(event.target.value)}
+          value={dateDraft}
+          onChange={(event) => setDateDraft(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              applyDateDraft();
+            }
+          }}
           placeholder="1404-08-05"
+          aria-describedby="staff-attendance-date-help"
+          aria-invalid={dateDraft !== date && !/^\\d{4}-\\d{2}-\\d{2}$/.test(enDigits(dateDraft.trim()))}
         />
-        <button type="button" className="b-btn b-btn-outline b-btn-sm" onClick={applyDateDraft} disabled={dateDraft === date}>{t("common.apply")}</button>
+        <button type="button" className="b-btn b-btn-outline b-btn-sm" onClick={applyDateDraft} disabled={dateDraft.trim() === date}>{t("common.apply")}</button>
+        <span id="staff-attendance-date-help" className="sr-only">{t("common.date")}</span>
         <span className="text-xs text-steel">{markedCount} / {data.staff.length}</span>
       </div>
 
