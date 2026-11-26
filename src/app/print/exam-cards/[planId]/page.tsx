@@ -113,7 +113,7 @@ function CardsInner() {
       ) : !data ? (
         <Loader2 className="w-8 h-8 animate-spin text-spring mx-auto mt-16" />
       ) : (
-        {cards.length === 0 ? (
+        cards.length === 0 ? (
           <p className="p-8 text-center text-sm text-steel">{t("common.empty")}</p>
         ) : (
           sheets.map((sheet, sheetIndex) => (
@@ -144,7 +144,7 @@ function CardsInner() {
               ))}
             </div>
           ))
-        )}
+        )
       )}
     </main>
   );
