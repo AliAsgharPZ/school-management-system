@@ -19,7 +19,7 @@ const checks = [
   ["Semantic KPI tones are exposed", /data-tone=\{tone\}/.test(read("../src/components/shared/bits.tsx"))],
   ["Explicit primary button variant exists", /primary:\s*"bg-primary/.test(button)],
   ["Design guide is versioned 3.1", design.includes("نسخهٔ 3.1")],
-  ["No malformed legacy topbar selector remains", !css.includes("[data-bahar-shell] > .flex-1 > div > header,\\n  background")],
+  ["No malformed legacy topbar selector remains", !/\\[data-bahar-shell\\]\\s*>\\s*\\.flex-1\\s*>\\s*div\\s*>\\s*header\\s*,\\s*(background|min-height):/.test(css)],
   ["Design guide avoids naming reference brands", !/Meta Design|Magic UI|Scrolltide/.test(design)],
 ];
 
