@@ -1466,7 +1466,7 @@ body { background: var(--background); }
   /* Brand */
   --spring: #00825e;
   --spring-deep: #006749;
-  --spring-soft: #00a875;
+  --spring-soft: #00b37d;
   --spring-tint: #e5f3ed;
   --blossom: #e5548b;
   --blossom-tint: #fff0f5;
@@ -1504,7 +1504,7 @@ body { background: var(--background); }
   --destructive-foreground: #ffffff;
   --border: #dce6df;
   --input: #c7d4cb;
-  --ring: #00a875;
+  --ring: #00b37d;
 
   /* Status */
   --success: #18794e;
@@ -1781,6 +1781,9 @@ h1, h2, h3, h4, h5, h6 {
 #main-content .bahar-stat-card[data-tone="warning"] { --stat-accent: var(--warning); }
 #main-content .bahar-stat-card[data-tone="info"] { --stat-accent: var(--info); }
 #main-content .bahar-stat-card[data-tone="steel"] { --stat-accent: var(--steel); }
+#main-content .bahar-stat-card[data-tone="ink"] { --stat-accent: var(--ink-deep); }
+#main-content .bahar-stat-card[data-tone="soft"] { --stat-accent: var(--spring); }
+
 #main-content .bahar-stat-icon {
   width: 42px;
   height: 42px;
