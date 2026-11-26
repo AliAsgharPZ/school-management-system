@@ -1332,7 +1332,6 @@ body { background: var(--background); }
   background: var(--cloud);
 }
 [data-bahar-shell] > .flex-1 > div > header,
-[data-bahar-shell] header.lg\:hidden {
   background: var(--card);
   backdrop-filter: none;
   border-color: var(--hairline-soft);
@@ -1536,7 +1535,6 @@ h1,h2,h3,h4,h5,h6 { font-family: "Arad","Vazirmatn",sans-serif; letter-spacing: 
 }
 html[dir="rtl"] [data-bahar-shell] > .flex-1 > aside a[aria-current="page"] { box-shadow: inset -3px 0 0 var(--sidebar-primary); }
 [data-bahar-shell] > .flex-1 > div > header,
-[data-bahar-shell] header.lg\\:hidden {
   min-height: 60px; background: color-mix(in srgb,var(--card) 94%,transparent);
   border-color: var(--hairline-soft); box-shadow: 0 1px 0 var(--hairline-soft); backdrop-filter: blur(14px);
 }
