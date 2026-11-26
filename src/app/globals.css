@@ -1465,3 +1465,84 @@ aside a:not([aria-current="page"]):hover {
 @media (min-width: 1024px) {
   [data-bahar-shell] > .flex-1 > aside { box-shadow: 1px 0 0 color-mix(in srgb, var(--hairline-soft) 60%, transparent); }
 }
+
+
+/* Shared overlays and compound controls — same Bahar surface language. */
+[role="dialog"],
+[data-radix-dialog-content],
+[data-radix-alert-dialog-content],
+[data-radix-popover-content],
+[data-radix-dropdown-menu-content],
+[data-radix-select-content],
+[data-radix-context-menu-content],
+[data-radix-hover-card-content] {
+  border: 1px solid var(--hairline-soft);
+  border-radius: 1.35rem;
+  box-shadow: 0 24px 70px -36px rgb(11 20 22 / 35%);
+}
+[role="dialog"] :is(input, select, textarea),
+[data-radix-dialog-content] :is(input, select, textarea) {
+  border-radius: var(--bahar-control-radius);
+}
+[role="menu"],
+[role="listbox"] {
+  border: 1px solid var(--hairline-soft);
+  border-radius: 1rem;
+  padding: .35rem;
+  box-shadow: var(--bahar-shadow-float);
+  background: var(--card);
+}
+[role="menuitem"],
+[role="option"] {
+  min-height: 2.65rem;
+  border-radius: .7rem;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+[role="menuitem"]:hover,
+[role="option"][data-highlighted],
+[role="option"][aria-selected="true"] {
+  background: var(--spring-tint);
+  color: var(--spring-deep);
+}
+[role="tablist"] {
+  gap: .25rem;
+  border-radius: 999px;
+  padding: .25rem;
+  background: var(--cloud);
+}
+[role="tab"] {
+  border-radius: 999px;
+  min-height: 2.5rem;
+  font-weight: 700;
+}
+[role="tab"][aria-selected="true"],
+[role="tab"][data-state="active"] {
+  background: var(--card);
+  color: var(--spring-deep);
+  box-shadow: 0 1px 3px rgb(11 20 22 / 10%);
+}
+[data-sonner-toaster] [data-sonner-toast] {
+  border: 1px solid var(--hairline-soft);
+  border-radius: 1rem;
+  box-shadow: var(--bahar-shadow-float);
+}
+#main-content :is(canvas, svg.recharts-surface) { max-width: 100%; }
+#main-content .recharts-cartesian-grid line { stroke: var(--hairline-soft); }
+#main-content .recharts-text { fill: var(--steel); font-family: var(--font-sans); }
+#main-content :is(.b-chart, [data-chart]) { min-width: 0; }
+#main-content :is(.b-filter-bar, .b-toolbar, .b-table-toolbar) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .65rem;
+  padding: .8rem;
+  border: 1px solid var(--hairline-soft);
+  border-radius: 1rem;
+  background: var(--card);
+}
+@media (max-width: 640px) {
+  [role="dialog"],
+  [data-radix-dialog-content],
+  [data-radix-alert-dialog-content] { border-radius: 1.15rem; }
+  [role="tablist"] { max-width: 100%; overflow-x: auto; justify-content: flex-start; }
+}
