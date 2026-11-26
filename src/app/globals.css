@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
-   بهار | Bahar School Management — Design Language v2
+   بهار | Bahar School Management — Design Language v4
    Minimal operational surfaces, balanced data density,
    precise hierarchy and the proprietary Bahar spring palette.
    - Spring Green  #00825E  (custom primary)
@@ -219,7 +219,7 @@
     transition: background-color 9999s ease-out;
   }
   /* فرم‌ها — color-scheme کنترل‌های بومی را هماهنگ می‌کند */
-  /* Arad Dots2 + Arad combo */
+  /* Arad typography */
   h1, h2, h3, h4, h5, h6 {
     font-family: "Arad";
   }
@@ -503,7 +503,7 @@ textarea.b-input {
 .b-hairline { border-color: var(--hairline-soft); }
 .b-divider { @apply w-full border-t; border-color: var(--hairline-soft); }
 
-/* Typography roles — Arad Dots2 for display, Arad for text */
+/* Typography roles — Arad only */
 .t-hero { font-family: "Arad"; font-size: 40px; line-height: 1.22; font-weight: 500; letter-spacing: -0.5px; }
 @media (min-width: 768px) { .t-hero { font-size: 56px; line-height: 1.18; } }
 @media (min-width: 1280px) { .t-hero { font-size: 64px; line-height: 1.16; } }
@@ -991,7 +991,7 @@ html[data-a11y-motion="reduce"] *, html[data-a11y-motion="reduce"] *::before, ht
 
 
 /* ==========================================================================
-   BAHAR DESIGN SYSTEM V2 — calm, precise, balanced-density operational UI
+   BAHAR DESIGN SYSTEM V4 — calm, precise, balanced-density operational UI
    ========================================================================= */
 :root {
   --bahar-surface-radius: .75rem;
