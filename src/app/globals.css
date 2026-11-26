@@ -1783,6 +1783,10 @@ h1, h2, h3, h4, h5, h6 {
 #main-content .bahar-stat-card[data-tone="steel"] { --stat-accent: var(--steel); }
 #main-content .bahar-stat-card[data-tone="ink"] { --stat-accent: var(--ink-deep); }
 #main-content .bahar-stat-card[data-tone="soft"] { --stat-accent: var(--spring); }
+#main-content [data-bahar-kpi-icon] {
+  background: color-mix(in srgb, var(--stat-accent, var(--spring)) 12%, var(--card));
+  color: var(--stat-accent, var(--spring));
+}
 
 #main-content .bahar-stat-icon {
   width: 42px;
