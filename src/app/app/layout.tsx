@@ -5,7 +5,6 @@ import { verifyToken, SESSION_COOKIE_NAME } from "@/lib/auth";
 import { parsePermissions } from "@/lib/roles";
 import { avatarApiFields } from "@/lib/avatar";
 import { AppShell } from "@/components/app-shell/app-shell";
-import { ScrollProgress } from "@/components/shared/scroll-motion";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const store = await cookies();
@@ -77,7 +76,6 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         ...avatarApiFields(user),
       }}
     >
-      <ScrollProgress />
       {children}
     </AppShell>
   );
