@@ -60,6 +60,9 @@ jobs:
       - name: Audit Bahar UI conventions
         run: node scripts/bahar-design-check.mjs
 
+      - name: Verify Bahar design-system integrity
+        run: node scripts/bahar-design-system-check.mjs
+
       - name: Deploy production Worker
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         env:
