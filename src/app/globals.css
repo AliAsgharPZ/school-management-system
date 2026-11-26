@@ -1932,7 +1932,7 @@ h1, h2, h3, h4, h5, h6 {
   --bahar-shadow-menu: 0 24px 64px -28px rgb(5 20 14 / 34%), 0 4px 14px rgb(5 20 14 / 8%);
 }
 html, body {
-  font-family: "Arad", var(--font-sans);
+  font-family: "Arad";
   font-feature-settings: "ss01" 1, "cv11" 1;
 }
 body { background: var(--canvas); }
@@ -2021,7 +2021,7 @@ body { background: var(--canvas); }
   min-height: var(--bahar-control-height);
   border-radius: var(--bahar-control-radius);
   padding-inline: 1rem;
-  font-family: "Arad", var(--font-sans);
+  font-family: "Arad";
   font-size: .875rem;
   font-weight: 700;
   letter-spacing: -.01em;
@@ -2067,7 +2067,7 @@ body { background: var(--canvas); }
   background: var(--surface-1);
   color: var(--text-primary);
   box-shadow: inset 0 1px 2px rgb(16 35 27 / 3%);
-  font-family: "Arad", var(--font-sans);
+  font-family: "Arad";
   transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
 }
 #main-content textarea,
@@ -2143,7 +2143,7 @@ body { background: var(--canvas); }
   box-shadow: var(--bahar-shadow-card);
 }
 #main-content .recharts-cartesian-grid line { stroke: var(--border-subtle); }
-#main-content .recharts-text { fill: var(--text-tertiary); font-family: "Arad", var(--font-sans); }
+#main-content .recharts-text { fill: var(--text-tertiary); font-family: "Arad"; }
 #main-content :focus-visible { outline-color: var(--spring); }
 @media (max-width: 767px) {
   #main-content { padding-inline: .85rem; }
