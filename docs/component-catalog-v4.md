@@ -486,7 +486,7 @@ CompactHeader → ContextSummary → SingleColumnFields → InlineValidation →
 
 ### موجود در src/components/ui
 
-در زمان تهیهٔ این سند، فایل‌های زیر در پوشهٔ UI دیده می‌شوند:
+در زمان تهیهٔ این سند، **۴۹ فایل کامپوننت UI** در پوشهٔ UI و **۱۵ فایل ابزار مشترک** در پوشهٔ shared دیده می‌شوند:
 
 - accordion
 - alert-dialog
