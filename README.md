@@ -210,7 +210,7 @@ school — in one install.
   operational visual language, with Bahar's spring-green and blossom
   identity. Its canonical rules and component contracts live in
   `docs/design-language.md` and `docs/component-contracts.md`.
-  `scripts/meta-design-check.mjs` is a legacy audit script only; it is
+  `scripts/bahar-design-check.mjs` audits shared UI conventions in report or strict mode; it is
   not the design specification.
 - **Sample schools (separate seed only)** — three populous sample
   schools (54 classes, 1,524 sample students, plus dorm, shop and
