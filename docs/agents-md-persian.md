@@ -1,5 +1,7 @@
 # Persian project rules (for CLAUDE.md / AGENTS.md / Cursor rules)
 
+For Bahar UI work, also read `docs/design-language.md`, `docs/component-contracts.md`, and `docs/ui-craft-rules.md`; those are the project-specific sources of truth for design and interaction.
+
 Paste the block below into the file your coding agent reads on every turn:
 `CLAUDE.md` (Claude Code), `AGENTS.md` (Codex and most agents), or a
 `.cursor/rules/persian.mdc` file with `alwaysApply: true` (Cursor). It is the

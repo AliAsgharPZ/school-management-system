@@ -13,7 +13,14 @@ export function CountUp({ value }: { value: number }) {
   useEffect(() => {
     const from = ref.current;
     const to = value;
-    if (from === to) { setShown(to); return; }
+    const reduceMotion =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      document.documentElement.dataset.a11yMotion === "reduce";
+    if (from === to || reduceMotion) {
+      setShown(to);
+      ref.current = to;
+      return;
+    }
     const start = performance.now();
     const dur = 700;
     let raf = 0;
@@ -40,11 +47,12 @@ export function PageHeader({
   grad?: boolean;
 }) {
   return (
-    <header data-bahar-page-heading className="b-rise no-print flex flex-wrap items-end justify-between gap-4 mb-7 md:mb-9">
-      <div className="flex min-w-0 flex-col gap-2">
-        <span className="h-1 w-10 rounded-full bg-blossom/80" aria-hidden="true" />
-        <h1 className="text-[26px] md:text-[34px] font-bold leading-[1.25] tracking-tight text-ink">{grad ? <span className="b-grad-text">{title}</span> : title}</h1>
-        {desc && <p className="t-sm text-steel max-w-2xl leading-7">{desc}</p>}
+    <header data-bahar-page-heading className="no-print flex flex-wrap items-center justify-between gap-4 mb-6">
+      <div className="flex min-w-0 flex-col gap-1.5">
+        <h1 className="text-[24px] md:text-[30px] font-semibold leading-[1.35] text-ink">
+          {grad ? <span className="b-grad-text">{title}</span> : title}
+        </h1>
+        {desc && <p className="text-sm text-steel max-w-3xl leading-7">{desc}</p>}
       </div>
       {action && <div className="flex items-center gap-2 flex-wrap shrink-0">{action}</div>}
     </header>
@@ -119,14 +127,14 @@ export function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="b-card-sm bahar-empty-state p-10 flex flex-col items-center text-center gap-3">
-      <span className="w-14 h-14 rounded-[1.25rem] bg-spring-tint text-spring flex items-center justify-center">
-        <Icon className="w-7 h-7" />
+    <section className="b-card-sm bahar-empty-state px-6 py-10 flex flex-col items-center text-center gap-3" aria-live="polite">
+      <span className="w-12 h-12 rounded-xl bg-spring-tint text-spring flex items-center justify-center">
+        <Icon className="w-6 h-6" aria-hidden="true" />
       </span>
-      <h3 className="font-bold text-[16px] text-ink">{title}</h3>
-      {desc && <p className="t-sm text-steel max-w-sm leading-7">{desc}</p>}
+      <h3 className="font-semibold text-base text-ink">{title}</h3>
+      {desc && <p className="text-sm text-steel max-w-md leading-7">{desc}</p>}
       {action}
-    </div>
+    </section>
   );
 }
 

@@ -41,18 +41,24 @@ function RosterInner() {
   const rows = (data?.assignments ?? []).filter((a) => a.sessionNo === session);
   const roomNames = [...new Set(rows.map((r) => r.roomName))];
 
+  async function handlePrint() {
+    await document.fonts.ready;
+    await Promise.all(Array.from(document.images).map((image) => image.decode().catch(() => undefined)));
+    window.print();
+  }
+
   return (
     <main className="min-h-dvh bg-white text-ink">
       <style>{`
         @page { size: A4 portrait; margin: 12mm; }
-        .roster-room { break-inside: avoid; margin-bottom: 10mm; }
+        .roster-room { margin-bottom: 10mm; }\n        .roster-room > header { break-after: avoid; page-break-after: avoid; }\n        .roster-table tr { break-inside: avoid; page-break-inside: avoid; }
         .roster-table { width: 100%; border-collapse: collapse; font-size: 12px; }
         .roster-table th, .roster-table td { border: 0.3mm solid var(--hairline); padding: 1.6mm 2mm; text-align: start; }
-        @media print { .roster-toolbar { display: none !important; } }
+        @media print { .roster-toolbar { display: none !important; } .roster-table thead { display: table-header-group; } .roster-room { break-inside: auto; } }
       `}</style>
 
       <div className="roster-toolbar flex items-center gap-2 p-4 flex-wrap">
-        <button type="button" className="b-btn b-btn-spring" onClick={() => window.print()} disabled={!data}>
+        <button type="button" className="b-btn b-btn-spring" onClick={handlePrint} disabled={!data}>
           <Printer className="w-4 h-4" />
           {t("examSeats.printRoster")}
         </button>

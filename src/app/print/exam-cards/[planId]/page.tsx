@@ -59,17 +59,23 @@ function CardsInner() {
 
   const cards = (data?.assignments ?? []).filter((a) => a.sessionNo === session && (!studentFilter || a.studentId === studentFilter));
 
+  async function handlePrint() {
+    await document.fonts.ready;
+    await Promise.all(Array.from(document.images).map((image) => image.decode().catch(() => undefined)));
+    window.print();
+  }
+
   return (
     <main className="min-h-dvh bg-white text-ink">
       <style>{`
         @page { size: A4 portrait; margin: 0; }
         .cards-sheet { display: grid; grid-template-columns: 105mm 105mm; width: 210mm; margin: 0 auto; }
-        .exam-card { width: 105mm; height: 74.25mm; box-sizing: border-box; border: 0.4mm dashed var(--hairline); padding: 5mm 6mm; display: flex; flex-direction: column; gap: 2mm; break-inside: avoid; overflow: hidden; }
-        @media print { .cards-toolbar { display: none !important; } .cards-sheet { margin: 0; } }
+        .exam-card { width: 105mm; height: 74.25mm; box-sizing: border-box; border: 0.4mm dashed var(--hairline); padding: 5mm 6mm; display: flex; flex-direction: column; gap: 2mm; break-inside: avoid; page-break-inside: avoid; overflow: hidden; }
+        @media print { .cards-toolbar { display: none !important; } .cards-sheet { margin: 0; break-inside: auto; } .exam-card { break-inside: avoid !important; page-break-inside: avoid !important; } }
       `}</style>
 
       <div className="cards-toolbar flex items-center gap-2 p-4 flex-wrap">
-        <button type="button" className="b-btn b-btn-spring" onClick={() => window.print()} disabled={!data}>
+        <button type="button" className="b-btn b-btn-spring" onClick={handlePrint} disabled={!data}>
           <Printer className="w-4 h-4" />
           {t("examSeats.printCards")}
         </button>

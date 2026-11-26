@@ -73,32 +73,73 @@ export default function CertificatesPage() {
   async function revoke(id: string) {
     try { await apiPatch("/api/certificates", { id, revoke: true }); toast.success(tr("certificates.revoked")); load(); } catch (e) { toast.error(e instanceof Error ? e.message : tr("common.errorShort")); }
   }
-  function printCert(c: Cert) {
+  async function printCert(c: Cert) {
     const w = window.open("", "_blank");
-    if (!w) return;
-    w.document.write(`<!doctype html><html dir="rtl" lang="fa"><head><meta charset="utf-8"><title>${esc(c.title)}</title>
-    <style>
-      @page { size: A4; margin: 12mm; }
-      body { font-family: Vazirmatn, Tahoma, sans-serif; text-align: center; color: var(--ink-deep); }
-      .frame { border: 3px double var(--spring); border-radius: 12px; padding: 18mm 14mm; margin: 6mm; position: relative; }
-      h1 { font-size: 20pt; color: var(--spring-deep); margin-bottom: 2mm; }
-      .school { font-size: 13pt; margin-bottom: 10mm; }
-      .serial { position: absolute; top: 6mm; left: 8mm; font-size: 9pt; direction: ltr; }
-      .body { font-size: 13.5pt; line-height: 2.2; text-align: justify; }
-      .sign { margin-top: 16mm; display: flex; justify-content: space-around; font-size: 11pt; }
-      .qr { margin-top: 8mm; font-size: 9pt; color: var(--steel); }
-    </style></head><body>
-    <div class="frame">
-      <span class="serial">${esc(c.serial)}</span>
-      <div class="school">مدیریت محترم مدرسه</div>
-      <h1>${esc(c.title)}</h1>
-      <div class="body">${esc(c.body).replace(/\n/g, "<br/>")}</div>
-      <div class="sign"><span>مهر و امضای مدیر</span><span>تاریخ صدور: ${new Date(c.issuedAt).toLocaleDateString("fa-IR")}</span></div>
-      <div class="qr"><div style="display:inline-block">${qrSvgHtml(`${location.origin}/verify/${c.verifyCode}`)}</div><br/>کد استعلام اصالت: <b dir="ltr">${esc(c.verifyCode)}</b></div>
-    </div>
-    <script>setTimeout(() => window.print(), 300);</script>
-    </body></html>`);
+    if (!w) {
+      toast.error(tr("common.errorShort"));
+      return;
+    }
+
+    const issuedDate = new Date(c.issuedAt).toLocaleDateString("fa-IR");
+    const verificationUrl = `${window.location.origin}/verify/${encodeURIComponent(c.verifyCode)}`;
+    w.document.open();
+    w.document.write(`<!doctype html>
+      <html dir="rtl" lang="fa">
+        <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>${esc(c.title)}</title>
+          <style>
+            @font-face {
+              font-family: "Vazirmatn";
+              src: url("${window.location.origin}/fonts/Vazirmatn-Regular.woff2") format("woff2");
+              font-weight: 400;
+              font-style: normal;
+              font-display: swap;
+            }
+            @page { size: A4 portrait; margin: 12mm; }
+            * { box-sizing: border-box; }
+            html, body { margin: 0; padding: 0; background: #fff; color: #1c2523; }
+            body { font-family: "Vazirmatn", Tahoma, sans-serif; text-align: center; font-size: 12pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .frame { border: 3px double #00825e; border-radius: 12px; padding: 18mm 14mm; margin: 6mm; position: relative; min-height: 245mm; }
+            h1 { font-size: 20pt; color: #006749; margin: 0 0 2mm; }
+            .school { font-size: 13pt; margin-bottom: 10mm; }
+            .serial { position: absolute; top: 6mm; left: 8mm; font-size: 9pt; direction: ltr; }
+            .body { font-size: 13.5pt; line-height: 2.2; text-align: justify; overflow-wrap: anywhere; }
+            .sign { margin-top: 16mm; display: flex; justify-content: space-around; gap: 12mm; font-size: 11pt; }
+            .qr { margin-top: 8mm; font-size: 9pt; color: #5d6f66; }
+            .qr svg { width: 28mm; height: 28mm; }
+            @media print { .frame { break-inside: avoid; } }
+          </style>
+        </head>
+        <body>
+          <main class="frame">
+            <span class="serial">${esc(c.serial)}</span>
+            <div class="school">مدیریت محترم مدرسه</div>
+            <h1>${esc(c.title)}</h1>
+            <div class="body">${esc(c.body).replace(/\n/g, "<br>")}</div>
+            <div class="sign"><span>مهر و امضای مدیر</span><span>تاریخ صدور: ${esc(issuedDate)}</span></div>
+            <div class="qr"><div style="display:inline-block">${qrSvgHtml(verificationUrl)}</div><br>کد استعلام اصالت: <b dir="ltr">${esc(c.verifyCode)}</b></div>
+          </main>
+        </body>
+      </html>`);
     w.document.close();
+
+    try {
+      await w.document.fonts.ready;
+      const images = Array.from(w.document.images);
+      await Promise.all(images.map((image) => image.decode().catch(() => undefined)));
+      await new Promise<void>((resolve) => w.requestAnimationFrame(() => w.requestAnimationFrame(() => resolve())));
+      if (!w.closed) {
+        w.focus();
+        w.print();
+      }
+    } catch {
+      if (!w.closed) {
+        w.focus();
+        w.print();
+      }
+    }
   }
 
   if (loading) return <LoadingBlock />;

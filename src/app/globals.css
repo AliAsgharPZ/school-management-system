@@ -4,11 +4,9 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
-   بهار | Bahar School Management — Design Language v4
-   Meta design system (pills, 32px cards, hairlines, dual CTA)
-   re-themed with the proprietary Bahar spring palette,
-   Material 3 motion principles (capsules, spring physics,
-   origin-aware transitions) and Arad Dots2 display type.
+   بهار | Bahar School Management — Design Language v2
+   Minimal operational surfaces, balanced data density,
+   precise hierarchy and the proprietary Bahar spring palette.
    - Spring Green  #00825E  (custom primary)
    - Blossom Pink  #E5548B  (seasonal accent, used sparingly)
    ============================================================ */
@@ -226,7 +224,7 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
   --color-ink-deep: var(--ink-deep);
   --color-ink: var(--ink);
   --color-steel: var(--steel);
-  --color-stone: var(--stone);
+  --color-stone: var(--steel);
   --color-hairline: var(--hairline);
   --color-hairline-soft: var(--hairline-soft);
   --color-cloud: var(--cloud);
@@ -459,7 +457,7 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
   }
 }
 
-/* ============ Meta-language component classes (Bahar re-theme) ============ */
+/* ============ Bahar shared component classes ============ */
 /* NOTE: all custom component classes live in @layer components so that
    Tailwind utilities (e.g. md:hidden, !p-0) always win the cascade. */
 
@@ -474,41 +472,32 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
    page scroll sideways. */
 .site-clip-x { overflow-x: hidden; overflow-x: clip; }
 
-/* Pill buttons — NEVER squared (Meta signature) */
+/* Buttons — restrained geometry and consistent hit areas */
 .b-btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-full font-bold text-sm leading-tight
-    select-none whitespace-nowrap transition-[transform,background-color,color,box-shadow,border-color] duration-200
-    active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-spring
+  @apply inline-flex items-center justify-center gap-2 rounded-xl font-semibold text-sm leading-tight
+    select-none whitespace-nowrap transition-[background-color,color,border-color,box-shadow,transform] duration-150
+    focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-spring
     disabled:pointer-events-none disabled:opacity-50 cursor-pointer;
-  padding: 14px 30px;
+  padding: 10px 18px;
   min-height: 44px;
 }
-.b-btn:not(:disabled):hover {
-  transform: translateY(-1.5px);
-  box-shadow: rgba(14, 22, 20, 0.14) 0px 4px 14px 0px;
-}
-.dark .b-btn:not(:disabled):hover {
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 4px 14px 0px;
-}
-.b-btn:not(:disabled):active {
-  transform: translateY(0) scale(0.98);
-  box-shadow: none;
-}
+.b-btn:not(:disabled):hover { filter: brightness(.97); }
+.b-btn:not(:disabled):active { transform: scale(.985); }
 .b-btn-sm {
   @apply text-[14px];
   padding: 10px 22px;
   min-height: 44px;
 }
-/* Meta buy-CTA: cobalt pill, only for commerce actions (wallet top-up/sell) */
+/* Commerce actions use the same Bahar brand token as other primary actions. */
 .b-btn-buy {
-  background: #0064e0;
+  background: var(--spring);
   color: #fff;
 }
 .b-btn-buy:not(:disabled):hover {
-  background: #0457cb;
+  background: var(--spring-deep);
 }
 .b-btn-buy:active {
-  background: #0457cb;
+  background: var(--spring-deep);
 }
 .b-btn-lg {
   @apply text-base;
@@ -536,7 +525,9 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
 }
 .b-btn-spring:not(:disabled):hover {
   background: var(--spring-soft);
+  color: var(--ink-deep);
 }
+.dark .b-btn-spring:not(:disabled):hover { color: #051610; }
 .b-btn-spring:active {
   background: var(--spring-deep);
 }
@@ -550,8 +541,9 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
 .b-btn-outline {
   background: transparent;
   color: var(--ink-deep);
-  border: 2px solid var(--ink-deep);
-  padding: 12px 28px;
+  border: 1px solid var(--hairline);
+  border-radius: .7rem;
+  padding: 10px 18px;
 }
 .b-btn-outline:hover {
   background: var(--spring-tint);
@@ -559,8 +551,9 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
 .b-btn-ghost {
   background: transparent;
   color: var(--ink-deep);
-  border: 2px solid color-mix(in srgb, var(--ink-deep) 12%, transparent);
-  padding: 10px 22px;
+  border: 1px solid var(--hairline-soft);
+  border-radius: .7rem;
+  padding: 10px 18px;
 }
 .b-btn-ghost:hover {
   border-color: color-mix(in srgb, var(--ink-deep) 25%, transparent);
@@ -594,15 +587,15 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
 .b-card {
   background: var(--card);
   border: 1px solid var(--hairline-soft);
-  border-radius: 32px;
+  border-radius: 18px;
 }
 .b-card-lg {
-  border-radius: 32px;
+  border-radius: 18px;
   border: 1px solid var(--hairline-soft);
   background: var(--card);
 }
 .b-card-md {
-  border-radius: 24px;
+  border-radius: 16px;
   border: 1px solid var(--hairline-soft);
   background: var(--card);
 }
@@ -614,11 +607,11 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
 .b-card-ink {
   background: var(--invert);
   color: var(--invert-foreground);
-  border-radius: 32px;
+  border-radius: 18px;
 }
 .b-card-tint {
   background: var(--spring-tint);
-  border-radius: 24px;
+  border-radius: 16px;
   border: 1px solid color-mix(in srgb, var(--spring) 14%, transparent);
 }
 .b-shadow-rail {
@@ -648,10 +641,10 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
 }
 .b-input:focus {
   outline: none;
-  border: 2px solid #1876f2;
+  border: 2px solid var(--spring);
   padding-inline: 13px;
 }
-/* Meta input shape for raw text-like inputs that do not carry .b-input */
+/* Shared geometry for native text-like inputs. */
 input[type="text"], input[type="number"], input[type="email"], input[type="password"],
 input[type="date"], input[type="search"], input[type="tel"], input[type="url"] {
   height: 44px;
@@ -661,7 +654,7 @@ input[type="text"]:focus, input[type="number"]:focus, input[type="email"]:focus,
 input[type="password"]:focus, input[type="date"]:focus, input[type="search"]:focus,
 input[type="tel"]:focus, input[type="url"]:focus {
   outline: none;
-  border: 2px solid #1876f2;
+  border: 2px solid var(--spring);
 }
 .b-input-error {
   border-color: var(--destructive) !important;
@@ -695,7 +688,7 @@ textarea.b-input {
 .b-badge-warning { background: var(--warning); color: var(--warning-foreground); }
 .b-badge-critical { background: var(--destructive); color: var(--destructive-foreground); }
 .b-badge-spring { background: var(--spring-tint); color: var(--spring-deep); }
-.b-badge-blossom { background: var(--blossom-tint); color: var(--blossom); }
+.b-badge-blossom { background: var(--blossom-tint); color: var(--ink); border: 1px solid color-mix(in srgb, var(--blossom) 28%, transparent); }
 .b-badge-neutral { background: var(--cloud); color: var(--steel); }
 .b-badge-ink { background: var(--invert); color: var(--invert-foreground); }
 
@@ -1214,97 +1207,31 @@ html[data-a11y-motion="reduce"] *, html[data-a11y-motion="reduce"] *::before, ht
 
 
 
-/* ── Meta-derived Bahar UI refresh (brand colors remain exclusively Bahar) ── */
-.bahar-scroll-progress {
-  position: fixed;
-  inset-block-start: 0;
-  inset-inline: 0 auto;
-  z-index: 100;
-  width: 100%;
-  height: 3px;
-  background: var(--spring);
-  transform-origin: right center;
-  pointer-events: none;
+/* ==========================================================================
+   BAHAR DESIGN SYSTEM V2 — calm, precise, balanced-density operational UI
+   ========================================================================= */
+:root {
+  --bahar-surface-radius: 1rem;
+  --bahar-surface-radius-lg: 1.25rem;
+  --bahar-control-radius: .7rem;
+  --bahar-shadow-card: 0 1px 2px rgb(11 20 22 / 3%);
+  --bahar-shadow-float: 0 12px 32px -24px rgb(11 20 22 / 22%);
 }
-.bahar-dashboard {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.25rem, 2.4vw, 2rem);
-}
-.bahar-dashboard > * { min-width: 0; }
+body { background: var(--background); }
 #main-content {
+  background: var(--background);
+  padding-inline: clamp(1rem, 2.4vw, 2rem);
+  padding-block: clamp(1.25rem, 2vw, 2rem);
   scroll-behavior: smooth;
   scrollbar-gutter: stable;
 }
-#main-content > div {
-  max-width: 80rem;
-}
-#main-content .b-card,
-#main-content .b-card-sm,
-#main-content .b-card-md {
-  border-radius: 1.5rem;
-  border-color: var(--hairline-soft);
-  box-shadow: 0 1px 2px color-mix(in srgb, var(--ink) 4%, transparent);
-}
-#main-content .b-card-md { border-radius: 2rem; }
-#main-content .b-card-sm { border-radius: 1rem; }
-#main-content .b-card-hover {
-  transition: transform 260ms var(--ease-decel), border-color 260ms var(--ease-decel), box-shadow 260ms var(--ease-decel);
-}
-#main-content .b-card-hover:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px -20px color-mix(in srgb, var(--ink) 22%, transparent);
-}
-#main-content .b-btn,
-#main-content button.b-btn,
-#main-content a.b-btn {
-  min-height: 2.75rem;
-  border-radius: 9999px;
-}
-#main-content input:not([type="checkbox"]):not([type="radio"]),
-#main-content select,
-#main-content textarea {
-  border-radius: 0.875rem;
-}
-@media (max-width: 640px) {
-  #main-content { padding-inline: 1rem; padding-block-start: 1.25rem; }
-  #main-content .b-card-md { border-radius: 1.5rem; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .bahar-scroll-progress { display: none; }
-  #main-content { scroll-behavior: auto; }
-}
-
-
-/* ==========================================================================
-   BAHAR / META COMPLETE UI PASS
-   Keep the existing Bahar semantic palette; refresh geometry, hierarchy,
-   navigation, data surfaces and motion without changing application logic.
-   ========================================================================== */
-:root {
-  --bahar-surface-radius: 1.35rem;
-  --bahar-surface-radius-lg: 1.8rem;
-  --bahar-control-radius: 0.9rem;
-  --bahar-shadow-card: 0 1px 2px rgb(11 20 22 / 3%), 0 10px 30px -24px rgb(11 20 22 / 18%);
-  --bahar-shadow-float: 0 18px 48px -28px rgb(11 20 22 / 24%);
-}
-body { background: var(--cloud); }
-#main-content {
-  background: var(--cloud);
-  padding-inline: clamp(1rem, 2.6vw, 2.5rem);
-  padding-block: clamp(1.25rem, 2.4vw, 2.25rem);
-}
-#main-content > div {
-  width: 100%;
-  max-width: 90rem;
-}
-#main-content [data-bahar-page-heading] {
-  position: relative;
-  padding-block: .35rem .2rem;
-}
+#main-content > div { width: 100%; max-width: 88rem; margin-inline: auto; }
+#main-content [data-bahar-page-heading] { gap: 1rem; margin-block-end: 1.5rem; }
 #main-content [data-bahar-page-heading] h1 {
-  letter-spacing: -.035em;
+  letter-spacing: 0;
   text-wrap: balance;
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+  line-height: 1.35;
 }
 #main-content [data-bahar-page-heading] p { max-width: 68ch; }
 #main-content .b-card,
@@ -1314,160 +1241,113 @@ body { background: var(--cloud); }
   border: 1px solid var(--hairline-soft);
   border-radius: var(--bahar-surface-radius);
   box-shadow: var(--bahar-shadow-card);
-  transition: border-color 220ms ease, box-shadow 260ms ease, transform 260ms cubic-bezier(.2,.8,.2,1);
 }
 #main-content .b-card-md { border-radius: var(--bahar-surface-radius-lg); }
-#main-content .b-card-sm { border-radius: 1.1rem; }
+#main-content .b-card-sm { border-radius: .8rem; }
+#main-content .b-card-hover {
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
 #main-content .b-card-hover:hover,
 #main-content .bahar-stat-card:hover {
-  border-color: color-mix(in srgb, var(--spring) 32%, var(--hairline-soft));
+  border-color: color-mix(in srgb, var(--spring) 28%, var(--hairline-soft));
   box-shadow: var(--bahar-shadow-float);
-  transform: translateY(-2px);
 }
-#main-content .bahar-stat-card { min-height: 6.25rem; }
-#main-content .bahar-stat-icon { border-radius: 1rem; }
+#main-content .bahar-stat-card { min-height: 5.75rem; }
+#main-content .bahar-stat-icon { border-radius: .8rem; }
 #main-content .b-btn,
 #main-content button.b-btn,
 #main-content a.b-btn {
   min-height: 2.75rem;
-  border-radius: 999px;
-  padding-inline: 1.1rem;
-  font-weight: 700;
-  transition: transform 180ms ease, box-shadow 220ms ease, background-color 180ms ease, border-color 180ms ease;
+  border-radius: .7rem;
+  padding-inline: 1rem;
+  font-weight: 600;
+  box-shadow: none;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, transform 150ms ease;
 }
-#main-content .b-btn:active { transform: scale(.975); }
-#main-content .b-btn-spring { box-shadow: 0 5px 14px -9px var(--spring); }
+#main-content .b-btn:not(:disabled):hover { transform: none; box-shadow: none; }
+#main-content .b-btn:active { transform: scale(.985); }
+#main-content .b-btn-spring { box-shadow: none; }
 #main-content input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
 #main-content select,
 #main-content textarea,
 #main-content .b-input {
-  min-height: 2.8rem;
+  min-height: 2.75rem;
   border-radius: var(--bahar-control-radius);
   border-color: var(--hairline);
   background-color: var(--card);
-  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+  transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
 }
-#main-content input:focus,
-#main-content select:focus,
-#main-content textarea:focus,
-#main-content .b-input:focus {
+#main-content :is(input, select, textarea, .b-input):focus {
   border-color: var(--spring);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--spring) 13%, transparent);
   outline: none;
+}
+#main-content :is(input, select, textarea, .b-input):focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--spring) 18%, transparent);
 }
 #main-content table { border-collapse: separate; border-spacing: 0; }
 #main-content thead th {
-  position: sticky;
-  top: 0;
-  z-index: 2;
   background: var(--cloud);
   color: var(--steel);
-  font-size: .75rem;
-  font-weight: 800;
-  letter-spacing: .01em;
+  font-size: .8rem;
+  font-weight: 650;
   white-space: nowrap;
 }
-#main-content tbody tr { transition: background-color 160ms ease; }
-#main-content tbody tr:hover { background: color-mix(in srgb, var(--spring-tint) 48%, transparent); }
+#main-content tbody tr { transition: background-color 120ms ease; }
+#main-content tbody tr:hover { background: color-mix(in srgb, var(--spring-tint) 42%, transparent); }
 #main-content tbody td { border-color: var(--hairline-soft); }
-#main-content .b-badge { border-radius: 999px; font-weight: 750; }
-#main-content .b-promo { border-radius: 1rem; }
+#main-content .b-badge { border-radius: .5rem; font-weight: 600; }
+#main-content .b-promo { border-radius: .8rem; }
 #main-content .bahar-empty-state {
-  min-height: 15rem;
+  min-height: 13rem;
   justify-content: center;
   border-style: dashed;
-  background: color-mix(in srgb, var(--card) 88%, var(--cloud));
+  background: var(--card);
 }
-#main-content .b-shimmer { border-radius: .8rem; }
-#main-content .b-page-in { animation: bahar-page-enter 420ms cubic-bezier(.2,.8,.2,1) both; }
+#main-content .b-shimmer { border-radius: .6rem; }
+#main-content .b-page-in { animation: bahar-page-enter 180ms ease-out both; }
 #main-content .b-page-in > :not(.print-only) { min-width: 0; }
 @keyframes bahar-page-enter {
-  from { opacity: 0; transform: translateY(9px); }
+  from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Desktop shell: quiet glass header, focused navigation and comfortable rail. */
-@media (min-width: 1024px) {
-  body > div > div > div > aside[class*="sticky"] {
-    background: var(--card);
-    border-color: var(--hairline-soft);
-  }
-  #main-content { min-height: calc(100vh - 3.5rem); }
-}
-header.hidden.lg\:flex {
-  background: color-mix(in srgb, var(--background) 92%, transparent);
-  backdrop-filter: saturate(150%) blur(16px);
-  border-color: var(--hairline-soft);
-}
-aside a[aria-current="page"],
-aside a[aria-current="page"]:hover { color: var(--spring-deep); }
-aside a[aria-current="page"] > span[style*="z-index"] {
-  background: var(--spring-tint);
-}
-aside a:not([aria-current="page"]):hover {
-  background: color-mix(in srgb, var(--spring-tint) 62%, transparent);
-}
-.dark body, .dark #main-content { background: var(--background); }
-.dark #main-content .b-card,
-.dark #main-content .b-card-sm,
-.dark #main-content .b-card-md { box-shadow: 0 1px 2px rgb(0 0 0 / 12%); }
-.dark #main-content thead th { background: var(--card); }
-@media (max-width: 767px) {
-  #main-content { padding-inline: 1rem; padding-block: 1.25rem 2rem; }
-  #main-content .b-card-md { border-radius: 1.4rem; }
-  #main-content [data-bahar-page-heading] { gap: .9rem; margin-bottom: 1.5rem; }
-  #main-content [data-bahar-page-heading] h1 { font-size: clamp(1.45rem, 6vw, 1.9rem); }
-  #main-content .bahar-stat-card { min-height: 5.6rem; padding: .9rem; }
-}
-@media (prefers-reduced-motion: reduce) {
-  #main-content .b-page-in { animation: none; }
-  #main-content .b-card,
-  #main-content .b-card-sm,
-  #main-content .b-card-md,
-  #main-content .b-btn { transition: none; }
-  #main-content .b-card-hover:hover,
-  #main-content .bahar-stat-card:hover { transform: none; }
-}
-
-
-/* Shell refinements: nav state, rail rhythm, and persistent workspace header. */
-[data-bahar-shell] > .flex-1 > aside {
-  background: var(--card);
-  border-color: var(--hairline-soft);
-}
+/* Navigation: stable surfaces, quiet active state, no glass blur. */
+[data-bahar-shell] > .flex-1 > aside,
 [data-bahar-shell] > .flex-1 > aside > div {
   background: var(--card);
+  border-color: var(--hairline-soft);
+  backdrop-filter: none;
 }
 [data-bahar-shell] > .flex-1 > aside a[aria-current="page"] {
   color: var(--spring-deep);
-  font-weight: 800;
+  font-weight: 700;
 }
 [data-bahar-shell] > .flex-1 > aside a[aria-current="page"] > span[style*="z-index"] {
   background: var(--spring-tint);
-  border: 1px solid color-mix(in srgb, var(--spring) 13%, transparent);
+  border: 1px solid color-mix(in srgb, var(--spring) 16%, transparent);
 }
-[data-bahar-shell] > .flex-1 > aside a:not([aria-current="page"]) {
-  color: var(--steel);
-}
+[data-bahar-shell] > .flex-1 > aside a:not([aria-current="page"]) { color: var(--steel); }
 [data-bahar-shell] > .flex-1 > aside a:not([aria-current="page"]):hover {
   color: var(--spring-deep);
-  background: color-mix(in srgb, var(--spring-tint) 72%, transparent);
+  background: var(--cloud);
 }
-[data-bahar-shell] > .flex-1 > div > header {
-  background: color-mix(in srgb, var(--background) 88%, transparent);
-  backdrop-filter: blur(18px) saturate(150%);
+[data-bahar-shell] > .flex-1 > div > header,
+[data-bahar-shell] header.lg\\:hidden {
+  background: var(--card);
+  backdrop-filter: none;
+  border-color: var(--hairline-soft);
 }
-[data-bahar-shell] header.lg\:hidden {
-  background: color-mix(in srgb, var(--background) 94%, transparent);
-  backdrop-filter: blur(16px) saturate(145%);
-}
-[data-bahar-shell] .b-card-sm:has(+ .b-card-sm) { margin-block-end: .15rem; }
 @media (min-width: 1024px) {
-  [data-bahar-shell] > .flex-1 > aside { box-shadow: 1px 0 0 color-mix(in srgb, var(--hairline-soft) 60%, transparent); }
+  [data-bahar-shell] > .flex-1 > aside {
+    box-shadow: 1px 0 0 var(--hairline-soft);
+  }
+  #main-content { min-height: calc(100vh - 3.5rem); }
 }
-
-
-/* Shared overlays and compound controls — same Bahar surface language. */
+@media (max-width: 767px) {
+  #main-content { padding-inline: 1rem; padding-block: 1rem 1.5rem; }
+  #main-content [data-bahar-page-heading] { margin-block-end: 1.25rem; }
+  #main-content .bahar-stat-card { min-height: 5.25rem; padding: .8rem; }
+}
 [role="dialog"],
 [data-radix-dialog-content],
 [data-radix-alert-dialog-content],
@@ -1477,26 +1357,20 @@ aside a:not([aria-current="page"]):hover {
 [data-radix-context-menu-content],
 [data-radix-hover-card-content] {
   border: 1px solid var(--hairline-soft);
-  border-radius: 1.35rem;
-  box-shadow: 0 24px 70px -36px rgb(11 20 22 / 35%);
-}
-[role="dialog"] :is(input, select, textarea),
-[data-radix-dialog-content] :is(input, select, textarea) {
-  border-radius: var(--bahar-control-radius);
-}
-[role="menu"],
-[role="listbox"] {
-  border: 1px solid var(--hairline-soft);
   border-radius: 1rem;
-  padding: .35rem;
+  box-shadow: 0 16px 48px -32px rgb(11 20 22 / 32%);
+}
+[role="menu"], [role="listbox"] {
+  border: 1px solid var(--hairline-soft);
+  border-radius: .8rem;
+  padding: .3rem;
   box-shadow: var(--bahar-shadow-float);
   background: var(--card);
 }
-[role="menuitem"],
-[role="option"] {
+[role="menuitem"], [role="option"] {
   min-height: 2.65rem;
-  border-radius: .7rem;
-  transition: background-color 150ms ease, color 150ms ease;
+  border-radius: .5rem;
+  transition: background-color 120ms ease, color 120ms ease;
 }
 [role="menuitem"]:hover,
 [role="option"][data-highlighted],
@@ -1505,25 +1379,21 @@ aside a:not([aria-current="page"]):hover {
   color: var(--spring-deep);
 }
 [role="tablist"] {
-  gap: .25rem;
-  border-radius: 999px;
-  padding: .25rem;
+  gap: .2rem;
+  border-radius: .7rem;
+  padding: .2rem;
   background: var(--cloud);
 }
-[role="tab"] {
-  border-radius: 999px;
-  min-height: 2.5rem;
-  font-weight: 700;
-}
+[role="tab"] { border-radius: .55rem; min-height: 2.5rem; font-weight: 600; }
 [role="tab"][aria-selected="true"],
 [role="tab"][data-state="active"] {
   background: var(--card);
   color: var(--spring-deep);
-  box-shadow: 0 1px 3px rgb(11 20 22 / 10%);
+  box-shadow: 0 1px 2px rgb(11 20 22 / 8%);
 }
 [data-sonner-toaster] [data-sonner-toast] {
   border: 1px solid var(--hairline-soft);
-  border-radius: 1rem;
+  border-radius: .8rem;
   box-shadow: var(--bahar-shadow-float);
 }
 #main-content :is(canvas, svg.recharts-surface) { max-width: 100%; }
@@ -1534,15 +1404,53 @@ aside a:not([aria-current="page"]):hover {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: .65rem;
-  padding: .8rem;
+  gap: .6rem;
+  padding: .75rem;
   border: 1px solid var(--hairline-soft);
-  border-radius: 1rem;
+  border-radius: .8rem;
   background: var(--card);
 }
-@media (max-width: 640px) {
-  [role="dialog"],
-  [data-radix-dialog-content],
-  [data-radix-alert-dialog-content] { border-radius: 1.15rem; }
-  [role="tablist"] { max-width: 100%; overflow-x: auto; justify-content: flex-start; }
+
+/* Print: neutralize screen-only positioning and preserve table pagination. */
+@media print {
+  @page { size: A4; margin: 12mm 10mm; }
+  html, body {
+    background: #fff !important;
+    color: #111 !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+  body { font-size: 11pt !important; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  #main-content {
+    background: #fff !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    min-height: 0 !important;
+  }
+  #main-content > div { max-width: none !important; }
+  #main-content thead th { position: static !important; top: auto !important; }
+  table { width: 100%; border-collapse: collapse !important; }
+  thead { display: table-header-group; }
+  tfoot { display: table-footer-group; }
+  tr, .b-print-keep { break-inside: avoid; page-break-inside: avoid; }
+  h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  .b-page-in { animation: none !important; transform: none !important; }
+  a { color: inherit !important; text-decoration: none !important; }
+  img { max-width: 100% !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #main-content { scroll-behavior: auto; }
+  #main-content .b-page-in { animation: none; }
+  #main-content .b-card,
+  #main-content .b-card-sm,
+  #main-content .b-card-md,
+  #main-content .b-btn { transition: none; }
 }
