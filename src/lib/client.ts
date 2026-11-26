@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState, type Dispatch, type SetStateAction } from "react";
 
 // ============================================================
 // بهار | ابزار کلاینت API
@@ -56,36 +56,59 @@ export const apiDelete = <T,>(url: string) => request<T>(url, { method: "DELETE"
 
 /** هوک دریافت داده با رفرش دستی */
 export function useApi<T>(url: string | null, deps: unknown[] = []) {
-  const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState(!!url);
-  const [error, setError] = useState<string | null>(null);
-  const urlRef = useRef(url);
-  urlRef.current = url;
+  const [state, setState] = useState<{
+    url: string | null;
+    data: T | null;
+    loading: boolean;
+    error: string | null;
+  }>({ url, data: null, loading: !!url, error: null });
+
+  const setData = useCallback<Dispatch<SetStateAction<T | null>>>((value) => {
+    setState((current) => ({
+      ...current,
+      url,
+      data: typeof value === "function"
+        ? (value as (previous: T | null) => T | null)(current.url === url ? current.data : null)
+        : value,
+    }));
+  }, [url]);
 
   const refetch = useCallback(async () => {
-    if (!urlRef.current) return;
-    setLoading(true);
-    setError(null);
+    if (!url) return;
+    setState((current) => ({
+      url,
+      data: current.url === url ? current.data : null,
+      loading: true,
+      error: null,
+    }));
     try {
-      const d = await request<T>(urlRef.current);
-      setData(d);
+      const d = await request<T>(url);
+      setState({ url, data: d, loading: false, error: null });
     } catch (e) {
-      setError(e instanceof Error ? e.message : "خطا");
-    } finally {
-      setLoading(false);
+      setState((current) => ({
+        url,
+        data: current.url === url ? current.data : null,
+        loading: false,
+        error: e instanceof Error ? e.message : "خطا",
+      }));
     }
-  }, []);
+  }, [url]);
 
   useEffect(() => {
-    if (!url) {
-      setData(null);
-      setLoading(false);
-      return;
-    }
-    refetch();
+    if (url) void refetch();
   }, [url, refetch, ...deps]);
 
-  return { data, loading, error, refetch, setData };
+  const visible = state.url === url
+    ? state
+    : { url, data: null, loading: !!url, error: null };
+
+  return {
+    data: visible.data,
+    loading: visible.loading,
+    error: visible.error,
+    refetch,
+    setData,
+  };
 }
 
 /** هوک نظرسنجی دوره‌ای (پیام‌رسان) */
