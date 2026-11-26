@@ -25,13 +25,14 @@ function RosterInner() {
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
     const s = Number(q.get("session") ?? "1");
-    if (s >= 1) setSession(s);
     (async () => {
       try {
         const res = await fetch(`/api/exam-seats?id=${params.planId}`);
         if (!res.ok) throw new Error();
         const json = (await res.json()) as { data?: Detail } & Detail;
-        setData((json as { data?: Detail }).data ?? (json as Detail));
+        const detail = json.data ?? json;
+        setData(detail);
+        setSession(Number.isInteger(s) && s >= 1 && s <= detail.plan.sessions ? s : 1);
       } catch {
         setFailed(true);
       }
@@ -93,6 +94,9 @@ function RosterInner() {
       ) : !data ? (
         <Loader2 className="w-8 h-8 animate-spin text-spring mx-auto mt-16" />
       ) : (
+        rows.length === 0 ? (
+          <p className="p-8 text-center text-sm text-steel">{t("common.empty")}</p>
+        ) : (
         <div className="p-4 print:p-0 max-w-4xl mx-auto flex flex-col">
           {roomNames.map((room) => {
             const roomRows = rows.filter((r) => r.roomName === room).sort((a, b) => a.seatNo - b.seatNo);
@@ -141,6 +145,7 @@ function RosterInner() {
             );
           })}
         </div>
+        )
       )}
     </main>
   );
