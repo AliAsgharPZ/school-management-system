@@ -6,7 +6,7 @@ import { ClipboardCheck, Loader2, Save, Trash2 } from "lucide-react";
 import { apiGet, apiPost, apiDelete } from "@/lib/client";
 import { PageHeader, EmptyState, LoadingBlock, ErrorBox } from "@/components/shared/bits";
 import { Select, useConfirm } from "@/components/shared/pickers";
-import { todayKey } from "@/lib/persian";
+import { enDigits, todayKey } from "@/lib/persian";
 import { useLang } from "@/lib/i18n";
 
 type StaffMark = { status: string; checkIn: string; checkOut: string };
@@ -94,7 +94,7 @@ export default function StaffAttendancePage() {
   }
 
   function applyDateDraft() {
-    const normalized = dateDraft.trim();
+    const normalized = enDigits(dateDraft.trim());
     const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(normalized);
     if (!match) {
       toast.error(t("common.invalidDate"));
@@ -103,7 +103,7 @@ export default function StaffAttendancePage() {
     }
     const month = Number(match[2]);
     const day = Number(match[3]);
-    if (month < 1 || month > 12 || day < 1 || day > 31) {
+    const maxDay = month <= 6 ? 31 : 30;\n    if (month < 1 || month > 12 || day < 1 || day > maxDay) {
       toast.error(t("common.invalidDate"));
       setDateDraft(date);
       return;
