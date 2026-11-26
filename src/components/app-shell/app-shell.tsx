@@ -604,7 +604,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
             )}
           </header>
           <main id="main-content" data-bahar-main tabIndex={-1} className="flex-1 min-w-0 px-4 md:px-8 py-6 md:py-8 pb-10 lg:pb-8 w-full">
-            <div className="max-w-6xl mx-auto b-page-in" key={pathname}>
+            <div className="max-w-[88rem] mx-auto b-page-in" key={pathname}>
               {/* سربرگ رسمی چاپ — فقط روی کاغذ/PDF دیده می‌شود */}
               <div className="print-only b-print-head" aria-hidden>
                 <div>
