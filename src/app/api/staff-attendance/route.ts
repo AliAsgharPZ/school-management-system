@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { requireUser, apiOk, apiErr, handleApiError, readJson, audit, actingSchoolIdFor, demoWriteBlock} from "@/lib/api";
-import { todayKey } from "@/lib/persian";
+import { enDigits, isValidCalendarDateKey, todayKey } from "@/lib/persian";
 
 /* ============================================================
    بهار | حضور و غیاب کارکنان — ثبت روزانه توسط مدیریت،
@@ -59,31 +59,59 @@ export async function POST(req: NextRequest) {
       date?: string;
       records?: Array<{ userId?: string; status?: string; checkIn?: string; checkOut?: string; note?: string }>;
     }>(req);
-    const date = (body.date ?? todayKey()).slice(0, 10);
+    const date = enDigits(String(body.date ?? todayKey()).trim());
+    if (!isValidCalendarDateKey(date)) return apiErr(400, "تاریخ واردشده معتبر نیست.", "INVALID_DATE");
     const records = (body.records ?? []).slice(0, 500);
     if (!records.length) return apiErr(400, "رکوردی ارسال نشده است.", "EMPTY");
 
     const staffIds = new Set(
       (await db.user.findMany({ where: { schoolId, role: { in: STAFF_ROLES }, isActive: true }, select: { id: true } })).map((u) => u.id),
     );
+    const seen = new Set<string>();
+    const normalized = records.map((record) => {
+      const userId = String(record.userId ?? "");
+      const status = String(record.status ?? "");
+      const checkIn = typeof record.checkIn === "string" ? enDigits(record.checkIn.trim()) : "";
+      const checkOut = typeof record.checkOut === "string" ? enDigits(record.checkOut.trim()) : "";
+      const note = typeof record.note === "string" ? record.note.trim().slice(0, 200) : "";
+      return { userId, status, checkIn, checkOut, note };
+    });
+
+    for (const record of normalized) {
+      if (!record.userId || !staffIds.has(record.userId)) {
+        return apiErr(400, "یکی از کارکنان انتخاب‌شده معتبر نیست.", "INVALID_STAFF");
+      }
+      if (seen.has(record.userId)) return apiErr(400, "برای یک کارمند بیش از یک رکورد ارسال شده است.", "DUPLICATE_STAFF");
+      seen.add(record.userId);
+      if (!STATUSES.includes(record.status as (typeof STATUSES)[number])) {
+        return apiErr(400, "وضعیت حضور و غیاب معتبر نیست.", "INVALID_STATUS");
+      }
+      if (record.checkIn && !/^([01]\\d|2[0-3]):[0-5]\\d$/.test(record.checkIn)) {
+        return apiErr(400, "ساعت ورود معتبر نیست.", "INVALID_CHECK_IN");
+      }
+      if (record.checkOut && !/^([01]\\d|2[0-3]):[0-5]\\d$/.test(record.checkOut)) {
+        return apiErr(400, "ساعت خروج معتبر نیست.", "INVALID_CHECK_OUT");
+      }
+      if (record.checkIn && record.checkOut && record.checkOut < record.checkIn) {
+        return apiErr(400, "ساعت خروج نمی‌تواند زودتر از ساعت ورود باشد.", "INVALID_TIME_RANGE");
+      }
+    }
+
     let saved = 0;
-    for (const r of records) {
-      const userId = String(r.userId ?? "");
-      const status = String(r.status ?? "");
-      if (!staffIds.has(userId) || !STATUSES.includes(status as (typeof STATUSES)[number])) continue;
+    for (const record of normalized) {
       await db.staffAttendance.upsert({
-        where: { userId_date: { userId, date } },
+        where: { userId_date: { userId: record.userId, date } },
         create: {
-          schoolId, userId, date, status,
-          checkIn: r.checkIn?.slice(0, 5) || null,
-          checkOut: r.checkOut?.slice(0, 5) || null,
-          note: r.note?.trim().slice(0, 200) || null,
+          schoolId, userId: record.userId, date, status: record.status,
+          checkIn: record.checkIn || null,
+          checkOut: record.checkOut || null,
+          note: record.note || null,
         },
         update: {
-          status,
-          checkIn: r.checkIn?.slice(0, 5) || null,
-          checkOut: r.checkOut?.slice(0, 5) || null,
-          note: r.note?.trim().slice(0, 200) || null,
+          status: record.status,
+          checkIn: record.checkIn || null,
+          checkOut: record.checkOut || null,
+          note: record.note || null,
         },
       });
       saved++;
@@ -100,14 +128,18 @@ export async function DELETE(req: NextRequest) {
     const me = await requireUser(req);
     const blocked = await demoWriteBlock(me);
     if (blocked) return blocked;
+    const schoolId = me.schoolId ?? actingSchoolIdFor(req, me) ?? null;
+    if (!schoolId) return apiErr(400, "کاربر به مدرسه‌ای متصل نیست.", "NO_SCHOOL");
     const id = new URL(req.url).searchParams.get("id") ?? "";
     if (!id) return apiErr(400, "شناسه لازم است.", "NO_ID");
     const row = await db.staffAttendance.findUnique({ where: { id }, select: { schoolId: true, userId: true } });
     if (!row) return apiErr(404, "رکورد یافت نشد.", "NOT_FOUND");
     const isMgr = ["MANAGER", "DEPUTY", "SUPER_ADMIN", "ADMIN"].includes(me.role);
-    if (row.userId !== me.id && !isMgr) return apiErr(403, "دسترسی ندارید.", "FORBIDDEN");
-    if (isMgr && me.schoolId && row.schoolId !== me.schoolId) return apiErr(403, "دسترسی ندارید.", "FORBIDDEN");
+    if (row.schoolId !== schoolId || (row.userId !== me.id && !isMgr)) {
+      return apiErr(403, "دسترسی ندارید.", "FORBIDDEN");
+    }
     await db.staffAttendance.delete({ where: { id } });
+    await audit({ user: me, action: "حذف سابقهٔ حضور و غیاب کارکنان", entityType: "StaffAttendance", schoolId, meta: { id } });
     return apiOk({ ok: true });
   } catch (e) { return handleApiError(e); }
 }
