@@ -222,7 +222,7 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
   --color-ink-deep: var(--ink-deep);
   --color-ink: var(--ink);
   --color-steel: var(--steel);
-  --color-stone: var(--stone);
+  --color-stone: var(--steel);
   --color-hairline: var(--hairline);
   --color-hairline-soft: var(--hairline-soft);
   --color-cloud: var(--cloud);
@@ -678,7 +678,7 @@ textarea.b-input {
 .b-badge-warning { background: var(--warning); color: var(--warning-foreground); }
 .b-badge-critical { background: var(--destructive); color: var(--destructive-foreground); }
 .b-badge-spring { background: var(--spring-tint); color: var(--spring-deep); }
-.b-badge-blossom { background: var(--blossom-tint); color: var(--blossom); }
+.b-badge-blossom { background: var(--blossom-tint); color: var(--ink); border: 1px solid color-mix(in srgb, var(--blossom) 28%, transparent); }
 .b-badge-neutral { background: var(--cloud); color: var(--steel); }
 .b-badge-ink { background: var(--invert); color: var(--invert-foreground); }
 
