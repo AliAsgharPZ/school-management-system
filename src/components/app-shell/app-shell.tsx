@@ -285,7 +285,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
 
   const SidebarContent = (
     <div className="flex flex-col h-full">
-      <div className={`flex items-center gap-2.5 h-16 shrink-0 border-b border-hairline-soft ${collapsed ? "justify-center px-2" : "px-5"}`}>
+      <div className={`flex items-center gap-2.5 h-16 shrink-0 border-b border-sidebar-border ${collapsed ? "justify-center px-2" : "px-5"}`}>
         <Link href="/app" className="flex items-center gap-2.5 min-w-0">
           <Image src={brand.logoUrl || "/logo.svg"} alt="بهار" width={30} height={30} className="shrink-0" />
           {!collapsed && (
@@ -294,7 +294,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
             ) : (
               <span className="flex flex-col leading-none min-w-0">
                 <span className="text-lg font-bold" style={{ fontFamily: "var(--font-heading)" }}>بهار</span>
-                <span className="text-[12px] text-steel truncate">{user.schoolName ?? "سرویس بهار"}</span>
+                <span className="text-[12px] text-sidebar-foreground/65 truncate">{user.schoolName ?? "سرویس بهار"}</span>
               </span>
             )
           )}
@@ -312,7 +312,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
                 aria-hidden
               >
                 <g.icon className="w-3.5 h-3.5 text-stone" />
-                <span className="text-[12px] font-bold tracking-wide text-stone">{g.tKey ? t(g.tKey) : g.label}</span>
+                <span className="text-[12px] font-bold tracking-wide text-sidebar-foreground/55">{g.tKey ? t(g.tKey) : g.label}</span>
               </div>
             )}
             {g.items.map((n) => {
@@ -327,7 +327,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
                   className={`relative flex items-center gap-3 rounded-full ${collapsed ? "justify-center py-2.5 px-0" : "py-2.5 px-4"} text-[14px] font-bold z-[1] transition-colors duration-200 ${
                     active
                       ? "text-invert-foreground"
-                      : "text-ink hover:bg-spring-tint dark:hover:bg-spring-tint hover:text-spring-deep"
+                      : "text-sidebar-foreground/75 hover:bg-sidebar-hover hover:text-sidebar-foreground"
                   }`}
                   style={{ isolation: "isolate" }}
                 >
@@ -335,7 +335,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
                     {active && (
                       <motion.span
                         layoutId="sidebar-capsule"
-                        className="absolute inset-0 rounded-full bg-invert"
+                        className="absolute inset-0 rounded-full bg-sidebar-active"
                         transition={springRubber}
                         style={{ zIndex: -1 }}
                         initial={{ opacity: 0 }}
@@ -352,7 +352,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
         ))}
       </ScrollFade>
 
-      <div className={`p-3 border-t border-hairline-soft shrink-0 ${collapsed ? "px-2" : ""}`}>
+      <div className={`p-3 border-t border-sidebar-border shrink-0 ${collapsed ? "px-2" : ""}`}>
         {inSchoolPanel && !collapsed && (
           <button
             onClick={exitSchoolPanel}
@@ -370,13 +370,13 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
             حالا: ردیف ۱ هویت (آواتار + نام + نقش)، ردیف ۲ تنظیمات سریع (زبان/تم/خروج).
             div های scale-90 حذف شدند — transform:scale روی والد، position:fixed پاپ‌آپ زبان را
             می‌شکست (containing-block) و پاپ‌آپ پایینِ صفحه رندر می‌شد. */}
-        <div className={`b-card-sm !rounded-2xl p-3 flex flex-col ${collapsed ? "items-center" : "gap-2"}`}>
+        <div className={`rounded-xl border border-sidebar-border bg-sidebar-hover/80 text-sidebar-foreground p-3 flex flex-col ${collapsed ? "items-center" : "gap-2"}`}>
           <div className={`flex items-center gap-3 w-full ${collapsed ? "justify-center" : ""}`}>
             <UserAvatar user={avatarUser} size={40} />
             {!collapsed && (
               <span className="flex flex-col min-w-0 flex-1">
                 <span className="text-[14px] font-bold truncate">{user.firstName} {user.lastName}</span>
-                <span className="text-[12px] text-steel truncate">{ROLE_LABELS[user.role] ?? user.role}</span>
+                <span className="text-[12px] text-sidebar-foreground/60 truncate">{ROLE_LABELS[user.role] ?? user.role}</span>
               </span>
             )}
           </div>
@@ -403,12 +403,12 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
             </button>
           )}
           {!collapsed && (
-            <div className="flex items-center gap-1 pt-2 border-t border-hairline-soft w-full">
+            <div className="flex items-center gap-1 pt-2 border-t border-sidebar-border w-full">
               <LanguageSwitcher compact restricted />
               <ThemeToggle />
               <button
                 onClick={logout}
-                className="ms-auto w-9 h-9 rounded-full flex items-center justify-center text-steel hover:text-destructive hover:bg-destructive/10 transition-colors shrink-0"
+                className="ms-auto w-9 h-9 rounded-full flex items-center justify-center text-sidebar-foreground/65 hover:text-red-300 hover:bg-white/5 transition-colors shrink-0"
                 title={t("shell.logout")}
                 aria-label={t("shell.logoutShort")}
               >
