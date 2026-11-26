@@ -305,13 +305,13 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
         {groupedItems.map((g, gi) => (
           <div key={g.key} className="flex flex-col gap-1">
             {collapsed ? (
-              gi > 0 && <div className="mx-3 my-2 border-t border-hairline-soft" aria-hidden />
+              gi > 0 && <div className="mx-3 my-2 border-t border-sidebar-border" aria-hidden />
             ) : (
               <div
                 className={`flex items-center gap-1.5 px-4 ${gi === 0 ? "pt-1 pb-1.5" : "pt-4 pb-1.5"}`}
                 aria-hidden
               >
-                <g.icon className="w-3.5 h-3.5 text-stone" />
+                <g.icon className="w-3.5 h-3.5 text-sidebar-foreground/50" />
                 <span className="text-[12px] font-bold tracking-wide text-sidebar-foreground/55">{g.tKey ? t(g.tKey) : g.label}</span>
               </div>
             )}
@@ -326,7 +326,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
                   data-bahar-nav-link
                   className={`relative flex items-center gap-3 rounded-full ${collapsed ? "justify-center py-2.5 px-0" : "py-2.5 px-4"} text-[14px] font-bold z-[1] transition-colors duration-200 ${
                     active
-                      ? "text-invert-foreground"
+                      ? "text-sidebar-foreground"
                       : "text-sidebar-foreground/75 hover:bg-sidebar-hover hover:text-sidebar-foreground"
                   }`}
                   style={{ isolation: "isolate" }}
