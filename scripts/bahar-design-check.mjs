@@ -74,7 +74,7 @@ for (const file of files) {
   const rawSelects = scanTags(source, "select").filter((tag) => !tag.includes("b-input"));
   if (rawSelects.length) violations.push(`native selects without shared styling: ${rawSelects.length}`);
 
-  const hardcodedColors = [...source.matchAll(/#[0-9a-fA-F]{3,8}\\b/g)].map((match) => match[0]);
+  const hardcodedColors = [...source.matchAll(/#[0-9a-fA-F]{3,8}\b/g)].map((match) => match[0]);
   if (hardcodedColors.length) violations.push(`hard-coded colors: ${[...new Set(hardcodedColors)].join(", ")}`);
 
   report.push({ page, violations });
@@ -82,7 +82,7 @@ for (const file of files) {
 
 const failed = report.filter((row) => row.violations.length);
 if (process.argv.includes("--json")) {
-  process.stdout.write(JSON.stringify({ scanned: report.length, flagged: failed.length, results: failed }, null, 2) + "\\n");
+  process.stdout.write(JSON.stringify({ scanned: report.length, flagged: failed.length, results: failed }, null, 2) + "\n");
 } else {
   console.log(`Bahar UI audit: ${report.length} pages scanned, ${failed.length} flagged.`);
   for (const row of failed) console.log(`- ${row.page}: ${row.violations.join("; ")}`);
