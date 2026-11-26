@@ -18,6 +18,8 @@ const eslintConfig = [...nextCoreWebVitals, ...nextTypescript, {
     
     // React rules
     "react-hooks/exhaustive-deps": "off",
+    // Existing data-loading effects use synchronous state resets; keep these visible as warnings while they are migrated.
+    "react-hooks/set-state-in-effect": "warn",
     "react-hooks/purity": "off",
     "react/no-unescaped-entities": "off",
     "react/display-name": "off",
