@@ -165,6 +165,10 @@
   --color-warning-foreground: var(--warning-foreground);
   --color-warning-deep: var(--warning-deep);
   --color-info: var(--info);
+  --color-danger: var(--danger);
+  --color-danger-tint: var(--danger-tint);
+  --color-sidebar-hover: var(--sidebar-hover);
+  --color-sidebar-active: var(--sidebar-active);
   --color-info-foreground: var(--info-foreground);
   --color-overlay: var(--overlay);
   --color-invert: var(--invert);
