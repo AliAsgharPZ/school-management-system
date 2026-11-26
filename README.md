@@ -206,12 +206,12 @@ school — in one install.
   developer sandbox that validates manifests without storing them
   (`/app/plugins`). Plugin code is **not** executed in the app; the
   agent API surface is the MCP server.
-- **Meta design pass** — the design language is Meta's (pill buttons,
-  24–32px cards, tight type hierarchy) with Bahar's own spring-green
-  palette, not Meta blue. `scripts/meta-design-check.mjs` audits pages
-  for PageHeader, token buttons/inputs and hard-coded colours; new
-  pages pass it, and older pages are migrated one by one (icon-only
-  buttons and legacy badge colours are intentional, not oversights).
+- **Bahar design system** — the product's own minimal, premium and
+  operational visual language, with Bahar's spring-green and blossom
+  identity. Its canonical rules and component contracts live in
+  `docs/design-language.md` and `docs/component-contracts.md`.
+  `scripts/meta-design-check.mjs` is a legacy audit script only; it is
+  not the design specification.
 - **Sample schools (separate seed only)** — three populous sample
   schools (54 classes, 1,524 sample students, plus dorm, shop and
   track data per school) live in a seed script **outside this repo**
