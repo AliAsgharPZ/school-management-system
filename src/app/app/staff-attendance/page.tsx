@@ -6,7 +6,7 @@ import { ClipboardCheck, Loader2, Save, Trash2 } from "lucide-react";
 import { apiGet, apiPost, apiDelete } from "@/lib/client";
 import { PageHeader, EmptyState, LoadingBlock, ErrorBox } from "@/components/shared/bits";
 import { Select, useConfirm } from "@/components/shared/pickers";
-import { enDigits, todayKey } from "@/lib/persian";
+import { enDigits, isValidCalendarDateKey, todayKey } from "@/lib/persian";
 import { useLang } from "@/lib/i18n";
 
 type StaffMark = { status: string; checkIn: string; checkOut: string; note: string };
@@ -90,26 +90,18 @@ export default function StaffAttendancePage() {
   function updateMark(userId: string, patch: Partial<StaffMark>) {
     setMarks((current) => ({
       ...current,
-      [userId]: { status: "", checkIn: "", checkOut: "", note: "", ...current[userId], ...patch },
+      [userId]: { ...(current[userId] ?? { status: "", checkIn: "", checkOut: "", note: "" }), ...patch },
     }));
   }
 
   function applyDateDraft() {
     const normalized = enDigits(dateDraft.trim());
-    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(normalized);
-    if (!match) {
+    if (!isValidCalendarDateKey(normalized)) {
       toast.error(t("common.invalidDate"));
       setDateDraft(date);
       return;
     }
-    const month = Number(match[2]);
-    const day = Number(match[3]);
-    const maxDay = month <= 6 ? 31 : 30;
-    if (month < 1 || month > 12 || day < 1 || day > maxDay) {
-      toast.error(t("common.invalidDate"));
-      setDateDraft(date);
-      return;
-    }
+    setDateDraft(normalized);
     setDate(normalized);
   }
 
@@ -236,7 +228,7 @@ export default function StaffAttendancePage() {
           }}
           placeholder="1404-08-05"
           aria-describedby="staff-attendance-date-help"
-          aria-invalid={dateDraft !== date && !/^\\d{4}-\\d{2}-\\d{2}$/.test(enDigits(dateDraft.trim()))}
+          aria-invalid={dateDraft.trim().length > 0 && !isValidCalendarDateKey(dateDraft)}
         />
         <button type="button" className="b-btn b-btn-outline b-btn-sm" onClick={applyDateDraft} disabled={dateDraft.trim() === date}>{t("common.apply")}</button>
         <span id="staff-attendance-date-help" className="sr-only">{t("common.date")}</span>
