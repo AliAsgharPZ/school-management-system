@@ -72,7 +72,7 @@ export function StatCard({
   const area = points ? `${points} 100,40 0,40` : "";
 
   return (
-    <div className={cn("b-card p-5", className)}>
+    <article data-bahar-kpi data-tone={tone} className={cn("b-card bahar-stat-card p-5", className)}>
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <p className="text-sm leading-6 text-steel">{title}</p>
@@ -127,6 +127,6 @@ export function StatCard({
           />
         </svg>
       ) : null}
-    </div>
+    </article>
   );
 }
