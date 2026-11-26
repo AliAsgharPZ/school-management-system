@@ -267,7 +267,7 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
   --warning-deep: #8a4c0b; /* متن کهربایی خوانا روی پس‌زمینه روشن */
   --info: #1972c4;
   --info-foreground: #ffffff;
-  --blossom-foreground: #ffffff;
+  --blossom-foreground: #3b1425;
   /* سیستم */
   --overlay: #0b1416;      /* اسکریم دیالوگ/جستجو — در دارک تقریباً سیاه */
   --invert: #0b1416;       /* چیپ معکوسِ امضای بهار (کپسول‌ها، دکمه ink) */
@@ -1562,7 +1562,7 @@ body { background: var(--background); }
   --spring-tint: #173b2e;
   --blossom: #f078a8;
   --blossom-tint: #3b1e2b;
-  --blossom-foreground: #ffe8f0;
+  --blossom-foreground: #2a101c;
   --ink-deep: #eff6f1;
   --ink: #dce8e1;
   --steel: #a3b5aa;
@@ -1778,7 +1778,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #main-content .bahar-stat-card[data-tone="spring"] { --stat-accent: var(--spring); }
 #main-content .bahar-stat-card[data-tone="blossom"] { --stat-accent: var(--blossom); }
-#main-content .bahar-stat-card[data-tone="warning"] { --stat-accent: var(--warning); }
+#main-content .bahar-stat-card[data-tone="warning"] { --stat-accent: var(--warning-deep); }
 #main-content .bahar-stat-card[data-tone="info"] { --stat-accent: var(--info); }
 #main-content .bahar-stat-card[data-tone="steel"] { --stat-accent: var(--steel); }
 #main-content .bahar-stat-card[data-tone="ink"] { --stat-accent: var(--ink-deep); }
