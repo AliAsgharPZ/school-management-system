@@ -1035,7 +1035,7 @@ export const CATALOG: Record<string, string> = {
   "common.actions": "عملیات",
   "common.date": "تاریخ",
   "common.apply": "اعمال",
-  "common.invalidDate": "تاریخ واردشده معتبر نیست.",
+  "common.invalidDate": "تاریخ واردشده معتبر نیست.",\n  "common.note": "یادداشت",
   "common.time": "ساعت",
   "common.name": "نام",
   "common.description": "توضیحات",
