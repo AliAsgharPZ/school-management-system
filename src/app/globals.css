@@ -1212,3 +1212,337 @@ html[data-a11y-motion="reduce"] *, html[data-a11y-motion="reduce"] *::before, ht
 /* ── بهار | پاس متا: توکن چک‌باکس هم‌خانوادهٔ b-input ── */
 .b-check { width: 20px; height: 20px; accent-color: var(--spring); cursor: pointer; flex-shrink: 0; }
 
+
+
+/* ── Meta-derived Bahar UI refresh (brand colors remain exclusively Bahar) ── */
+.bahar-scroll-progress {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0 auto;
+  z-index: 100;
+  width: 100%;
+  height: 3px;
+  background: var(--spring);
+  transform-origin: right center;
+  pointer-events: none;
+}
+.bahar-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.4vw, 2rem);
+}
+.bahar-dashboard > * { min-width: 0; }
+#main-content {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+#main-content > div {
+  max-width: 80rem;
+}
+#main-content .b-card,
+#main-content .b-card-sm,
+#main-content .b-card-md {
+  border-radius: 1.5rem;
+  border-color: var(--hairline-soft);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--ink) 4%, transparent);
+}
+#main-content .b-card-md { border-radius: 2rem; }
+#main-content .b-card-sm { border-radius: 1rem; }
+#main-content .b-card-hover {
+  transition: transform 260ms var(--ease-decel), border-color 260ms var(--ease-decel), box-shadow 260ms var(--ease-decel);
+}
+#main-content .b-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -20px color-mix(in srgb, var(--ink) 22%, transparent);
+}
+#main-content .b-btn,
+#main-content button.b-btn,
+#main-content a.b-btn {
+  min-height: 2.75rem;
+  border-radius: 9999px;
+}
+#main-content input:not([type="checkbox"]):not([type="radio"]),
+#main-content select,
+#main-content textarea {
+  border-radius: 0.875rem;
+}
+@media (max-width: 640px) {
+  #main-content { padding-inline: 1rem; padding-block-start: 1.25rem; }
+  #main-content .b-card-md { border-radius: 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bahar-scroll-progress { display: none; }
+  #main-content { scroll-behavior: auto; }
+}
+
+
+/* ==========================================================================
+   BAHAR / META COMPLETE UI PASS
+   Keep the existing Bahar semantic palette; refresh geometry, hierarchy,
+   navigation, data surfaces and motion without changing application logic.
+   ========================================================================== */
+:root {
+  --bahar-surface-radius: 1.35rem;
+  --bahar-surface-radius-lg: 1.8rem;
+  --bahar-control-radius: 0.9rem;
+  --bahar-shadow-card: 0 1px 2px rgb(11 20 22 / 3%), 0 10px 30px -24px rgb(11 20 22 / 18%);
+  --bahar-shadow-float: 0 18px 48px -28px rgb(11 20 22 / 24%);
+}
+body { background: var(--cloud); }
+#main-content {
+  background: var(--cloud);
+  padding-inline: clamp(1rem, 2.6vw, 2.5rem);
+  padding-block: clamp(1.25rem, 2.4vw, 2.25rem);
+}
+#main-content > div {
+  width: 100%;
+  max-width: 90rem;
+}
+#main-content [data-bahar-page-heading] {
+  position: relative;
+  padding-block: .35rem .2rem;
+}
+#main-content [data-bahar-page-heading] h1 {
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+#main-content [data-bahar-page-heading] p { max-width: 68ch; }
+#main-content .b-card,
+#main-content .b-card-sm,
+#main-content .b-card-md {
+  background: var(--card);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--bahar-surface-radius);
+  box-shadow: var(--bahar-shadow-card);
+  transition: border-color 220ms ease, box-shadow 260ms ease, transform 260ms cubic-bezier(.2,.8,.2,1);
+}
+#main-content .b-card-md { border-radius: var(--bahar-surface-radius-lg); }
+#main-content .b-card-sm { border-radius: 1.1rem; }
+#main-content .b-card-hover:hover,
+#main-content .bahar-stat-card:hover {
+  border-color: color-mix(in srgb, var(--spring) 32%, var(--hairline-soft));
+  box-shadow: var(--bahar-shadow-float);
+  transform: translateY(-2px);
+}
+#main-content .bahar-stat-card { min-height: 6.25rem; }
+#main-content .bahar-stat-icon { border-radius: 1rem; }
+#main-content .b-btn,
+#main-content button.b-btn,
+#main-content a.b-btn {
+  min-height: 2.75rem;
+  border-radius: 999px;
+  padding-inline: 1.1rem;
+  font-weight: 700;
+  transition: transform 180ms ease, box-shadow 220ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+#main-content .b-btn:active { transform: scale(.975); }
+#main-content .b-btn-spring { box-shadow: 0 5px 14px -9px var(--spring); }
+#main-content input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+#main-content select,
+#main-content textarea,
+#main-content .b-input {
+  min-height: 2.8rem;
+  border-radius: var(--bahar-control-radius);
+  border-color: var(--hairline);
+  background-color: var(--card);
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+#main-content input:focus,
+#main-content select:focus,
+#main-content textarea:focus,
+#main-content .b-input:focus {
+  border-color: var(--spring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--spring) 13%, transparent);
+  outline: none;
+}
+#main-content table { border-collapse: separate; border-spacing: 0; }
+#main-content thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--cloud);
+  color: var(--steel);
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+#main-content tbody tr { transition: background-color 160ms ease; }
+#main-content tbody tr:hover { background: color-mix(in srgb, var(--spring-tint) 48%, transparent); }
+#main-content tbody td { border-color: var(--hairline-soft); }
+#main-content .b-badge { border-radius: 999px; font-weight: 750; }
+#main-content .b-promo { border-radius: 1rem; }
+#main-content .bahar-empty-state {
+  min-height: 15rem;
+  justify-content: center;
+  border-style: dashed;
+  background: color-mix(in srgb, var(--card) 88%, var(--cloud));
+}
+#main-content .b-shimmer { border-radius: .8rem; }
+#main-content .b-page-in { animation: bahar-page-enter 420ms cubic-bezier(.2,.8,.2,1) both; }
+#main-content .b-page-in > :not(.print-only) { min-width: 0; }
+@keyframes bahar-page-enter {
+  from { opacity: 0; transform: translateY(9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Desktop shell: quiet glass header, focused navigation and comfortable rail. */
+@media (min-width: 1024px) {
+  body > div > div > div > aside[class*="sticky"] {
+    background: var(--card);
+    border-color: var(--hairline-soft);
+  }
+  #main-content { min-height: calc(100vh - 3.5rem); }
+}
+header.hidden.lg\:flex {
+  background: color-mix(in srgb, var(--background) 92%, transparent);
+  backdrop-filter: saturate(150%) blur(16px);
+  border-color: var(--hairline-soft);
+}
+aside a[aria-current="page"],
+aside a[aria-current="page"]:hover { color: var(--spring-deep); }
+aside a[aria-current="page"] > span[style*="z-index"] {
+  background: var(--spring-tint);
+}
+aside a:not([aria-current="page"]):hover {
+  background: color-mix(in srgb, var(--spring-tint) 62%, transparent);
+}
+.dark body, .dark #main-content { background: var(--background); }
+.dark #main-content .b-card,
+.dark #main-content .b-card-sm,
+.dark #main-content .b-card-md { box-shadow: 0 1px 2px rgb(0 0 0 / 12%); }
+.dark #main-content thead th { background: var(--card); }
+@media (max-width: 767px) {
+  #main-content { padding-inline: 1rem; padding-block: 1.25rem 2rem; }
+  #main-content .b-card-md { border-radius: 1.4rem; }
+  #main-content [data-bahar-page-heading] { gap: .9rem; margin-bottom: 1.5rem; }
+  #main-content [data-bahar-page-heading] h1 { font-size: clamp(1.45rem, 6vw, 1.9rem); }
+  #main-content .bahar-stat-card { min-height: 5.6rem; padding: .9rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #main-content .b-page-in { animation: none; }
+  #main-content .b-card,
+  #main-content .b-card-sm,
+  #main-content .b-card-md,
+  #main-content .b-btn { transition: none; }
+  #main-content .b-card-hover:hover,
+  #main-content .bahar-stat-card:hover { transform: none; }
+}
+
+
+/* Shell refinements: nav state, rail rhythm, and persistent workspace header. */
+[data-bahar-shell] > .flex-1 > aside {
+  background: var(--card);
+  border-color: var(--hairline-soft);
+}
+[data-bahar-shell] > .flex-1 > aside > div {
+  background: var(--card);
+}
+[data-bahar-shell] > .flex-1 > aside a[aria-current="page"] {
+  color: var(--spring-deep);
+  font-weight: 800;
+}
+[data-bahar-shell] > .flex-1 > aside a[aria-current="page"] > span[style*="z-index"] {
+  background: var(--spring-tint);
+  border: 1px solid color-mix(in srgb, var(--spring) 13%, transparent);
+}
+[data-bahar-shell] > .flex-1 > aside a:not([aria-current="page"]) {
+  color: var(--steel);
+}
+[data-bahar-shell] > .flex-1 > aside a:not([aria-current="page"]):hover {
+  color: var(--spring-deep);
+  background: color-mix(in srgb, var(--spring-tint) 72%, transparent);
+}
+[data-bahar-shell] > .flex-1 > div > header {
+  background: color-mix(in srgb, var(--background) 88%, transparent);
+  backdrop-filter: blur(18px) saturate(150%);
+}
+[data-bahar-shell] header.lg\:hidden {
+  background: color-mix(in srgb, var(--background) 94%, transparent);
+  backdrop-filter: blur(16px) saturate(145%);
+}
+[data-bahar-shell] .b-card-sm:has(+ .b-card-sm) { margin-block-end: .15rem; }
+@media (min-width: 1024px) {
+  [data-bahar-shell] > .flex-1 > aside { box-shadow: 1px 0 0 color-mix(in srgb, var(--hairline-soft) 60%, transparent); }
+}
+
+
+/* Shared overlays and compound controls — same Bahar surface language. */
+[role="dialog"],
+[data-radix-dialog-content],
+[data-radix-alert-dialog-content],
+[data-radix-popover-content],
+[data-radix-dropdown-menu-content],
+[data-radix-select-content],
+[data-radix-context-menu-content],
+[data-radix-hover-card-content] {
+  border: 1px solid var(--hairline-soft);
+  border-radius: 1.35rem;
+  box-shadow: 0 24px 70px -36px rgb(11 20 22 / 35%);
+}
+[role="dialog"] :is(input, select, textarea),
+[data-radix-dialog-content] :is(input, select, textarea) {
+  border-radius: var(--bahar-control-radius);
+}
+[role="menu"],
+[role="listbox"] {
+  border: 1px solid var(--hairline-soft);
+  border-radius: 1rem;
+  padding: .35rem;
+  box-shadow: var(--bahar-shadow-float);
+  background: var(--card);
+}
+[role="menuitem"],
+[role="option"] {
+  min-height: 2.65rem;
+  border-radius: .7rem;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+[role="menuitem"]:hover,
+[role="option"][data-highlighted],
+[role="option"][aria-selected="true"] {
+  background: var(--spring-tint);
+  color: var(--spring-deep);
+}
+[role="tablist"] {
+  gap: .25rem;
+  border-radius: 999px;
+  padding: .25rem;
+  background: var(--cloud);
+}
+[role="tab"] {
+  border-radius: 999px;
+  min-height: 2.5rem;
+  font-weight: 700;
+}
+[role="tab"][aria-selected="true"],
+[role="tab"][data-state="active"] {
+  background: var(--card);
+  color: var(--spring-deep);
+  box-shadow: 0 1px 3px rgb(11 20 22 / 10%);
+}
+[data-sonner-toaster] [data-sonner-toast] {
+  border: 1px solid var(--hairline-soft);
+  border-radius: 1rem;
+  box-shadow: var(--bahar-shadow-float);
+}
+#main-content :is(canvas, svg.recharts-surface) { max-width: 100%; }
+#main-content .recharts-cartesian-grid line { stroke: var(--hairline-soft); }
+#main-content .recharts-text { fill: var(--steel); font-family: var(--font-sans); }
+#main-content :is(.b-chart, [data-chart]) { min-width: 0; }
+#main-content :is(.b-filter-bar, .b-toolbar, .b-table-toolbar) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .65rem;
+  padding: .8rem;
+  border: 1px solid var(--hairline-soft);
+  border-radius: 1rem;
+  background: var(--card);
+}
+@media (max-width: 640px) {
+  [role="dialog"],
+  [data-radix-dialog-content],
+  [data-radix-alert-dialog-content] { border-radius: 1.15rem; }
+  [role="tablist"] { max-width: 100%; overflow-x: auto; justify-content: flex-start; }
+}

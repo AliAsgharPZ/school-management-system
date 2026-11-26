@@ -17,6 +17,7 @@ import { faNumber, faDigits, formatDateFa, relativeTimeFa, currencyLabel, jalali
 import { PageHeader, StatCard, LoadingBlock, EmptyState, ErrorBox } from "@/components/shared/bits";
 import { LineChart, BarChart, DonutChart, VBarChart, RadialGauge } from "@/components/shared/charts";
 import { StaggerGroup, StaggerItem, CountUp } from "@/components/shared/motion";
+import { ScrollReveal } from "@/components/shared/scroll-motion";
 
 /* ============================================================
    بهار | داشبورد نقش‌محور — مرکز اقدامات + بینش + چارت
@@ -62,8 +63,8 @@ export default function DashboardPage() {
   if (!data || !actionCenter) return <LoadingBlock label={t("dashboard.loading")} />;
 
   return (
-    <div>
-      <PageHeader title={greeting(t)} desc={subTitle(data, t)} grad />
+    <div className="bahar-dashboard">
+      <ScrollReveal className="mb-2"><PageHeader title={greeting(t)} desc={subTitle(data, t)} grad /></ScrollReveal>
 
       {/* ═══ مرکز اقدامات ═══ */}
       {(actionCenter.items.length > 0 || actionCenter.needsAttention.length > 0) && (
@@ -101,11 +102,11 @@ export default function DashboardPage() {
         </section>
       )}
 
-      {data.scope === "service" && <ServiceDashboard data={data} />}
-      {data.scope === "school" && <ManagerDashboard data={data} why={whyOpen} setWhy={setWhyOpen} />}
-      {data.scope === "teacher" && <TeacherDashboard data={data} />}
-      {data.scope === "student" && <StudentDashboard data={data} />}
-      {data.scope === "parent" && <ParentDashboard data={data} />}
+      {data.scope === "service" && <ScrollReveal delay={0.06}><ServiceDashboard data={data} /></ScrollReveal>}
+      {data.scope === "school" && <ScrollReveal delay={0.06}><ManagerDashboard data={data} why={whyOpen} setWhy={setWhyOpen} /></ScrollReveal>}
+      {data.scope === "teacher" && <ScrollReveal delay={0.06}><TeacherDashboard data={data} /></ScrollReveal>}
+      {data.scope === "student" && <ScrollReveal delay={0.06}><StudentDashboard data={data} /></ScrollReveal>}
+      {data.scope === "parent" && <ScrollReveal delay={0.06}><ParentDashboard data={data} /></ScrollReveal>}
       {data.scope === "none" && (
         <EmptyState icon={SchoolIcon} title={t("dashboard.welcomeNone")} desc={t("dashboard.noSchoolYet")} />
       )}

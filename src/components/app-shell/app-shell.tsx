@@ -322,6 +322,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
                   key={n.href}
                   href={n.href}
                   title={collapsed ? (n.tKey ? t(n.tKey) : n.label) : undefined}
+                  aria-current={active ? "page" : undefined}
                   className={`relative flex items-center gap-3 rounded-full ${collapsed ? "justify-center py-2.5 px-0" : "py-2.5 px-4"} text-[14px] font-bold z-[1] transition-colors duration-200 ${
                     active
                       ? "text-invert-foreground"
@@ -421,7 +422,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
 
   return (
     <ShellUserContext.Provider value={{ user, badges }}>
-    <div className="min-h-screen bg-background flex flex-col">
+    <div data-bahar-shell className="min-h-screen bg-background flex flex-col">
       <SkipLink />
       {/* هدر موبایل — بدون همبرگر؛ ناوبری موبایل = لانچر app-screen داخل داشبورد */}
       <header className="lg:hidden sticky top-0 z-40 bg-background border-b border-hairline-soft flex items-center justify-between gap-1 px-3 h-16 no-print">
