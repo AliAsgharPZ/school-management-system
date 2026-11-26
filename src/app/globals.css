@@ -2026,16 +2026,16 @@ body { background: var(--canvas); }
 #main-content [data-slot="button"][data-variant="default"],
 #main-content [data-slot="button"][data-variant="primary"],
 #main-content .b-btn-spring {
-  background: linear-gradient(135deg, #008b64, #006b4e);
+  background: #006b4e;
   color: #fff;
   border-color: transparent;
-  box-shadow: 0 3px 8px rgb(0 107 78 / 18%), inset 0 1px 0 rgb(255 255 255 / 12%);
+  box-shadow: 0 3px 8px rgb(0 107 78 / 18%);
 }
 #main-content [data-slot="button"][data-variant="default"]:hover,
 #main-content [data-slot="button"][data-variant="primary"]:hover,
 #main-content .b-btn-spring:not(:disabled):hover {
-  background: linear-gradient(135deg, #00966c, #007657);
-  box-shadow: 0 6px 14px rgb(0 107 78 / 22%), inset 0 1px 0 rgb(255 255 255 / 14%);
+  background: #007657;
+  box-shadow: 0 6px 14px rgb(0 107 78 / 22%);
   transform: translateY(-1px);
 }
 #main-content [data-slot="button"][data-variant="outline"],
