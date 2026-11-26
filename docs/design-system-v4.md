@@ -193,7 +193,7 @@ spring-500 رنگ امضای برند است؛ spring-600 رنگ پیش‌فرض
 - تمام کنترل‌های native، ورودی‌ها، دکمه‌ها، tooltipها، toastها و محتوای چاپ باید Arad را به ارث ببرند.
 - اگر فونت بارگذاری نشد، خطای asset باید رفع شود؛ جایگزین‌کردن خاموش با خانوادهٔ دیگری رفتار طراحی‌شده نیست.
 
-منبع فایل‌ها: AradFD-Regular.woff2، AradFD-Medium.woff2، AradFD-SemiBold.woff2، AradFD-Bold.woff2 و وزن‌های Light/ExtraBold موجود.
+منبع فایل‌ها: AradFD-Regular.woff2، AradFD-Medium.woff2، AradFD-SemiBold.woff2، AradFD-Bold.woff2 و وزن‌های Light/ExtraBold موجود. مرجع بالادستی فونت [مخزن رسمی Arad](https://github.com/MohamadDarvishi/Arad) است؛ مجوز SIL Open Font License 1.1 در public/fonts/OFL.txt نگهداری می‌شود. فونت‌های اصلی بدون تغییر توزیع می‌شوند و نام Reserved Font Name آن‌ها حفظ می‌شود.
 
 ### 3.2 مقیاس تایپوگرافی
 
