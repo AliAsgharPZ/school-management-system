@@ -102,13 +102,11 @@ export function Select({
             return searchValue.toLocaleLowerCase().includes(normalized) ? 1 : 0;
           }}
         >
-          {showSearch && (
-            <CommandInput
-              placeholder="جستجو…"
-              className="h-11"
-              aria-label={ariaLabel ? `جستجو در ${ariaLabel}` : "جستجوی گزینه‌ها"}
-            />
-          )}
+          <CommandInput
+            placeholder="جستجو…"
+            className={showSearch ? "h-11" : "sr-only"}
+            aria-label={ariaLabel ? `جستجو در ${ariaLabel}` : "جستجوی گزینه‌ها"}
+          />
           <CommandList className="max-h-72 p-1">
             <CommandEmpty>{emptyLabel}</CommandEmpty>
             <CommandGroup>
