@@ -17,6 +17,8 @@ const checks = [
   ["Desktop topbar hook is connected", shell.includes("data-bahar-topbar") && css.includes("[data-bahar-topbar]")],
   ["Mobile topbar hook is connected", shell.includes("data-bahar-mobile-topbar") && css.includes("[data-bahar-mobile-topbar]")],
   ["Navigation active-state hook is connected", shell.includes("data-bahar-nav-link") && css.includes("[data-bahar-nav-link]")],
+  ["Main content hook is connected", shell.includes("data-bahar-main")],
+  ["Dashboard KPI icon exposes its tone", dashboardStat.includes("data-bahar-kpi-icon") && css.includes("[data-bahar-kpi-icon]")],
   ["Semantic KPI tones are exposed", /data-tone=\{tone\}/.test(read("../src/components/shared/bits.tsx"))],
   ["Explicit primary button variant exists", /primary:\s*"bg-primary/.test(button)],
   ["Design guide is versioned 3.1", design.includes("نسخهٔ 3.1")],
