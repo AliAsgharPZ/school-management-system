@@ -23,7 +23,7 @@ export function Price({ amount, original, unit = "تومان", size = "md", clas
       {off > 0 && (
         <span className="mt-0.5 flex items-center gap-2 text-xs">
           <span className="text-muted-foreground line-through tabular-nums">{faNumber(original!)}</span>
-          <span className="rounded-full bg-foreground px-1.5 py-px text-[12px] font-semibold text-background">{faPercent(off)} تخفیف</span>
+          <span className="rounded-md bg-blossom-100 px-2 py-0.5 text-[11px] font-semibold text-blossom-800">{faPercent(off)} تخفیف</span>
         </span>
       )}
     </div>

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "./bahar-v5.css";
 import { Toaster } from "@/components/ui/sonner";
 import { SwRegister } from "@/components/sw-register";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -9,7 +10,6 @@ import { getSettings } from "@/lib/settings";
 import { getActiveCountryPublic } from "@/lib/country/server";
 import { CountryProvider } from "@/lib/country/client";
 import type { CountryProfile } from "@/lib/country/types";
-import { vazirmatn } from "./fonts";
 
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -71,11 +71,12 @@ export default async function RootLayout({
   } catch { /* دیفالت ایران */ }
   return (
     <html
+      data-bahar-ui="v5"
       lang={initialProfile?.locale?.split("-")[0] ?? "fa"}
       dir={initialProfile?.direction ?? "rtl"}
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-     className={vazirmatn.variable}>
+>
       <body className="antialiased bg-background text-foreground min-h-screen flex flex-col font-sans bg-background text-foreground">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem enableColorScheme={false} disableTransitionOnChange>
           <CountryProvider initialProfile={initialProfile}>{children}</CountryProvider>

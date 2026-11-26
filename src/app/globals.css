@@ -4,156 +4,55 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
-   بهار | Bahar School Management — Design Language v2
+   بهار | Bahar School Management — Design Language v4
    Minimal operational surfaces, balanced data density,
    precise hierarchy and the proprietary Bahar spring palette.
    - Spring Green  #00825E  (custom primary)
    - Blossom Pink  #E5548B  (seasonal accent, used sparingly)
    ============================================================ */
 
-/* --- Arad Dots2 (display/headings — Persian, fused dots, Farsi digits) --- */
+/* --- Bahar typography: Arad only --- */
 @font-face {
   font-family: "Arad";
-  src: url("/fonts/AradDots2-Light.woff2") format("woff2");
+  src: url("/fonts/AradFD-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Arad";
-  src: url("/fonts/AradDots2-Regular.woff2") format("woff2");
+  src: url("/fonts/AradFD-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Arad";
-  src: url("/fonts/AradDots2-Medium.woff2") format("woff2");
+  src: url("/fonts/AradFD-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Arad";
-  src: url("/fonts/AradDots2-SemiBold.woff2") format("woff2");
+  src: url("/fonts/AradFD-SemiBold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Arad";
-  src: url("/fonts/AradDots2-Bold.woff2") format("woff2");
+  src: url("/fonts/AradFD-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Arad";
-  src: url("/fonts/AradDots2-ExtraBold.woff2") format("woff2");
+  src: url("/fonts/AradFD-ExtraBold.woff2") format("woff2");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
-}
-
-/* --- Vazirmatn (body/UI — Persian humanist-geometric) --- */
-@font-face {
-  font-family: "Vazirmatn";
-  src: url("/fonts/Vazirmatn-Light.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Vazirmatn";
-  src: url("/fonts/Vazirmatn-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Vazirmatn";
-  src: url("/fonts/Vazirmatn-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Vazirmatn";
-  src: url("/fonts/Vazirmatn-SemiBold.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Vazirmatn";
-  src: url("/fonts/Vazirmatn-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* --- Manrope (Latin/Cyrillic/Greek — Google Fonts OFL release, variable 200-800, self-hosted) --- */
-/* Note: use the Google Fonts OFL release, NOT Manrope V5 (2025, separate license). */
-@font-face {
-  font-family: "Manrope";
-  src: url("/fonts/Manrope-latin.woff2") format("woff2");
-  font-weight: 200 800;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: "Manrope";
-  src: url("/fonts/Manrope-latin-ext.woff2") format("woff2");
-  font-weight: 200 800;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: "Manrope";
-  src: url("/fonts/Manrope-cyrillic.woff2") format("woff2");
-  font-weight: 200 800;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-@font-face {
-  font-family: "Manrope";
-  src: url("/fonts/Manrope-cyrillic-ext.woff2") format("woff2");
-  font-weight: 200 800;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-@font-face {
-  font-family: "Manrope";
-  src: url("/fonts/Manrope-greek.woff2") format("woff2");
-  font-weight: 200 800;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-@font-face {
-  font-family: "Manrope";
-  src: url("/fonts/Manrope-vietnamese.woff2") format("woff2");
-  font-weight: 200 800;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* Latin/Cyrillic languages use Manrope first; fa/ar keep Vazirmatn/Arad (see layout lang). */
-html[lang="en"], html[lang="tr"], html[lang="az"], html[lang="it"], html[lang="de"], html[lang="pt"], html[lang="es"], html[lang="fr"], html[lang="ru"] {
-  --font-sans: "Manrope", "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
-  --font-heading: "Manrope", "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
-}
-html[lang="en"] body, html[lang="tr"] body, html[lang="az"] body, html[lang="it"] body, html[lang="de"] body, html[lang="pt"] body, html[lang="es"] body, html[lang="fr"] body, html[lang="ru"] body,
-html[lang="en"] .t-hero, html[lang="tr"] .t-hero, html[lang="az"] .t-hero, html[lang="it"] .t-hero, html[lang="de"] .t-hero, html[lang="pt"] .t-hero, html[lang="es"] .t-hero, html[lang="fr"] .t-hero, html[lang="ru"] .t-hero,
-html[lang="en"] .t-display, html[lang="tr"] .t-display, html[lang="az"] .t-display, html[lang="it"] .t-display, html[lang="de"] .t-display, html[lang="pt"] .t-display, html[lang="es"] .t-display, html[lang="fr"] .t-display, html[lang="ru"] .t-display,
-html[lang="en"] .t-h1, html[lang="tr"] .t-h1, html[lang="az"] .t-h1, html[lang="it"] .t-h1, html[lang="de"] .t-h1, html[lang="pt"] .t-h1, html[lang="es"] .t-h1, html[lang="fr"] .t-h1, html[lang="ru"] .t-h1,
-html[lang="en"] .t-h2, html[lang="tr"] .t-h2, html[lang="az"] .t-h2, html[lang="it"] .t-h2, html[lang="de"] .t-h2, html[lang="pt"] .t-h2, html[lang="es"] .t-h2, html[lang="fr"] .t-h2, html[lang="ru"] .t-h2,
-html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="it"] .t-h3, html[lang="de"] .t-h3, html[lang="pt"] .t-h3, html[lang="es"] .t-h3, html[lang="fr"] .t-h3, html[lang="ru"] .t-h3 {
-  font-family: "Manrope", "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
 }
 
 /* ============================================================
@@ -174,9 +73,9 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
-  --font-heading: "Arad", "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
-  --font-mono: ui-monospace, monospace;
+  --font-sans: "Arad";
+  --font-heading: "Arad";
+  --font-mono: "Arad";
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -213,6 +112,37 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 24px);
+  /* Bahar V4 scales and semantic surfaces */
+  --color-spring-50: var(--spring-50);
+  --color-spring-100: var(--spring-100);
+  --color-spring-200: var(--spring-200);
+  --color-spring-300: var(--spring-300);
+  --color-spring-400: var(--spring-400);
+  --color-spring-500: var(--spring-500);
+  --color-spring-600: var(--spring-600);
+  --color-spring-700: var(--spring-700);
+  --color-spring-800: var(--spring-800);
+  --color-spring-900: var(--spring-900);
+  --color-spring-950: var(--spring-950);
+  --color-blossom-50: var(--blossom-50);
+  --color-blossom-100: var(--blossom-100);
+  --color-blossom-200: var(--blossom-200);
+  --color-blossom-300: var(--blossom-300);
+  --color-blossom-400: var(--blossom-400);
+  --color-blossom-500: var(--blossom-500);
+  --color-blossom-600: var(--blossom-600);
+  --color-blossom-700: var(--blossom-700);
+  --color-blossom-800: var(--blossom-800);
+  --color-blossom-900: var(--blossom-900);
+  --color-canvas: var(--canvas);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
   /* Bahar proprietary palette */
   --color-spring: var(--spring);
   --color-spring-deep: var(--spring-deep);
@@ -235,157 +165,14 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
   --color-warning-foreground: var(--warning-foreground);
   --color-warning-deep: var(--warning-deep);
   --color-info: var(--info);
+  --color-danger: var(--danger);
+  --color-danger-tint: var(--danger-tint);
+  --color-sidebar-hover: var(--sidebar-hover);
+  --color-sidebar-active: var(--sidebar-active);
   --color-info-foreground: var(--info-foreground);
   --color-overlay: var(--overlay);
   --color-invert: var(--invert);
   --color-invert-foreground: var(--invert-foreground);
-}
-
-:root {
-  --radius: 0.5rem;
-
-  /* Bahar spring palette (custom) */
-  --spring: #00825e;
-  --spring-deep: #006749;
-  --spring-soft: #00b37d;
-  --spring-tint: #e2f3ec;
-  --blossom: #e5548b;
-  --blossom-tint: #fdeef4;
-  --ink-deep: #0b1416;
-  --ink: #1c2523;
-  --steel: #5d6f66;
-  --stone: #8a9b92;
-  --hairline: #cdd5d1;
-  --hairline-soft: #e2eae6;
-  --cloud: #f2f6f3;
-
-  /* Status tokens — «رنگ» برای fill/dot و «foreground» متن روی fill */
-  --success: #1b8148;
-  --success-foreground: #ffffff;
-  --warning: #f2a918;
-  --warning-foreground: #0b1416;
-  --warning-deep: #8a4c0b; /* متن کهربایی خوانا روی پس‌زمینه روشن */
-  --info: #1972c4;
-  --info-foreground: #ffffff;
-  --blossom-foreground: #3b1425;
-  /* سیستم */
-  --overlay: #0b1416;      /* اسکریم دیالوگ/جستجو — در دارک تقریباً سیاه */
-  --invert: #0b1416;       /* چیپ معکوسِ امضای بهار (کپسول‌ها، دکمه ink) */
-  --invert-foreground: #ffffff;
-  --autofill-bg: #eef4f0;  /* پس‌زمینه autofill مرورگر */
-  /* نقشه ایران (SVG) */
-  --map-land: #e3e8e5;
-  --map-hover: #c9ded3;
-  --map-stroke: #ffffff;
-  --map-label: #5b6b66;
-  --map-label-strong: #005a42;
-  --map-label-selected: #ffffff;
-
-  /* shadcn mapping */
-  --background: #ffffff;
-  --foreground: #0b1416;
-  --card: #ffffff;
-  --card-foreground: #0b1416;
-  --popover: #ffffff;
-  --popover-foreground: #0b1416;
-  --primary: #00825e;
-  --primary-foreground: #ffffff;
-  --secondary: #f2f6f3;
-  --secondary-foreground: #0b1416;
-  --muted: #f2f6f3;
-  --muted-foreground: #5d6f66;
-  --accent: #e2f3ec;
-  --accent-foreground: #00553e;
-  --destructive: #e41e3f;
-  --destructive-foreground: #ffffff;
-  --border: #e2eae6;
-  --input: #cdd5d1;
-  --ring: #00b37d;
-  --chart-1: #00825e;
-  --chart-2: #00b37d;
-  --chart-3: #e5548b;
-  --chart-4: #f2a918;
-  --chart-5: #5d6f66;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #1c2523;
-  --sidebar-primary: #00825e;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #e2f3ec;
-  --sidebar-accent-foreground: #00553e;
-  --sidebar-border: #e2eae6;
-  --sidebar-ring: #00b37d;
-}
-
-.dark {
-  --spring: #00b37d;
-  --spring-deep: #35d69c;
-  --spring-soft: #2ecf9a;
-  --spring-tint: #10312a;
-  --blossom: #f06fa4;
-  --blossom-tint: #331420;
-  --blossom-foreground: #380f22;
-  --ink-deep: #e8f0ec;
-  --ink: #d7e3dd;
-  --steel: #9aada3;
-  --stone: #7d8f85;
-  --hairline: #33403a;
-  --hairline-soft: #232e29;
-  --cloud: #141b18;
-
-  /* Status tokens — در دارک روشن‌تر تا به‌عنوان متن هم خوانا باشند */
-  --success: #3fbf77;
-  --success-foreground: #04150c;
-  --warning: #f5b73d;
-  --warning-foreground: #221803;
-  --warning-deep: #f7c04a; /* متن کهربایی خوانا روی پس‌زمینه تیره */
-  --info: #58a8ec;
-  --info-foreground: #0a1b2e;
-  /* سیستم */
-  --overlay: #030605;
-  --invert: #e8f0ec;
-  --invert-foreground: #0b1416;
-  --autofill-bg: #1a2420;
-  /* نقشه ایران */
-  --map-land: #1c2823;
-  --map-hover: #2c4239;
-  --map-stroke: #0c1210;
-  --map-label: #8fa39a;
-  --map-label-strong: #7fe3bd;
-  --map-label-selected: #051610;
-
-  /* سلسله‌مراتب سطح در دارک: background ← sidebar ← card ← popover */
-  --background: #0c1210;
-  --foreground: #e8f0ec;
-  --card: #131b18;
-  --card-foreground: #e8f0ec;
-  --popover: #19231f;
-  --popover-foreground: #e8f0ec;
-  --primary: #00b37d;
-  --primary-foreground: #051610;
-  --secondary: #1a2420;
-  --secondary-foreground: #e8f0ec;
-  --muted: #1a2420;
-  --muted-foreground: #9aada3;
-  --accent: #1d382e;
-  --accent-foreground: #7fe3bd;
-  --destructive: #f0284a;
-  --destructive-foreground: #ffffff;
-  --border: #26312b;
-  --input: #36443d;
-  --ring: #00b37d;
-  --chart-1: #00b37d;
-  --chart-2: #2ecf9a;
-  --chart-3: #f06fa4;
-  --chart-4: #f2a918;
-  --chart-5: #93a69c;
-  --sidebar: #0f1613;
-  --sidebar-foreground: #d7e3dd;
-  --sidebar-primary: #00b37d;
-  --sidebar-primary-foreground: #051610;
-  --sidebar-accent: #1d382e;
-  --sidebar-accent-foreground: #8ee8c4;
-  --sidebar-border: #232e29;
-  --sidebar-ring: #00b37d;
 }
 
 @layer base {
@@ -418,7 +205,7 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
        وب‌ویو داک‌داک‌گو و موتورهای قدیمی clip تنها را نادیده می‌گرفتند. */
     overflow-x: hidden;
     overflow-x: clip;
-    font-family: "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
+    font-family: "Arad";
     font-size: 16px;
     line-height: 1.55;
     letter-spacing: 0;
@@ -436,9 +223,9 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
     transition: background-color 9999s ease-out;
   }
   /* فرم‌ها — color-scheme کنترل‌های بومی را هماهنگ می‌کند */
-  /* Arad Dots2 + Vazirmatn combo */
+  /* Arad typography */
   h1, h2, h3, h4, h5, h6 {
-    font-family: "Arad", "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
+    font-family: "Arad";
   }
   ::selection {
     background: var(--spring-tint);
@@ -720,16 +507,16 @@ textarea.b-input {
 .b-hairline { border-color: var(--hairline-soft); }
 .b-divider { @apply w-full border-t; border-color: var(--hairline-soft); }
 
-/* Typography roles — Arad Dots2 for display, Vazirmatn for text */
-.t-hero { font-family: "Arad", "Vazirmatn", "Segoe UI", Tahoma, sans-serif; font-size: 40px; line-height: 1.22; font-weight: 500; letter-spacing: -0.5px; }
+/* Typography roles — Arad only */
+.t-hero { font-family: "Arad"; font-size: 40px; line-height: 1.22; font-weight: 500; letter-spacing: -0.5px; }
 @media (min-width: 768px) { .t-hero { font-size: 56px; line-height: 1.18; } }
 @media (min-width: 1280px) { .t-hero { font-size: 64px; line-height: 1.16; } }
-.t-display { font-family: "Arad", "Vazirmatn", "Segoe UI", Tahoma, sans-serif; font-size: 34px; line-height: 1.28; font-weight: 500; }
+.t-display { font-family: "Arad"; font-size: 34px; line-height: 1.28; font-weight: 500; }
 @media (min-width: 768px) { .t-display { font-size: 48px; line-height: 1.17; } }
-.t-h1 { font-family: "Arad", "Vazirmatn", "Segoe UI", Tahoma, sans-serif; font-size: 28px; line-height: 1.3; font-weight: 500; }
+.t-h1 { font-family: "Arad"; font-size: 28px; line-height: 1.3; font-weight: 500; }
 @media (min-width: 768px) { .t-h1 { font-size: 36px; } }
-.t-h2 { font-family: "Arad", "Vazirmatn", "Segoe UI", Tahoma, sans-serif; font-size: 24px; line-height: 1.33; font-weight: 500; }
-.t-h3 { font-family: "Arad", "Vazirmatn", "Segoe UI", Tahoma, sans-serif; font-size: 20px; line-height: 1.4; font-weight: 600; }
+.t-h2 { font-family: "Arad"; font-size: 24px; line-height: 1.33; font-weight: 500; }
+.t-h3 { font-family: "Arad"; font-size: 20px; line-height: 1.4; font-weight: 600; }
 .t-sub { font-size: 17px; line-height: 1.55; font-weight: 400; color: color-mix(in srgb, var(--ink) 80%, var(--steel)); }
 .t-body { font-size: 16px; line-height: 1.65; }
 .t-sm { font-size: 14px; line-height: 1.6; }
@@ -1208,14 +995,14 @@ html[data-a11y-motion="reduce"] *, html[data-a11y-motion="reduce"] *::before, ht
 
 
 /* ==========================================================================
-   BAHAR DESIGN SYSTEM V2 — calm, precise, balanced-density operational UI
+   BAHAR DESIGN SYSTEM V4 — calm, precise, balanced-density operational UI
    ========================================================================= */
 :root {
-  --bahar-surface-radius: 1rem;
-  --bahar-surface-radius-lg: 1.25rem;
-  --bahar-control-radius: .7rem;
-  --bahar-shadow-card: 0 1px 2px rgb(11 20 22 / 3%);
-  --bahar-shadow-float: 0 12px 32px -24px rgb(11 20 22 / 22%);
+  --bahar-surface-radius: .75rem;
+  --bahar-surface-radius-lg: 1rem;
+  --bahar-control-radius: .5rem;
+  --bahar-shadow-card: 0 1px 2px rgb(16 35 27 / 5%), 0 1px 1px rgb(16 35 27 / 3%);
+  --bahar-shadow-float: 0 8px 24px -16px rgb(16 35 27 / 24%), 0 2px 6px rgb(16 35 27 / 5%);
 }
 body { background: var(--background); }
 #main-content {
@@ -1225,7 +1012,7 @@ body { background: var(--background); }
   scroll-behavior: smooth;
   scrollbar-gutter: stable;
 }
-#main-content > div { width: 100%; max-width: 88rem; margin-inline: auto; }
+#main-content > div { width: 100%; max-width: 90rem; margin-inline: auto; }
 #main-content [data-bahar-page-heading] { gap: 1rem; margin-block-end: 1.5rem; }
 #main-content [data-bahar-page-heading] h1 {
   letter-spacing: 0;
@@ -1456,105 +1243,169 @@ body { background: var(--background); }
 
 
 /* ==========================================================================
-   BAHAR / VISUAL SYSTEM 3.1
+   BAHAR / VISUAL SYSTEM 4.0
    Forest workspace · warm paper canvas · spring actions · blossom signature
    ========================================================================== */
 :root {
   color-scheme: light;
-  --radius: 10px;
+  --radius: 0.625rem;
 
-  /* Brand */
+  /* Bahar V4 — Spring brand scale */
+  --spring-50: #eaf5f0;
+  --spring-100: #d5eadf;
+  --spring-200: #b2d9c8;
+  --spring-300: #83c3a9;
+  --spring-400: #4daa86;
+  --spring-500: #00825e;
+  --spring-600: #006b4e;
+  --spring-700: #00553f;
+  --spring-800: #064433;
+  --spring-900: #0d352a;
+  --spring-950: #08251d;
   --spring: #00825e;
-  --spring-deep: #006749;
-  --spring-soft: #00b37d;
-  --spring-tint: #e2f3ec;
+  --spring-deep: #006b4e;
+  --spring-soft: #4daa86;
+  --spring-tint: #eaf5f0;
+
+  /* Bahar V4 — Blossom brand scale */
+  --blossom-50: #fff1f6;
+  --blossom-100: #fde1ec;
+  --blossom-200: #fac4d9;
+  --blossom-300: #f49bbe;
+  --blossom-400: #ec729f;
+  --blossom-500: #e5548b;
+  --blossom-600: #c83c72;
+  --blossom-700: #a52c5b;
+  --blossom-800: #7f234a;
+  --blossom-900: #581a37;
   --blossom: #e5548b;
-  --blossom-tint: #fff0f5;
+  --blossom-tint: #fff1f6;
   --blossom-foreground: #3b1425;
 
-  /* Neutral architecture */
-  --ink-deep: #14231c;
-  --ink: #1c2922;
-  --steel: #586b60;
-  --stone: #788a7e;
-  --hairline: #d4ded7;
+  /* Bahar V4 — neutral semantic surfaces */
+  --canvas: #f5f7f5;
+  --surface-1: #ffffff;
+  --surface-2: #f0f4f1;
+  --surface-3: #e8efea;
+  --text-primary: #17231d;
+  --text-secondary: #52665b;
+  --text-tertiary: #718278;
+  --text-disabled: #9aa79f;
+  --border-subtle: #e5ece7;
+  --border-default: #d5e0d8;
+  --border-strong: #b9c9bf;
+  --sidebar-surface: #10231b;
+  --sidebar-hover: #1a3328;
+  --sidebar-active: #234535;
+
+  /* Compatibility aliases for existing components */
+  --ink-deep: #17231d;
+  --ink: #17231d;
+  --steel: #52665b;
+  --stone: #718278;
+  --hairline: #d5e0d8;
   --hairline-soft: #e5ece7;
   --cloud: #f0f4f1;
-  --bahar-canvas: #f4f7f4;
+  --bahar-canvas: #f5f7f5;
   --bahar-surface-1: #ffffff;
-  --bahar-surface-2: #eef3ef;
-  --bahar-surface-3: #e5ece7;
+  --bahar-surface-2: #f0f4f1;
+  --bahar-surface-3: #e8efea;
 
-  /* shadcn semantic map */
-  --background: #f4f7f4;
-  --foreground: #1c2922;
-  --card: #ffffff;
-  --card-foreground: #1c2922;
-  --popover: #ffffff;
-  --popover-foreground: #1c2922;
-  --primary: #00825e;
-  --primary-foreground: #ffffff;
-  --secondary: #edf2ee;
-  --secondary-foreground: #24332b;
-  --muted: #edf2ee;
-  --muted-foreground: #586b60;
-  --accent: #e2f3ec;
-  --accent-foreground: #00583f;
-  --destructive: #c9364c;
-  --destructive-foreground: #ffffff;
-  --border: #dce6df;
-  --input: #c7d4cb;
-  --ring: #00b37d;
-
-  /* Status */
-  --success: #18794e;
+  /* Semantic statuses */
+  --success: #176b42;
   --success-foreground: #ffffff;
-  --warning: #d28b16;
-  --warning-foreground: #211704;
-  --warning-deep: #87550b;
-  --info: #2876a8;
+  --success-tint: #e8f5ed;
+  --warning: #8a4c0b;
+  --warning-foreground: #ffffff;
+  --warning-deep: #8a4c0b;
+  --warning-tint: #fff4df;
+  --info: #175ea8;
   --info-foreground: #ffffff;
+  --info-tint: #eaf3fc;
+  --danger: #b42318;
+  --danger-foreground: #ffffff;
+  --danger-tint: #fdeceb;
 
-  /* Sidebar: separate branded workspace */
-  --sidebar: #14251f;
-  --sidebar-foreground: #e8f1ec;
-  --sidebar-primary: #49d5a2;
-  --sidebar-primary-foreground: #09251a;
-  --sidebar-accent: #20382e;
-  --sidebar-accent-foreground: #c7f3df;
-  --sidebar-border: #2a4036;
-  --sidebar-ring: #49d5a2;
+  --background: #f5f7f5;
+  --foreground: #17231d;
+  --card: #ffffff;
+  --card-foreground: #17231d;
+  --popover: #ffffff;
+  --popover-foreground: #17231d;
+  --primary: #006b4e;
+  --primary-foreground: #ffffff;
+  --secondary: #f0f4f1;
+  --secondary-foreground: #17231d;
+  --muted: #f0f4f1;
+  --muted-foreground: #52665b;
+  --accent: #eaf5f0;
+  --accent-foreground: #00553f;
+  --destructive: #b42318;
+  --destructive-foreground: #ffffff;
+  --border: #d5e0d8;
+  --input: #b9c9bf;
+  --ring: #00825e;
 
-  --blossom-foreground: #3b1425;
-  --overlay: #101a16;
-  --invert: #14231c;
+  --sidebar: #10231b;
+  --sidebar-foreground: #e8f0ea;
+  --sidebar-primary: #4daa86;
+  --sidebar-primary-foreground: #08251d;
+  --sidebar-accent: #234535;
+  --sidebar-accent-foreground: #e8f0ea;
+  --sidebar-border: #304639;
+  --sidebar-ring: #4daa86;
+
+  --overlay: #07120d;
+  --invert: #10231b;
   --invert-foreground: #ffffff;
-  --autofill-bg: #edf3ef;
-  --chart-1: #00825e;
-  --chart-2: #e5548b;
-  --chart-3: #2876a8;
-  --chart-4: #d28b16;
-  --chart-5: #71857a;
+  --autofill-bg: #f0f4f1;
+  --chart-1: #006b4e;
+  --chart-2: #3b82a0;
+  --chart-3: #e5548b;
+  --chart-4: #b7791f;
+  --chart-5: #6b63a8;
 
-  /* Geometry, depth and motion */
-  --bahar-radius-xs: 6px;
-  --bahar-radius-sm: 9px;
-  --bahar-radius-md: 12px;
-  --bahar-radius-lg: 16px;
-  --bahar-radius-xl: 20px;
-  --bahar-shadow-1: 0 1px 2px rgb(20 37 31 / 4%), 0 1px 1px rgb(20 37 31 / 3%);
-  --bahar-shadow-2: 0 8px 24px -16px rgb(20 37 31 / 28%), 0 2px 6px rgb(20 37 31 / 5%);
-  --bahar-shadow-3: 0 22px 56px -28px rgb(20 37 31 / 32%), 0 8px 20px rgb(20 37 31 / 8%);
-  --bahar-shadow-focus: 0 0 0 3px rgb(0 130 94 / 17%);
-  --dur-tap: 130ms;
-  --dur-fade: 180ms;
-  --dur-pop: 240ms;
-  --ease-standard: cubic-bezier(.2,.7,.2,1);
+  /* Geometry, elevation and motion */
+  --bahar-radius-xs: 4px;
+  --bahar-radius-sm: 6px;
+  --bahar-radius-md: 8px;
+  --bahar-radius-lg: 12px;
+  --bahar-radius-xl: 16px;
+  --bahar-shadow-1: 0 1px 2px rgb(16 35 27 / 5%), 0 1px 1px rgb(16 35 27 / 3%);
+  --bahar-shadow-2: 0 8px 24px -16px rgb(16 35 27 / 24%), 0 2px 6px rgb(16 35 27 / 5%);
+  --bahar-shadow-3: 0 22px 56px -28px rgb(16 35 27 / 28%), 0 8px 20px rgb(16 35 27 / 7%);
+  --bahar-shadow-focus: 0 0 0 3px rgb(0 130 94 / 18%);
+  --dur-tap: 120ms;
+  --dur-fade: 160ms;
+  --dur-pop: 220ms;
+  --ease-standard: cubic-bezier(.2,0,0,1);
   --ease-emphasized: cubic-bezier(.2,0,0,1);
   --ease-spring: cubic-bezier(.22,1,.36,1);
 }
 
 .dark {
+  /* Dark-mode tonal scales are remapped for dark surfaces */
+  --spring-50: #0e2a20;
+  --spring-100: #123729;
+  --spring-200: #1a4a36;
+  --spring-300: #27684b;
+  --spring-400: #3b9369;
+  --spring-500: #20c58c;
+  --spring-600: #43d6a0;
+  --spring-700: #65e2b2;
+  --spring-800: #a9ebcf;
+  --spring-900: #d2f5e4;
+  --spring-950: #ecfaf2;
+  --blossom-50: #2a101c;
+  --blossom-100: #3b1e2b;
+  --blossom-200: #5b2a40;
+  --blossom-300: #803c5a;
+  --blossom-400: #b64d7a;
+  --blossom-500: #f078a8;
+  --blossom-600: #f49bbe;
+  --blossom-700: #fac4d9;
+  --blossom-800: #fde1ec;
+  --blossom-900: #fff1f6;
   color-scheme: dark;
   --spring: #20c58c;
   --spring-deep: #65e2b2;
@@ -1563,68 +1414,91 @@ body { background: var(--background); }
   --blossom: #f078a8;
   --blossom-tint: #3b1e2b;
   --blossom-foreground: #2a101c;
-  --ink-deep: #eff6f1;
-  --ink: #dce8e1;
-  --steel: #a3b5aa;
-  --stone: #82958a;
-  --hairline: #34463c;
-  --hairline-soft: #27372f;
-  --cloud: #19251f;
-  --bahar-canvas: #0c1511;
-  --bahar-surface-1: #121e18;
-  --bahar-surface-2: #19251f;
-  --bahar-surface-3: #203128;
 
-  --background: #0c1511;
-  --foreground: #e8f1ec;
-  --card: #121e18;
-  --card-foreground: #e8f1ec;
-  --popover: #1a2921;
-  --popover-foreground: #e8f1ec;
+  --canvas: #0b1510;
+  --surface-1: #111f17;
+  --surface-2: #17271e;
+  --surface-3: #203329;
+  --text-primary: #e8f0ea;
+  --text-secondary: #b0c0b5;
+  --text-tertiary: #8fa397;
+  --text-disabled: #65776b;
+  --border-subtle: #24372c;
+  --border-default: #304639;
+  --border-strong: #496253;
+  --sidebar-surface: #08110c;
+  --sidebar-hover: #14251b;
+  --sidebar-active: #1d392a;
+
+  --ink-deep: #e8f0ea;
+  --ink: #dce8e1;
+  --steel: #b0c0b5;
+  --stone: #8fa397;
+  --hairline: #304639;
+  --hairline-soft: #24372c;
+  --cloud: #111f17;
+  --bahar-canvas: #0b1510;
+  --bahar-surface-1: #111f17;
+  --bahar-surface-2: #17271e;
+  --bahar-surface-3: #203329;
+
+  --success: #65d69a;
+  --success-foreground: #08251d;
+  --success-tint: #153425;
+  --warning: #f5c36a;
+  --warning-foreground: #2a1b06;
+  --warning-deep: #f5c36a;
+  --warning-tint: #3a2b16;
+  --info: #7dbbfa;
+  --info-foreground: #10243a;
+  --info-tint: #172e46;
+  --danger: #ff8d86;
+  --danger-foreground: #421f1d;
+  --danger-tint: #421f1d;
+
+  --background: #0b1510;
+  --foreground: #e8f0ea;
+  --card: #111f17;
+  --card-foreground: #e8f0ea;
+  --popover: #17271e;
+  --popover-foreground: #e8f0ea;
   --primary: #20c58c;
-  --primary-foreground: #062116;
-  --secondary: #1a2921;
-  --secondary-foreground: #e8f1ec;
-  --muted: #19251f;
-  --muted-foreground: #a3b5aa;
-  --accent: #173b2e;
-  --accent-foreground: #a4f0d0;
-  --destructive: #f05b70;
-  --destructive-foreground: #26070c;
-  --border: #2b3a32;
-  --input: #405248;
+  --primary-foreground: #08251d;
+  --secondary: #17271e;
+  --secondary-foreground: #e8f0ea;
+  --muted: #17271e;
+  --muted-foreground: #b0c0b5;
+  --accent: #203329;
+  --accent-foreground: #a9ebcf;
+  --destructive: #ff8d86;
+  --destructive-foreground: #421f1d;
+  --border: #304639;
+  --input: #496253;
   --ring: #20c58c;
 
-  --success: #4bc98a;
-  --success-foreground: #062116;
-  --warning: #f2bd50;
-  --warning-foreground: #211704;
-  --warning-deep: #f4c76b;
-  --info: #69b7e8;
-  --info-foreground: #071d2b;
+  --sidebar: #08110c;
+  --sidebar-foreground: #e8f0ea;
+  --sidebar-primary: #65e2b2;
+  --sidebar-primary-foreground: #08251d;
+  --sidebar-accent: #1d392a;
+  --sidebar-accent-foreground: #e8f0ea;
+  --sidebar-border: #24372c;
+  --sidebar-ring: #20c58c;
 
-  --sidebar: #080f0b;
-  --sidebar-foreground: #dce8e1;
-  --sidebar-primary: #43d6a0;
-  --sidebar-primary-foreground: #062116;
-  --sidebar-accent: #172a20;
-  --sidebar-accent-foreground: #a4f0d0;
-  --sidebar-border: #23362b;
-  --sidebar-ring: #43d6a0;
+  --overlay: #000000;
+  --invert: #f0f5f1;
+  --invert-foreground: #0b1510;
+  --autofill-bg: #17271e;
+  --chart-1: #20c58c;
+  --chart-2: #3b82a0;
+  --chart-3: #f078a8;
+  --chart-4: #f5c36a;
+  --chart-5: #8c83c8;
 
-  --overlay: #020805;
-  --invert: #e8f1ec;
-  --invert-foreground: #0c1511;
-  --autofill-bg: #18271f;
-  --chart-1: #43d6a0;
-  --chart-2: #f078a8;
-  --chart-3: #69b7e8;
-  --chart-4: #f2bd50;
-  --chart-5: #9aafa2;
-  --bahar-shadow-1: 0 1px 2px rgb(0 0 0 / 22%);
-  --bahar-shadow-2: 0 8px 24px -14px rgb(0 0 0 / 60%);
-  --bahar-shadow-3: 0 20px 52px -24px rgb(0 0 0 / 74%);
-  --bahar-shadow-focus: 0 0 0 3px rgb(32 197 140 / 23%);
+  --bahar-shadow-1: 0 1px 2px rgb(0 0 0 / 24%);
+  --bahar-shadow-2: 0 8px 24px -14px rgb(0 0 0 / 62%);
+  --bahar-shadow-3: 0 20px 52px -24px rgb(0 0 0 / 76%);
+  --bahar-shadow-focus: 0 0 0 3px rgb(32 197 140 / 24%);
 }
 
 /* Global canvas and type */
@@ -1632,12 +1506,12 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bahar-canvas);
   color: var(--foreground);
-  font-family: "Vazirmatn", "Segoe UI", sans-serif;
+  font-family: "Arad";
   font-size: 14px;
-  line-height: 1.65;
+  line-height: 1.8;
 }
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Arad", "Vazirmatn", sans-serif;
+  font-family: "Arad";
   letter-spacing: 0;
   text-wrap: balance;
 }
@@ -1797,7 +1671,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #main-content .bahar-stat-card [class*="text-[22px]"],
 #main-content .bahar-stat-card [class*="text-[25px]"] {
-  font-family: "Manrope", "Vazirmatn", sans-serif;
+  font-family: "Arad";
   font-variant-numeric: tabular-nums;
   letter-spacing: -.035em;
 }
@@ -2040,4 +1914,243 @@ h1, h2, h3, h4, h5, h6 {
 @media print {
   #main-content { background: #fff !important; }
   [data-bahar-sidebar], [data-bahar-topbar], [data-bahar-mobile-topbar] { display: none !important; }
+}
+
+
+/* ============================================================
+   BAHAR V4 — premium operational interface finish
+   Intent: editorial hierarchy, tactile controls, calm surfaces,
+   forest navigation, and data-dense layouts with generous rhythm.
+   ============================================================ */
+:root {
+  --bahar-content-width: 88rem;
+  --bahar-control-height: 2.75rem;
+  --bahar-control-radius: .625rem;
+  --bahar-card-radius: .875rem;
+  --bahar-shadow-card: 0 1px 2px rgb(16 35 27 / 4%), 0 8px 28px -24px rgb(16 35 27 / 20%);
+  --bahar-shadow-card-hover: 0 12px 32px -22px rgb(8 37 29 / 28%), 0 3px 8px rgb(16 35 27 / 5%);
+  --bahar-shadow-menu: 0 24px 64px -28px rgb(5 20 14 / 34%), 0 4px 14px rgb(5 20 14 / 8%);
+}
+html, body {
+  font-family: "Arad";
+  font-feature-settings: "ss01" 1, "cv11" 1;
+}
+body { background: var(--canvas); }
+[data-bahar-shell] { background: var(--canvas); }
+[data-bahar-sidebar] {
+  background: var(--sidebar) !important;
+  color: var(--sidebar-foreground);
+  border-color: var(--sidebar-border) !important;
+  box-shadow: 1px 0 0 rgb(8 17 12 / 7%);
+}
+[data-bahar-sidebar] a,
+[data-bahar-sidebar] button { transition: background-color 160ms ease, color 160ms ease, transform 160ms ease; }
+[data-bahar-topbar] {
+  background: color-mix(in srgb, var(--surface-1) 92%, transparent) !important;
+  border-color: var(--border-subtle) !important;
+  backdrop-filter: saturate(150%) blur(16px);
+  -webkit-backdrop-filter: saturate(150%) blur(16px);
+}
+[data-bahar-mobile-topbar] {
+  background: color-mix(in srgb, var(--surface-1) 94%, transparent) !important;
+  border-color: var(--border-subtle) !important;
+  backdrop-filter: saturate(150%) blur(16px);
+  -webkit-backdrop-filter: saturate(150%) blur(16px);
+}
+#main-content {
+  background:
+    radial-gradient(ellipse at 92% 0%, color-mix(in srgb, var(--spring) 4%, transparent), transparent 34rem),
+    var(--canvas);
+  padding-block: clamp(1.35rem, 2.4vw, 2.35rem);
+}
+#main-content > .max-w-6xl,
+#main-content > .max-w-\[88rem\] {
+  width: min(100%, var(--bahar-content-width));
+}
+#main-content [data-bahar-page-heading] { margin-block-end: 1.65rem; }
+#main-content [data-bahar-page-heading] h1 {
+  color: var(--text-primary);
+  font-size: clamp(1.65rem, 2.2vw, 2.15rem);
+  font-weight: 800;
+  letter-spacing: -.045em;
+  line-height: 1.28;
+}
+#main-content [data-bahar-page-heading] p {
+  color: var(--text-secondary);
+  font-size: .9rem;
+  line-height: 1.9;
+  max-width: 54rem;
+}
+#main-content .b-card,
+#main-content .b-card-md,
+#main-content .b-card-sm,
+#main-content [data-slot="card"] {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--bahar-card-radius);
+  background: var(--surface-1);
+  box-shadow: var(--bahar-shadow-card);
+}
+#main-content .b-card { padding: 1.35rem; }
+#main-content .b-card-md { padding: 1.15rem; }
+#main-content .b-card-sm { padding: 1rem; }
+#main-content [data-slot="card"] { padding-block: 1.2rem; }
+#main-content [data-slot="card-header"] { padding-inline: 1.2rem; }
+#main-content [data-slot="card-content"] { padding-inline: 1.2rem; }
+#main-content [data-slot="card-footer"] { padding-inline: 1.2rem; }
+#main-content .b-card-hover:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--spring) 30%, var(--border-default));
+  box-shadow: var(--bahar-shadow-card-hover);
+}
+#main-content .bahar-stat-card {
+  min-height: 112px;
+  border-radius: 14px;
+  background: linear-gradient(145deg, var(--surface-1), color-mix(in srgb, var(--surface-2) 44%, var(--surface-1)));
+  padding: 1.1rem 1.15rem;
+}
+#main-content .bahar-stat-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--stat-accent, var(--spring)) 12%, transparent);
+}
+#main-content [data-slot="button"],
+#main-content .b-btn,
+#main-content button.b-btn,
+#main-content a.b-btn {
+  min-height: var(--bahar-control-height);
+  border-radius: var(--bahar-control-radius);
+  padding-inline: 1rem;
+  font-family: "Arad";
+  font-size: .875rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  transition: transform 160ms var(--ease-spring), background-color 160ms ease, color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+#main-content [data-slot="button"][data-variant="default"],
+#main-content [data-slot="button"][data-variant="primary"],
+#main-content .b-btn-spring {
+  background: #006b4e;
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 3px 8px rgb(0 107 78 / 18%);
+}
+#main-content [data-slot="button"][data-variant="default"]:hover,
+#main-content [data-slot="button"][data-variant="primary"]:hover,
+#main-content .b-btn-spring:not(:disabled):hover {
+  background: #007657;
+  box-shadow: 0 6px 14px rgb(0 107 78 / 22%);
+  transform: translateY(-1px);
+}
+#main-content [data-slot="button"][data-variant="outline"],
+#main-content .b-btn-outline {
+  background: var(--surface-1);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+}
+#main-content [data-slot="button"][data-variant="outline"]:hover,
+#main-content .b-btn-outline:hover { border-color: color-mix(in srgb, var(--spring) 55%, var(--border-default)); background: var(--spring-tint); }
+#main-content [data-slot="button"][data-variant="secondary"],
+#main-content .b-btn-soft { background: var(--surface-2); color: var(--text-primary); border: 1px solid transparent; }
+#main-content [data-slot="button"][data-variant="secondary"]:hover,
+#main-content .b-btn-soft:hover { background: var(--surface-3); }
+#main-content [data-slot="button"][data-variant="ghost"],
+#main-content .b-btn-ghost { background: transparent; color: var(--text-secondary); box-shadow: none; }
+#main-content [data-slot="button"][data-variant="ghost"]:hover,
+#main-content .b-btn-ghost:hover { background: var(--surface-2); color: var(--text-primary); }
+#main-content [data-slot="button"]:active,
+#main-content .b-btn:active { transform: translateY(0) scale(.985); }
+#main-content :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea, [data-slot="input"], [data-slot="textarea"], [data-slot="select-trigger"], .b-input) {
+  min-height: var(--bahar-control-height);
+  border: 1px solid var(--border-default);
+  border-radius: var(--bahar-control-radius);
+  background: var(--surface-1);
+  color: var(--text-primary);
+  box-shadow: inset 0 1px 2px rgb(16 35 27 / 3%);
+  font-family: "Arad";
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+#main-content textarea,
+#main-content [data-slot="textarea"] { min-height: 7rem; padding-block: .75rem; }
+#main-content :is(input, select, textarea, [data-slot="input"], [data-slot="textarea"], [data-slot="select-trigger"], .b-input):focus-visible {
+  border-color: var(--spring);
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--spring) 15%, transparent);
+}
+#main-content :is(input, textarea)::placeholder { color: var(--text-tertiary); opacity: 1; }
+#main-content label,
+#main-content [data-slot="label"],
+#main-content [data-slot="form-label"] { color: var(--text-primary); font-weight: 650; }
+#main-content [data-slot="table-container"] {
+  overflow: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--surface-1);
+}
+#main-content [data-slot="table"] { border-collapse: separate; border-spacing: 0; }
+#main-content [data-slot="table-head"],
+#main-content thead th {
+  height: 46px;
+  background: var(--surface-2);
+  color: var(--text-secondary);
+  border-block-end: 1px solid var(--border-default);
+  font-size: .75rem;
+  font-weight: 750;
+  letter-spacing: .01em;
+}
+#main-content [data-slot="table-cell"],
+#main-content tbody td { padding-block: .82rem; border-block-end: 1px solid var(--border-subtle); }
+#main-content [data-slot="table-row"]:hover { background: color-mix(in srgb, var(--spring-tint) 55%, var(--surface-1)); }
+#main-content [data-slot="badge"] { border-radius: 6px; font-weight: 700; }
+#main-content [data-slot="tabs-list"] { border: 1px solid var(--border-subtle); border-radius: 10px; background: var(--surface-2); }
+#main-content [data-slot="tabs-trigger"][data-state="active"] { background: var(--surface-1); color: var(--spring-deep); box-shadow: 0 1px 4px rgb(16 35 27 / 10%); }
+#main-content [data-slot="dialog-content"],
+#main-content [data-slot="alert-dialog-content"] { border-radius: 15px; border-color: var(--border-subtle); background: var(--surface-1); box-shadow: var(--bahar-shadow-menu); }
+[data-slot="popover-content"],
+[data-slot="dropdown-menu-content"],
+[data-slot="context-menu-content"],
+[data-slot="select-content"],
+[data-slot="hover-card-content"],
+[data-slot="navigation-menu-viewport"] {
+  border-color: var(--border-default);
+  border-radius: 11px;
+  background: var(--surface-1);
+  box-shadow: var(--bahar-shadow-menu);
+}
+[data-slot="dropdown-menu-item"],
+[data-slot="context-menu-item"],
+[data-slot="menubar-item"],
+[data-slot="select-item"] { min-height: 38px; border-radius: 6px; }
+[data-slot="dropdown-menu-item"]:focus,
+[data-slot="context-menu-item"]:focus,
+[data-slot="menubar-item"]:focus,
+[data-slot="select-item"]:focus { background: var(--spring-tint); color: var(--spring-deep); }
+[data-slot="tooltip-content"] { border-radius: 6px; background: var(--invert); color: var(--invert-foreground); box-shadow: var(--bahar-shadow-2); }
+[data-sonner-toaster] [data-sonner-toast] {
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  background: var(--surface-1);
+  color: var(--text-primary);
+  box-shadow: var(--bahar-shadow-menu);
+}
+#main-content .bahar-empty-state { border-radius: 14px; border-color: var(--border-default); background: var(--surface-1); }
+#main-content .b-filter-bar,
+#main-content .b-toolbar,
+#main-content .b-table-toolbar {
+  border-color: var(--border-subtle);
+  border-radius: 12px;
+  background: var(--surface-1);
+  box-shadow: var(--bahar-shadow-card);
+}
+#main-content .recharts-cartesian-grid line { stroke: var(--border-subtle); }
+#main-content .recharts-text { fill: var(--text-tertiary); font-family: "Arad"; }
+#main-content :focus-visible { outline-color: var(--spring); }
+@media (max-width: 767px) {
+  #main-content { padding-inline: .85rem; }
+  #main-content .bahar-stat-card { min-height: 96px; }
+  #main-content [data-slot="table-container"] { border-radius: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #main-content .b-card-hover:hover,
+  #main-content [data-slot="button"]:hover { transform: none; }
 }
