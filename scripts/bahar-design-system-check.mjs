@@ -18,7 +18,7 @@ const checks = [
   ["Original blossom pink is preserved", css.includes("--blossom: #e5548b")],
   ["Spring tonal scale is exposed", css.includes("--spring-950: #08251d") && css.includes("--color-spring-950: var(--spring-950)")],
   ["Blossom tonal scale is exposed", css.includes("--blossom-900: #581a37") && css.includes("--color-blossom-900: var(--blossom-900)")],
-  ["Arad is the only declared font family", !/Vazirmatn|Manrope|Inter|Geist|Roboto|Segoe UI|Tahoma|ui-monospace|sans-serif/.test(css)],
+  ["Arad is the only declared font family", [...css.matchAll(/font-family\s*:\s*([^;]+);/g)].every(match => match[1].trim() === '"Arad"' || match[1].trim() === "var(--font-sans)") && [...css.matchAll(/@font-face\s*\{[^}]*font-family:\s*([^;]+);/gs)].every(match => match[1].trim() === '"Arad"')],
   ["Arad self-hosted weights are present", ["Light","Regular","Medium","SemiBold","Bold","ExtraBold"].every(weight => css.includes("AradFD-" + weight + ".woff2"))],
   ["External font loader is removed", !/next\/font|Vazirmatn/.test(fontLoader)],
   ["Root layout has no secondary font class", !/vazirmatn|Manrope|font-family/i.test(layout)],
