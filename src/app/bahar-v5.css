@@ -27,6 +27,8 @@
  --secondary:var(--v5-muted);--secondary-foreground:var(--v5-text);--muted:var(--v5-muted);--muted-foreground:var(--v5-secondary);
  --accent:var(--v5-tint);--accent-foreground:#00553f;--destructive:var(--v5-danger);--destructive-foreground:#fff;
  --border:var(--v5-border);--input:var(--v5-border-strong);--ring:var(--v5-spring);--sidebar-border:#304639;--radius:.625rem;
+ --ink:var(--v5-text);--ink-deep:var(--v5-text);--steel:var(--v5-secondary);--paper:var(--v5-surface);--cloud:var(--v5-muted);--hairline:var(--v5-border);--hairline-soft:var(--v5-border-soft);--sidebar-surface:var(--v5-sidebar);--invert:#10231b;--invert-foreground:#fff;
+ --success-foreground:#fff;--warning-foreground:#fff;--warning-deep:var(--v5-warning);--info-foreground:#fff;--danger-foreground:#fff;--blossom-foreground:#3b1425;
 }
 .dark{
  color-scheme:dark;
