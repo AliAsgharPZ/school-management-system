@@ -40,7 +40,7 @@ export default function StaffAttendancePage() {
   const { t } = useLang();
   const confirm = useConfirm();
   const [data, setData] = useState<MgrData | OwnData | null>(null);
-  const [date, setDate] = useState(todayKey());
+  const [date, setDate] = useState(todayKey());\n  const [dateDraft, setDateDraft] = useState(todayKey());
   const [marks, setMarks] = useState<Record<string, StaffMark>>({});
   const [busy, setBusy] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -92,7 +92,7 @@ export default function StaffAttendancePage() {
     }));
   }
 
-  async function save() {
+  function applyDateDraft() {\n    const normalized = dateDraft.trim();\n    const match = /^(\\d{4})-(\\d{2})-(\\d{2})$/.exec(normalized);\n    if (!match) {\n      toast.error(t("common.invalidDate"));\n      setDateDraft(date);\n      return;\n    }\n    const month = Number(match[2]);\n    const day = Number(match[3]);\n    if (month < 1 || month > 12 || day < 1 || day > 31) {\n      toast.error(t("common.invalidDate"));\n      setDateDraft(date);\n      return;\n    }\n    setDate(normalized);\n  }\n\n  async function save() {
     if (!data?.manager) return;
     const records = Object.entries(marks)
       .filter(([, mark]) => Boolean(mark.status))
@@ -186,7 +186,7 @@ export default function StaffAttendancePage() {
         title={t("nav.staffAttendance")}
         desc={t("staffAttendance.sbt-rvzanh-hzvr-mdyr-maavn-malman-v-sraydar-mbnay-mrkhsy-v-hqvq")}
         action={
-          <button type="button" className="b-btn b-btn-spring" disabled={busy || markedCount === 0} onClick={save}>
+          <button type="button" className="b-btn b-btn-spring" disabled={busy || markedCount === 0 || dateDraft !== date} onClick={save}>
             {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
             {t("staffAttendance.sbt-hmh")}
           </button>
@@ -206,7 +206,7 @@ export default function StaffAttendancePage() {
           onChange={(event) => setDate(event.target.value)}
           placeholder="1404-08-05"
         />
-        <span className="text-xs text-steel">{markedCount} / {data.staff.length}</span>
+        <button type="button" className="b-btn b-btn-outline b-btn-sm" onClick={applyDateDraft} disabled={dateDraft === date}>{t("common.apply")}</button>\n        <span className="text-xs text-steel">{markedCount} / {data.staff.length}</span>
       </div>
 
       <section className="b-card-sm divide-y divide-hairline-soft">
