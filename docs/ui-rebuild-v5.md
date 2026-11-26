@@ -50,7 +50,7 @@
 
 ## 4. موجودی دقیق routeهای پنل
 
-تعداد route pageهای موجود در filesystem شاخهٔ بازسازی: **144**. این فهرست از درخت واقعی مخزن تولید شده است؛ route جدیدی از روی حدس ساخته نشده است.
+تعداد route pageهای موجود در filesystem شاخهٔ بازسازی: **145** شامل داشبورد اصلی. از این تعداد، 144 route صفحهٔ ماژولی و یک route داشبورد است. این فهرست از درخت واقعی مخزن تولید شده است؛ route جدیدی از روی حدس ساخته نشده است.
 
 ```text
 //app/accessibility
@@ -141,6 +141,7 @@
 //app/network
 //app/observations
 //app/office-hours
+//app
 //app/parking
 //app/payroll
 //app/pickup
