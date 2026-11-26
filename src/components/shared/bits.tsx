@@ -18,7 +18,7 @@ export function CountUp({ value }: { value: number }) {
  return <><span aria-hidden="true">{faNumber(shown)}</span><span className="sr-only">{faNumber(value)}</span></>;
 }
 
-export function PageHeader({title,desc,action,grad=false}:{title:string;desc?:string;action?:React.ReactNode;grad?:boolean}) {
+export function PageHeader({title,desc,action}:{title:string;desc?:string;action?:React.ReactNode;grad?:boolean}) {
  return <header data-bahar-page-heading className="no-print flex flex-wrap items-center justify-between gap-4"><div className="flex min-w-0 flex-col gap-1"><h1>{title}</h1>{desc?<p>{desc}</p>:null}</div>{action?<div className="flex shrink-0 flex-wrap items-center gap-2">{action}</div>:null}</header>;
 }
 
