@@ -68,15 +68,16 @@ export function Select({
   const showSearch = searchable ?? options.length > 9;
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+    <div className={`relative inline-flex min-w-0 ${className}`}>
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
         <button
           type="button"
           disabled={disabled}
           aria-label={ariaLabel}
           aria-expanded={open}
           aria-haspopup="listbox"
-          className={`b-input flex min-w-0 items-center justify-between gap-2 text-start cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 ${className} ${buttonClassName}`}
+          className={`b-input flex w-full min-w-0 items-center justify-between gap-2 text-start cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 ${buttonClassName}`}
         >
           <span className={`min-w-0 truncate ${selected ? "text-ink" : "text-steel"}`}>
             {selected?.label ?? placeholder}
@@ -130,8 +131,9 @@ export function Select({
             </CommandGroup>
           </CommandList>
         </Command>
-      </PopoverContent>
-    </Popover>
+        </PopoverContent>
+      </Popover>
+    </div>
   );
 }
 
