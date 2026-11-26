@@ -160,6 +160,7 @@ export default function StaffAttendancePage() {
                   <th scope="col" className="p-3 text-start">{t("common.status")}</th>
                   <th scope="col" className="p-3 text-start">{t("auth.login.submit")}</th>
                   <th scope="col" className="p-3 text-start">{t("shell.logoutShort")}</th>
+                  <th scope="col" className="p-3 text-start">{t("common.note")}</th>
                   <th scope="col" className="p-3 text-start">{t("common.actions")}</th>
                 </tr>
               </thead>
@@ -170,6 +171,7 @@ export default function StaffAttendancePage() {
                     <td className="p-3">{t(STATUS_TKEY[record.status] ?? record.status)}</td>
                     <td className="p-3 tabular-nums" dir="ltr">{record.checkIn ?? "—"}</td>
                     <td className="p-3 tabular-nums" dir="ltr">{record.checkOut ?? "—"}</td>
+                    <td className="p-3">{record.note ?? "—"}</td>
                     <td className="p-3">
                       <button
                         type="button"
@@ -274,6 +276,16 @@ export default function StaffAttendancePage() {
                     onChange={(event) => updateMark(row.user.id, { checkOut: event.target.value })}
                     aria-label={`${t("shell.logoutShort")} ${fullName}`}
                     dir="ltr"
+                  />
+                </label>
+                <label className="flex min-w-0 flex-col gap-1 text-xs text-steel">
+                  <span>{t("common.note")}</span>
+                  <input
+                    type="text"
+                    maxLength={200}
+                    className="b-input w-full"
+                    value={mark.note}
+                    onChange={(event) => updateMark(row.user.id, { note: event.target.value })}
                   />
                 </label>
               </div>
