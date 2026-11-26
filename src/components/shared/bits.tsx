@@ -35,7 +35,12 @@ export function CountUp({ value }: { value: number }) {
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [value]);
-  return <>{faNumber(shown)}</>;
+  return (
+    <>
+      <span aria-hidden="true">{faNumber(shown)}</span>
+      <span className="sr-only">{faNumber(value)}</span>
+    </>
+  );
 }
 
 export function PageHeader({
@@ -139,14 +144,15 @@ export function EmptyState({
 }
 
 export function ErrorBox({ message, onRetry }: { message: string; onRetry?: () => void }) {
+  const { t } = useLang();
   return (
-    <div className="b-card-sm !border-destructive/30 bg-destructive/5 p-4 flex items-start gap-3 text-destructive">
+    <div role="alert" className="b-card-sm !border-destructive/30 bg-destructive/5 p-4 flex items-start gap-3 text-destructive">
       <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" />
       <div className="flex-1 min-w-0 space-y-3">
         <span className="text-[14px] font-medium leading-relaxed block">{message}</span>
         {onRetry && (
           <button type="button" className="b-btn b-btn-ghost min-h-11" onClick={onRetry}>
-            تلاش دوباره
+            {t("common.retry")}
           </button>
         )}
       </div>
