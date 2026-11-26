@@ -58,7 +58,7 @@ export function calendarParts(date: Date = new Date(), calendar?: CalendarKind):
 /** بررسی سخت‌گیرانهٔ کلید تاریخ در تقویم فعال کشور */
 export function isValidCalendarDateKey(value: string): boolean {
   const normalized = enDigits(value.trim());
-  const match = /^(\\d{4,})-(\\d{2})-(\\d{2})$/.exec(normalized);
+  const match = /^(\d{4,})-(\d{2})-(\d{2})$/.exec(normalized);
   if (!match) return false;
   const year = Number(match[1]);
   const month = Number(match[2]);
