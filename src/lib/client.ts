@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState, type Dispatch, type SetStateAction } from "react";
+import { useCallback, useEffect, useRef, useState, type Dispatch, type SetStateAction } from "react";
 
 // ============================================================
 // بهار | ابزار کلاینت API
@@ -56,6 +56,7 @@ export const apiDelete = <T,>(url: string) => request<T>(url, { method: "DELETE"
 
 /** هوک دریافت داده با رفرش دستی */
 export function useApi<T>(url: string | null, deps: unknown[] = []) {
+  const requestIdRef = useRef(0);
   const [state, setState] = useState<{
     url: string | null;
     data: T | null;
@@ -75,6 +76,7 @@ export function useApi<T>(url: string | null, deps: unknown[] = []) {
 
   const refetch = useCallback(async () => {
     if (!url) return;
+    const requestId = ++requestIdRef.current;
     setState((current) => ({
       url,
       data: current.url === url ? current.data : null,
@@ -83,19 +85,26 @@ export function useApi<T>(url: string | null, deps: unknown[] = []) {
     }));
     try {
       const d = await request<T>(url);
-      setState({ url, data: d, loading: false, error: null });
+      if (requestId === requestIdRef.current) {
+        setState({ url, data: d, loading: false, error: null });
+      }
     } catch (e) {
-      setState((current) => ({
-        url,
-        data: current.url === url ? current.data : null,
-        loading: false,
-        error: e instanceof Error ? e.message : "خطا",
-      }));
+      if (requestId === requestIdRef.current) {
+        setState((current) => ({
+          url,
+          data: current.url === url ? current.data : null,
+          loading: false,
+          error: e instanceof Error ? e.message : "خطا",
+        }));
+      }
     }
   }, [url]);
 
   useEffect(() => {
     if (url) void refetch();
+    return () => {
+      requestIdRef.current += 1;
+    };
   }, [url, refetch, ...deps]);
 
   const visible = state.url === url
