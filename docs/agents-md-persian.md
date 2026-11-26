@@ -1,98 +1,58 @@
-# Persian project rules (for CLAUDE.md / AGENTS.md / Cursor rules)
+# قواعد فارسی، راست‌چین و بومی‌سازی بهار
 
-For Bahar UI work, also read `docs/design-language.md`, `docs/component-contracts.md`, and `docs/ui-craft-rules.md`; those are the project-specific sources of truth for design and interaction.
+این سند قواعد نگارش و بومی‌سازی رابط بهار است. بهار چندزبانه و چندکشوری است؛ فارسی زبان مبدأ محصول است، اما هیچ صفحه‌ای نباید زبان، جهت، تقویم یا منطقهٔ زمانی پروفایل فعال را نادیده بگیرد.
 
-Paste the block below into the file your coding agent reads on every turn:
-`CLAUDE.md` (Claude Code), `AGENTS.md` (Codex and most agents), or a
-`.cursor/rules/persian.mdc` file with `alwaysApply: true` (Cursor). It is the
-one-page summary of the VibeFarsi Persian skills, for projects that do not
-want to install each skill separately.
+برای طراحی و پیاده‌سازی رابط، این اسناد نیز الزام‌آورند:
+- `docs/design-language.md`
+- `docs/component-contracts.md`
+- `docs/ui-craft-rules.md`
 
-Edit the two bracketed choices first: the copy register and the component
-source.
+## ۱. زبان و نگارش فارسی
+- متن‌های فارسی با نگارش طبیعی، دقیق و محترمانه نوشته شوند؛ لحن رسمیِ انسانی و یکدست باشد.
+- نیم‌فاصله در ترکیب‌هایی مانند «می‌شود»، «ثبت‌نام» و «گزارش‌ها» رعایت شود.
+- از «ی» و «ک» فارسی، گیومهٔ فارسی و نشانه‌گذاری فارسی استفاده شود.
+- از عبارت‌های ماشینی مانند «می‌باشد»، «در راستای» و ترجمهٔ لفظ‌به‌لفظ پرهیز شود.
+- متن کاربرپسند، کوتاه و دقیق باشد؛ خطا باید علت و راه‌حل قابل فهم داشته باشد.
+- هیچ متن رابطی را مستقیماً در صفحه hardcode نکن؛ از کاتالوگ i18n موجود استفاده کن.
+- فارسی زبان مبدأ است؛ کلیدها و ترجمه‌های زبان‌های دیگر را حذف یا بی‌دلیل تغییر نده.
 
----
+## ۲. جهت و چیدمان
+- جهت صفحه از locale فعال تعیین شود؛ فارسی و زبان‌های RTL راست‌چین و زبان‌های LTR چپ‌چین باشند.
+- از ویژگی‌های منطقی CSS و کلاس‌های start/end استفاده کن؛ برای رفع RTL از چیدمان معکوس و marginهای فیزیکی استفاده نکن.
+- شناسه، ایمیل، URL، کد، شماره تماس و زمان در صورت نیاز با `dir="ltr"` نمایش داده شوند.
+- آیکون جهت‌دار فقط وقتی معنای جهت وابسته به زبان است mirror شود.
 
-## Persian / RTL rules for this project
+## ۳. تایپوگرافی
+- فقط از فونت‌های موجود و self-hosted پروژه و توکن `--font-sans` استفاده کن.
+- فونت جدید یا CDN بدون بررسی مجوز، وزن‌های واقعی و عملکرد اضافه نکن.
+- letter-spacing متن فارسی صفر باشد؛ از uppercase و tracking برای فارسی استفاده نکن.
+- سلسله‌مراتب تیتر، متن، برچسب و داده مطابق `docs/design-language.md` باشد.
 
-This product is for Persian (Farsi) speakers in Iran. Apply these rules to
-every file you touch, without being reminded.
+## ۴. اعداد، تاریخ و زمان
+- ارقام نمایشی از formatter مرکزی پروژه استفاده کنند؛ ارقام ورودی فارسی و عربی پیش از اعتبارسنجی normalize شوند.
+- مقادیر API و محاسبات از قالب normalized استفاده کنند؛ رشتهٔ نمایشی را به API نفرست.
+- تقویم، ارقام، هفته و timezone از Country Profile فعال خوانده شوند.
+- پروفایل ایران به‌طور پیش‌فرض از تقویم شمسی و timezone تهران استفاده می‌کند؛ این فرض را به کشورهای دیگر تعمیم نده.
+- تاریخ را با slicing یا تبدیل دستی رشته نساز؛ از helperهای مرکزی تاریخ استفاده کن.
 
-### Language and register
-- All user-facing text is Persian: labels, placeholders, errors, empty states,
-  toasts, `aria-label`, page titles, metadata. Code identifiers, props, file
-  names, commit messages stay English.
-- Register: [formal-but-human («می‌شود»، «کنید»، «است») | light
-  conversational («میشه»، «می‌تونید»، «کنید»)]. Never mix the two in one
-  screen. Never «می‌باشد»، «لازم به ذکر است»، «در راستای».
-- No English defaults in copy: never «Oops», «Something went wrong»,
-  «Submit», «Loading».
-- Orthography: ZWNJ (نیم‌فاصله) in compounds (می‌شود، ثبت‌نام، سفارش‌ها),
-  Persian ی and ک, «گیومه» for quotes, «،» «؟» punctuation, no em dashes.
+## ۵. فرم و اعتبارسنجی
+- هر ورودی label مستقل داشته باشد؛ placeholder جایگزین label نیست.
+- خطا زیر همان فیلد نمایش داده شود و با `aria-describedby` به آن متصل باشد.
+- مقدار فرم پس از خطای اعتبارسنجی یا شبکه حفظ شود.
+- ارقام فارسی/عربی/لاتین قبل از اعتبارسنجی normalize شوند.
+- قواعد کد ملی، تلفن، نشانی، پول و سایر داده‌های وابسته به کشور از Country Profile و validatorهای موجود بیایند؛ قواعد ایران را برای همهٔ کشورها hardcode نکن.
+- پیام خطا مشخص کند چه چیزی نامعتبر است و کاربر چگونه اصلاحش کند.
 
-### Direction and layout
-- `<html lang="fa" dir="rtl">` once; nothing else sets `dir` except LTR
-  controls (phone, email, OTP, IBAN, card, URL, code).
-- Logical Tailwind classes only: `ms-`/`me-`, `ps-`/`pe-`, `start-`/`end-`,
-  `text-start`, `border-s`, `rounded-s-`. Never `ml-`, `pl-`, `left-`,
-  `text-left`, `border-l`, `space-x-*` (use `gap-*`).
-- Do not use `flex-row-reverse` to "fix" RTL order.
-- "Next"/"submit" arrows point left (`ArrowLeft`); drawers open from the start
-  edge.
+## ۶. کامپوننت و ظاهر
+- از کامپوننت‌های مشترک موجود در `src/components/ui` و `src/components/shared` استفاده کن.
+- پیاده‌سازی فعلی Radix-based را حفظ کن؛ UI kit دیگری نصب نکن مگر با دلیل فنی و تأیید.
+- رنگ، فونت، فاصله، radius و سایه از سیستم طراحی اختصاصی بهار بیاید.
+- اندازهٔ هدف لمس، focus-visible، disabled، loading، invalid و reduced-motion را رعایت کن.
+- دکمهٔ بدون عمل، لینک بی‌مقصد و وضعیت موفقیت ساختگی ممنوع است.
 
-### Typography
-- Font: [Vazirmatn | IRANSans] via the project's `--font-sans`. Never Inter,
-  Roboto, Geist or `system-ui` alone.
-- `letter-spacing: 0` on Persian; no `tracking-*`, no `uppercase`.
-- Body ~16px, line-height 1.7–1.9; headings line-height ≥ 1.2.
-
-### Numbers, money, dates
-- Visible digits are Persian ۰–۹; values, URLs, API payloads keep Latin digits.
-- Thousands separator «٬», decimal «٫», percent «٪» after the number.
-- Money: «۱۲٬۴۵۰٬۰۰۰ تومان», unit after the number; never «$» or «Toman»;
-  never mix تومان and ریال.
-- Dates are Jalali (شمسی) in the UI, week starts Saturday, Friday is the
-  weekend; store UTC ISO 8601; time zone `Asia/Tehran` (+03:30, no DST).
-- Relative time in Persian («۲ ساعت پیش»).
-
-### Forms and validation
-- Label above the field; placeholder is an example, not a label.
-- Normalize Persian and Arabic-Indic digits before validating.
-- Mobile: 11 digits starting `09` (also accept `+98`). National ID: 10 digits
-  with the mod-11 checksum. IBAN: `IR` + 24 digits, mod-97. Card: 16 digits,
-  Luhn. Postal code: 10 digits.
-- Errors under the field, specific: «شماره موبایل باید ۱۱ رقم باشد و با ۰۹
-  شروع شود.»
-
-### Components and colors
-- Components come from [VibeFarsi (`npx vibefarsi add <slug>`) | the
-  project's `components/ui`]. Do not add shadcn or another LTR kit.
-- Colors only from theme tokens (`bg-background`, `text-muted-foreground`,
-  `border-border`, `bg-primary`, `text-brand`…). No hex/oklch in components.
-- Radius from `--radius`.
-
-### Before you finish
-- Grep the diff for `ml-|mr-|pl-|pr-|left-|right-|text-left|text-right|space-x`.
-- Check every visible number is Persian and every date is Jalali.
-- Read every new string aloud in Persian: would an Iranian product ship it?
-
----
-
-## Where to put it
-
-| Tool | File | Note |
-|---|---|---|
-| Claude Code | `CLAUDE.md` at the repo root | Or keep this file at `docs/persian-rules.md` and add `@docs/persian-rules.md` to `CLAUDE.md`. |
-| Codex | `AGENTS.md` at the repo root | Codex reads it on every session. |
-| Cursor | `.cursor/rules/persian.mdc` | Add a frontmatter with `alwaysApply: true`. |
-| Other agents | `AGENTS.md` | Most tools read it; otherwise paste into the system prompt. |
-
-## Going further
-
-The full skills cover each topic in depth and trigger on their own when the
-task matches: `persian-rtl-ui`, `persian-ui-copy`, `persian-conversational`,
-`persian-formal`, `jalali-calendar`, `iran-validation`, `persian-seo`.
-Install any of them with `npx vibefarsi add <slug>`. For the craft side
-(design system discipline, layout shift, type scale, touch targets, motion
-by name) pair this with the `ui-craft-rules` guide; `vibefarsi init` writes
-both into `docs/` and a compact block into `AGENTS.md`.
+## ۷. پیش از تحویل
+- RTL و LTR، Light و Dark، موبایل و دسکتاپ را بررسی کن.
+- متن فارسی، ارقام، تاریخ، labelها و پیام‌های خطا را بازبینی کن.
+- تمام کنترل‌ها را با صفحه‌کلید امتحان کن.
+- build، lint و typecheck را در صورت دسترسی به محیط اجرا انجام بده و نتیجهٔ واقعی را گزارش کن.
+- اگر تستی اجرا نشده، صریحاً بگو؛ آن را پاس‌شده اعلام نکن.
