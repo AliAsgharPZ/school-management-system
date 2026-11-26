@@ -538,6 +538,22 @@ CompactHeader → ContextSummary → SingleColumnFields → InlineValidation →
 - toggle
 - tooltip
 
+
+### وضعیت واقعی مهاجرت V4
+
+در شاخهٔ `design-system-v4-arad-only`، **۴۷ جزء از ۴۹ جزء UI** از نظر ظاهر و قراردادهای بصری به V4 منتقل شده‌اند. دو مورد زیر اجزای صرفاً ساختاری/ترکیبی‌اند و skin مستقل ندارند:
+
+- `aspect-ratio`: primitive ساختاری برای نسبت ابعاد؛ ظاهر از محتوای داخل می‌آید.
+- `toaster`: میزبان و composition اعلان‌ها؛ ظاهر از `toast` و `sonner` می‌آید.
+
+اجزای منتقل‌شده:
+
+`accordion`, `alert-dialog`, `alert`, `avatar`, `badge`, `breadcrumb`, `button`, `calendar`, `card`, `carousel`, `chart`, `checkbox`, `collapsible`, `command`, `context-menu`, `dialog`, `drawer`, `dropdown-menu`, `form`, `hover-card`, `input-otp`, `input`, `label`, `menubar`, `navigation-menu`, `pagination`, `popover`, `price`, `progress`, `radio-group`, `resizable`, `scroll-area`, `select`, `separator`, `sheet`, `sidebar`, `skeleton`, `slider`, `sonner`, `switch`, `table`, `tabs`, `textarea`, `toast`, `toggle-group`, `toggle`, `tooltip`.
+
+مهاجرت شامل یکپارچه‌سازی اندازه و شعاع کنترل‌ها، حالت focus، سطوح و مرزها، منوها و overlayها، جداول، تب‌ها، بازخوردها و رفتار hover/pressed است. API و primitiveهای Radix/کتابخانه‌های موجود حفظ شده‌اند تا منطق و دسترس‌پذیری آسیب نبیند.
+
+**محدودهٔ باقی‌مانده:** این آمار دربارهٔ لایهٔ UI primitive است؛ به معنی بازبینی بصری تک‌تک صفحات محصول یا پیاده‌سازی تمام componentهای domain فهرست‌شده نیست. آن کار باید صفحه‌به‌صفحه و با screenshot QA انجام شود.
+
 ### موجود در src/components/shared
 
 - bits
