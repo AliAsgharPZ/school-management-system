@@ -51,7 +51,9 @@ function RosterInner() {
     <main className="min-h-dvh bg-white text-ink">
       <style>{`
         @page { size: A4 portrait; margin: 12mm; }
-        .roster-room { margin-bottom: 10mm; }\n        .roster-room > header { break-after: avoid; page-break-after: avoid; }\n        .roster-table tr { break-inside: avoid; page-break-inside: avoid; }
+        .roster-room { margin-bottom: 10mm; }
+        .roster-room > header { break-after: avoid; page-break-after: avoid; }
+        .roster-table tr { break-inside: avoid; page-break-inside: avoid; }
         .roster-table { width: 100%; border-collapse: collapse; font-size: 12px; }
         .roster-table th, .roster-table td { border: 0.3mm solid var(--hairline); padding: 1.6mm 2mm; text-align: start; }
         @media print { .roster-toolbar { display: none !important; } .roster-table thead { display: table-header-group; } .roster-room { break-inside: auto; } }
