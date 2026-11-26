@@ -589,8 +589,7 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
   border: 1px solid var(--hairline-soft);
   border-radius: 18px;
 }
-.b-card-lg {
-  border-radius: 32px;
+.b-card-lg {\n  border-radius: 18px;
   border: 1px solid var(--hairline-soft);
   background: var(--card);
 }
@@ -604,14 +603,9 @@ html[lang="en"] .t-h3, html[lang="tr"] .t-h3, html[lang="az"] .t-h3, html[lang="
   border: 1px solid var(--hairline-soft);
   background: var(--card);
 }
-.b-card-ink {
-  background: var(--invert);
-  color: var(--invert-foreground);
-  border-radius: 32px;
+.b-card-ink {\n  background: var(--invert);\n  color: var(--invert-foreground);\n  border-radius: 18px;
 }
-.b-card-tint {
-  background: var(--spring-tint);
-  border-radius: 24px;
+.b-card-tint {\n  background: var(--spring-tint);\n  border-radius: 16px;
   border: 1px solid color-mix(in srgb, var(--spring) 14%, transparent);
 }
 .b-shadow-rail {
