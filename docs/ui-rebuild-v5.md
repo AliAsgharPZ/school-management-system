@@ -1,6 +1,7 @@
 # برنامه و ماتریس بازسازی رابط کاربری بهار — V5
 
-**شاخه:** `ui-rebuild-v5`  
+**شاخهٔ انتشار:** `design-system-v4-arad-only` (PR #4)
+**شاخهٔ کاری اولیه:** `ui-rebuild-v5`  
 **مرجع طراحی:** `docs/design-system-v5.md`  
 **مرجع کامپوننت:** `docs/component-catalog-v5.md`  
 **هدف:** جایگزینی کامل presentation layer قدیمی با V5، بدون حذف منطق دامنه، routeها، APIها، permissionها یا داده‌ها.
