@@ -423,7 +423,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
 
   return (
     <ShellUserContext.Provider value={{ user, badges }}>
-    <div data-bahar-shell className="min-h-screen bg-background flex flex-col">
+    <div data-bahar-shell className="min-h-screen bg-canvas flex flex-col">
       <SkipLink />
       {/* هدر موبایل — بدون همبرگر؛ ناوبری موبایل = لانچر app-screen داخل داشبورد */}
       <header data-bahar-mobile-topbar className="lg:hidden sticky top-0 z-40 bg-background border-b border-hairline-soft flex items-center justify-between gap-1 px-3 h-16 no-print">
@@ -542,7 +542,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
         {/* سایدبار دسکتاپ — جمع‌شونده با افکت rubber band */}
         <motion.aside
           data-bahar-sidebar
-          className="hidden lg:block shrink-0 border-e border-hairline-soft bg-background sticky top-0 h-screen overflow-hidden no-print"
+          className="hidden lg:block shrink-0 border-e border-sidebar-border bg-sidebar sticky top-0 h-screen overflow-hidden no-print"
           animate={{ width: collapsed ? 76 : 248 }}
           transition={{ type: "spring", stiffness: 480, damping: 30, mass: 0.9 }}
           initial={false}
@@ -564,7 +564,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
         {/* محتوا — ستون عمودی: هدر دسکتاپ + صفحه */}
         <div className="flex-1 min-w-0 flex flex-col">
           {/* هدر دسکتاپ (راند ۱۸) — چیپ پنل مدرسه + جستجو + زنگ اعلان‌ها */}
-          <header data-bahar-topbar className="hidden lg:flex sticky top-0 z-40 h-14 shrink-0 items-center gap-2 px-6 bg-background border-b border-hairline-soft no-print">
+          <header data-bahar-topbar className="hidden lg:flex sticky top-0 z-40 h-[60px] shrink-0 items-center gap-2 px-6 bg-background border-b border-hairline-soft no-print">
             {inSchoolPanel && (
               <button
                 onClick={exitSchoolPanel}
