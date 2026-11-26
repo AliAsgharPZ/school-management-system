@@ -55,6 +55,33 @@ export function calendarParts(date: Date = new Date(), calendar?: CalendarKind):
   return { y: get("year"), m: get("month"), d: get("day") };
 }
 
+/** بررسی سخت‌گیرانهٔ کلید تاریخ در تقویم فعال کشور */
+export function isValidCalendarDateKey(value: string): boolean {
+  const normalized = enDigits(value.trim());
+  const match = /^(\\d{4,})-(\\d{2})-(\\d{2})$/.exec(normalized);
+  if (!match) return false;
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  if (!Number.isSafeInteger(year) || year < 1 || month < 1 || month > 13 || day < 1 || day > 31) return false;
+
+  const calendar = getCountrySync().calendar;
+  const first = calendarToDate(year, month, 1, calendar);
+  const firstParts = calendarParts(first, calendar);
+  if (firstParts.y !== year || firstParts.m !== month || firstParts.d !== 1) return false;
+
+  const next = month === 13
+    ? calendarToDate(year + 1, 1, 1, calendar)
+    : calendarToDate(year, month + 1, 1, calendar);
+  const nextParts = calendarParts(next, calendar);
+  if (month === 13
+    ? nextParts.y !== year + 1 || nextParts.m !== 1 || nextParts.d !== 1
+    : nextParts.y !== year || nextParts.m !== month + 1 || nextParts.d !== 1) return false;
+
+  const daysInMonth = Math.round((next.getTime() - first.getTime()) / 86_400_000);
+  return day <= daysInMonth;
+}
+
 /** اجزای تاریخ شمسی — نام قدیمی calendarParts (سازگاری) */
 export function jalaliParts(date: Date = new Date()): { y: number; m: number; d: number } {
   return calendarParts(date, "persian");
