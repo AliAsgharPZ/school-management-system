@@ -63,7 +63,8 @@ export default function StaffAttendancePage() {
             next[row.user.id] = {
               status: row.record?.status ?? "",
               checkIn: row.record?.checkIn ?? "",
-              checkOut: row.record?.checkOut ?? "",\n              note: row.record?.note ?? "",
+              checkOut: row.record?.checkOut ?? "",
+              note: row.record?.note ?? "",
             };
           }
           setMarks(next);
@@ -120,7 +121,8 @@ export default function StaffAttendancePage() {
         userId,
         status: mark.status,
         checkIn: mark.checkIn || undefined,
-        checkOut: mark.checkOut || undefined,\n        note: mark.note || undefined,
+        checkOut: mark.checkOut || undefined,
+        note: mark.note || undefined,
       }));
     if (!records.length) {
       toast.error(t("common.errorShort"));
