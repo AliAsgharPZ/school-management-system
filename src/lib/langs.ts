@@ -1033,7 +1033,7 @@ export const CATALOG: Record<string, string> = {
   "common.details": "جزئیات",
   "common.status": "وضعیت",
   "common.actions": "عملیات",
-  "common.date": "تاریخ",
+  "common.date": "تاریخ",\n  "common.apply": "اعمال",\n  "common.invalidDate": "تاریخ واردشده معتبر نیست.",
   "common.time": "ساعت",
   "common.name": "نام",
   "common.description": "توضیحات",
