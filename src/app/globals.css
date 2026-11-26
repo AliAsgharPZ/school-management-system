@@ -1212,3 +1212,65 @@ html[data-a11y-motion="reduce"] *, html[data-a11y-motion="reduce"] *::before, ht
 /* ── بهار | پاس متا: توکن چک‌باکس هم‌خانوادهٔ b-input ── */
 .b-check { width: 20px; height: 20px; accent-color: var(--spring); cursor: pointer; flex-shrink: 0; }
 
+
+
+/* ── Meta-derived Bahar UI refresh (brand colors remain exclusively Bahar) ── */
+.bahar-scroll-progress {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0 auto;
+  z-index: 100;
+  width: 100%;
+  height: 3px;
+  background: var(--spring);
+  transform-origin: right center;
+  pointer-events: none;
+}
+.bahar-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.4vw, 2rem);
+}
+.bahar-dashboard > * { min-width: 0; }
+#main-content {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+#main-content > div {
+  max-width: 80rem;
+}
+#main-content .b-card,
+#main-content .b-card-sm,
+#main-content .b-card-md {
+  border-radius: 1.5rem;
+  border-color: var(--hairline-soft);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--ink) 4%, transparent);
+}
+#main-content .b-card-md { border-radius: 2rem; }
+#main-content .b-card-sm { border-radius: 1rem; }
+#main-content .b-card-hover {
+  transition: transform 260ms var(--ease-decel), border-color 260ms var(--ease-decel), box-shadow 260ms var(--ease-decel);
+}
+#main-content .b-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -20px color-mix(in srgb, var(--ink) 22%, transparent);
+}
+#main-content .b-btn,
+#main-content button.b-btn,
+#main-content a.b-btn {
+  min-height: 2.75rem;
+  border-radius: 9999px;
+}
+#main-content input:not([type="checkbox"]):not([type="radio"]),
+#main-content select,
+#main-content textarea {
+  border-radius: 0.875rem;
+}
+@media (max-width: 640px) {
+  #main-content { padding-inline: 1rem; padding-block-start: 1.25rem; }
+  #main-content .b-card-md { border-radius: 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bahar-scroll-progress { display: none; }
+  #main-content { scroll-behavior: auto; }
+}
