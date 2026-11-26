@@ -4,6 +4,7 @@ const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
 const css = read("../src/app/globals.css");
 const shell = read("../src/components/app-shell/app-shell.tsx");
 const button = read("../src/components/ui/button.tsx");
+const dashboardStat = read("../src/components/bahar/dashboard/stat-card.tsx");
 const design = read("../docs/design-language.md");
 
 const checks = [
