@@ -27,7 +27,6 @@ function CardsInner() {
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
     const s = Number(q.get("session") ?? "1");
-    if (s >= 1) setSession(s);
     setStudentFilter(q.get("student") ?? "");
     (async () => {
       try {
@@ -45,12 +44,16 @@ function CardsInner() {
             schoolName: json.data?.schoolName ?? "",
             assignments: mine,
           });
+          const availableSessions = [...new Set(mine.map((card) => card.sessionNo))].sort((a, b) => a - b);
+          setSession(availableSessions.includes(s) ? s : availableSessions[0] ?? 1);
           return;
         }
         const res = await fetch(`/api/exam-seats?id=${params.planId}`);
         if (!res.ok) throw new Error();
         const json = (await res.json()) as { data?: Detail } & Detail;
-        setData((json as { data?: Detail }).data ?? (json as Detail));
+        const detail = json.data ?? json;
+        setData(detail);
+        setSession(Number.isInteger(s) && s >= 1 && s <= detail.plan.sessions ? s : 1);
       } catch {
         setFailed(true);
       }
@@ -58,6 +61,7 @@ function CardsInner() {
   }, [params.planId]);
 
   const cards = (data?.assignments ?? []).filter((a) => a.sessionNo === session && (!studentFilter || a.studentId === studentFilter));
+  const sheets = Array.from({ length: Math.ceil(cards.length / 8) }, (_, index) => cards.slice(index * 8, index * 8 + 8));
 
   async function handlePrint() {
     await document.fonts.ready;
@@ -69,9 +73,9 @@ function CardsInner() {
     <main className="min-h-dvh bg-white text-ink">
       <style>{`
         @page { size: A4 portrait; margin: 0; }
-        .cards-sheet { display: grid; grid-template-columns: 105mm 105mm; width: 210mm; margin: 0 auto; }
+        .cards-sheet { display: grid; grid-template-columns: 105mm 105mm; grid-auto-rows: 74.25mm; grid-template-rows: repeat(4, 74.25mm); width: 210mm; min-height: 297mm; margin: 0 auto 12mm; }
         .exam-card { width: 105mm; height: 74.25mm; box-sizing: border-box; border: 0.4mm dashed var(--hairline); padding: 5mm 6mm; display: flex; flex-direction: column; gap: 2mm; break-inside: avoid; page-break-inside: avoid; overflow: hidden; }
-        @media print { .cards-toolbar { display: none !important; } .cards-sheet { margin: 0; break-inside: auto; } .exam-card { break-inside: avoid !important; page-break-inside: avoid !important; } }
+        @media print { .cards-toolbar { display: none !important; } .cards-sheet { margin: 0; break-inside: avoid; page-break-inside: avoid; break-after: page; page-break-after: always; } .cards-sheet:last-child { break-after: auto; page-break-after: auto; } .exam-card { break-inside: avoid !important; page-break-inside: avoid !important; } }
       `}</style>
 
       <div className="cards-toolbar flex items-center gap-2 p-4 flex-wrap">
@@ -109,8 +113,12 @@ function CardsInner() {
       ) : !data ? (
         <Loader2 className="w-8 h-8 animate-spin text-spring mx-auto mt-16" />
       ) : (
-        <div className="cards-sheet">
-          {cards.map((a) => (
+        {cards.length === 0 ? (
+          <p className="p-8 text-center text-sm text-steel">{t("common.empty")}</p>
+        ) : (
+          sheets.map((sheet, sheetIndex) => (
+            <div key={sheetIndex} className="cards-sheet">
+              {sheet.map((a) => (
             <section key={a.id} className="exam-card">
               <header className="flex items-center gap-2">
                 <Sprout className="w-5 h-5 text-spring shrink-0" />
@@ -133,8 +141,10 @@ function CardsInner() {
                 </span>
               </div>
             </section>
-          ))}
-        </div>
+              ))}
+            </div>
+          ))
+        )}
       )}
     </main>
   );
