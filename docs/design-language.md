@@ -248,7 +248,6 @@
 
 این منابع برای اصول تعامل، دسترس‌پذیری، تایپوگرافی و چاپ مبنا هستند؛ تصمیم‌های رنگ و هویت برند از توکن‌های خود بهار می‌آیند.
 
-- Vercel Web Interface Guidelines: https://vercel.com/design/guidelines
 - WAI-ARIA Authoring Practices: https://www.w3.org/WAI/ARIA/apg/
 - WCAG 2.2: https://www.w3.org/TR/WCAG22/
 - Radix Accessibility: https://www.radix-ui.com/primitives/docs/overview/accessibility
@@ -256,8 +255,6 @@
 - MDN Printing: https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Printing
 - MDN beforeprint: https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeprint_event
 - MDN afterprint: https://developer.mozilla.org/en-US/docs/Web/API/Window/afterprint_event
-- Linear UI refresh principles (scanability and consistent navigation): https://linear.app/changelog/2026-03-12-ui-refresh
-- Linear interface preferences: https://linear.app/docs/account-preferences
 
 ## 14. معیار پذیرش
 
