@@ -44,6 +44,8 @@
  --secondary:var(--v5-muted);--secondary-foreground:var(--v5-text);--muted:var(--v5-muted);--muted-foreground:var(--v5-secondary);
  --accent:var(--v5-sunken);--accent-foreground:#a9ebcf;--destructive:var(--v5-danger);--destructive-foreground:#421f1d;
  --border:var(--v5-border);--input:var(--v5-border-strong);--ring:var(--v5-spring);--sidebar-border:#24372c;
+ --ink:var(--v5-text);--ink-deep:var(--v5-text);--steel:var(--v5-secondary);--paper:var(--v5-surface);--cloud:var(--v5-muted);--hairline:var(--v5-border);--hairline-soft:var(--v5-border-soft);--sidebar-surface:var(--v5-sidebar);--invert:#f0f5f1;--invert-foreground:#0b1510;
+ --success-foreground:#08251d;--warning-foreground:#2a1b06;--warning-deep:var(--v5-warning);--info-foreground:#10243a;--danger-foreground:#421f1d;--blossom-foreground:#2a101c;
 }
 html[data-bahar-ui="v5"],html[data-bahar-ui="v5"] body{font-family:"Arad";background:var(--v5-canvas);color:var(--v5-text);text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
 html[data-bahar-ui="v5"] :is(button,input,select,textarea,option){font:inherit}
