@@ -32,10 +32,10 @@
 - `icon`: مربع 40px دسکتاپ و 44px موبایل.
 
 ### Behavior
-- type پیش‌فرض `button` باشد، مگر فرم صریحاً submit را تعیین کند.
+- رفتار بومی type حفظ شود؛ درون فرم برای کنش‌های غیرارسال حتماً `type="button"` و برای ارسال `type="submit"` صریحاً تعیین شود.
 - loading، spinner را همراه label نشان دهد؛ متن اصلی حذف نشود.
 - disabled با aria-disabled یا native disabled مطابق semantics.
-- دکمهٔ داخل فرم بدون type نباید ناخواسته submit کند.
+- همهٔ دکمه‌های داخل فرم باید type صریح داشته باشند تا submit ناخواسته رخ ندهد.
 - variant/size از CVA و توکن‌های مرکزی؛ رنگ مستقیم hex ممنوع.
 
 ## 3. Input / Textarea / Select
