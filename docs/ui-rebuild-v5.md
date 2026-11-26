@@ -48,168 +48,158 @@
 - classهای قدیمی با semantic tokens جایگزین شوند.
 - layout و ترتیب بصری اطلاعات بهتر شود، اگر ترتیب عملیات و meaning حفظ شود.
 
-## 4. صفحه‌ها و دامنه‌ها
+## 4. موجودی دقیق routeهای پنل
 
-### Dashboard و دسترسی
-- `/app`
-- `/app/accessibility`
-- `/app/modules`
-- `/app/modules/[slug]`
+تعداد route pageهای موجود در filesystem شاخهٔ بازسازی: **144**. این فهرست از درخت واقعی مخزن تولید شده است؛ route جدیدی از روی حدس ساخته نشده است.
 
-### دانش‌آموز، اولیا و ثبت‌نام
-- `/app/students`
-- `/app/students/[id]`
-- `/app/children`
-- `/app/admissions`
-- `/app/alumni`
-- `/app/student-goals`
-- `/app/badges`
-- `/app/birthdays`
-- `/app/id-cards`
-- `/app/id-reissue`
-- `/app/yearbook`
-- `/app/portfolio`
-- `/app/observations`
-- `/app/behavior`
-- `/app/guidance`
-- `/app/wellbeing`
-- `/app/health`
-- `/app/medication-log`
+```text
+//app/accessibility
+//app/admissions
+//app/alumni
+//app/announcements
+//app/approvals
+//app/assembly
+//app/asset-loans
+//app/assignments
+//app/attendance
+//app/audit
+//app/automation
+//app/badges
+//app/behavior
+//app/bike-registry
+//app/birthdays
+//app/blog
+//app/book-exchange
+//app/book-suggestions
+//app/bots
+//app/call-log
+//app/campaigns
+//app/carpool
+//app/certificates
+//app/children
+//app/class-roles
+//app/class-visits
+//app/classes
+//app/cleaning
+//app/club-proposals
+//app/clubs
+//app/consents
+//app/countries
+//app/descriptive-report
+//app/document-requests
+//app/dormitory
+//app/drill-log
+//app/duty-logs
+//app/duty-roster
+//app/elections
+//app/engagement
+//app/events
+//app/exam-seats
+//app/exams
+//app/excuses
+//app/facilities
+//app/fame
+//app/fee-installments
+//app/finance
+//app/forms/[id]
+//app/forms
+//app/gate-passes
+//app/grade-appeals
+//app/grades
+//app/guidance
+//app/health
+//app/held-items
+//app/help-board
+//app/homework-balance
+//app/id-cards
+//app/id-reissue
+//app/imports
+//app/insights
+//app/journal
+//app/keys-log
+//app/kindness-wall
+//app/labs
+//app/languages
+//app/leads
+//app/leaves
+//app/lesson-plans
+//app/library
+//app/locale-settings
+//app/lockers
+//app/lost-found
+//app/makeup-classes
+//app/mcp
+//app/meal-orders
+//app/meals
+//app/medication-log
+//app/meetings
+//app/mentoring
+//app/messages
+//app/minutes
+//app/modules/[slug]
+//app/modules
+//app/network
+//app/observations
+//app/office-hours
+//app/parking
+//app/payroll
+//app/pickup
+//app/plugins
+//app/podcast
+//app/portfolio
+//app/preschool
+//app/print-requests
+//app/profile
+//app/question-bank
+//app/quizzes/[id]
+//app/quizzes
+//app/reading
+//app/report-comments
+//app/reports
+//app/resources
+//app/revision-plan
+//app/rollover
+//app/safe-route
+//app/safety-reports
+//app/schedule
+//app/schools
+//app/science-fair
+//app/seating
+//app/settings
+//app/shad
+//app/shuttle-delays
+//app/sms
+//app/sports-league
+//app/sports-records
+//app/staff-attendance
+//app/student-goals
+//app/students/[id]
+//app/students
+//app/study-groups
+//app/study
+//app/subjects
+//app/substitutions
+//app/supply-requests
+//app/tasks
+//app/tickets
+//app/tracks
+//app/transfer-requests
+//app/transport-requests
+//app/transport
+//app/tutor-offers
+//app/tv
+//app/uniforms
+//app/users
+//app/venues
+//app/virtual-sessions
+//app/volunteer
+//app/wallet
+//app/website
+//app/wellbeing
+//app/yearbook
+```
 
-### آموزش، کلاس و ارزشیابی
-- `/app/classes`
-- `/app/class-roles`
-- `/app/class-visits`
-- `/app/subjects`
-- `/app/lesson-plans`
-- `/app/assignments`
-- `/app/exams`
-- `/app/exam-seats`
-- `/app/grades`
-- `/app/descriptive-report`
-- `/app/grade-appeals`
-- `/app/question-bank`
-- `/app/quizzes`
-- `/app/quizzes/[id]`
-- `/app/study`
-- `/app/study-groups`
-- `/app/reading`
-- `/app/revision-plan`
-- `/app/makeup-classes`
-- `/app/tracks`
-- `/app/seating`
-- `/app/timetable` (در صورت route موجود/ناوبری مرتبط)
-- `/app/teaching` (در صورت route موجود/ناوبری مرتبط)
-
-### حضور و غیاب و عملیات روزانه
-- `/app/attendance`
-- `/app/excuses`
-- `/app/approvals`
-- `/app/staff-attendance`
-- `/app/duty-roster`
-- `/app/duty-logs`
-- `/app/drill-log`
-- `/app/cleaning`
-- `/app/keys-log`
-- `/app/held-items`
-- `/app/lost-found`
-- `/app/lockers`
-- `/app/facilities`
-- `/app/asset-loans`
-- `/app/safe-route`
-- `/app/safety-reports`
-- `/app/gate-passes`
-- `/app/pickup`
-- `/app/parking`
-
-### ارتباطات، محتوا و جامعه
-- `/app/announcements`
-- `/app/messages`
-- `/app/call-log`
-- `/app/consents`
-- `/app/events`
-- `/app/assembly`
-- `/app/blog`
-- `/app/campaigns`
-- `/app/clubs`
-- `/app/club-proposals`
-- `/app/elections`
-- `/app/kindness-wall`
-- `/app/fame`
-- `/app/meetings`
-- `/app/minutes`
-- `/app/help-board`
-- `/app/tickets`
-- `/app/tasks`
-- `/app/volunteer`
-- `/app/podcast`
-- `/app/tv`
-- `/app/virtual-sessions`
-
-### مالی، خرید و منابع
-- `/app/finance`
-- `/app/fee-installments`
-- `/app/payroll`
-- `/app/wallet`
-- `/app/shop`
-- `/app/supply-requests`
-- `/app/resources`
-- `/app/library`
-- `/app/book-exchange`
-- `/app/book-suggestions`
-- `/app/meals`
-- `/app/meal-orders`
-- `/app/uniforms`
-
-### حمل‌ونقل، خدمات و فضا
-- `/app/transport`
-- `/app/transport-requests`
-- `/app/carpool`
-- `/app/shuttle-delays`
-- `/app/bike-registry`
-- `/app/dormitory`
-- `/app/preschool`
-- `/app/venues`
-- `/app/sports-league`
-- `/app/sports-records`
-- `/app/science-fair`
-
-### مدیریت، تنظیمات و یکپارچه‌سازی
-- `/app/audit`
-- `/app/automation`
-- `/app/bots`
-- `/app/countries`
-- `/app/imports`
-- `/app/insights`
-- `/app/journal`
-- `/app/labs`
-- `/app/languages`
-- `/app/leads`
-- `/app/leaves`
-- `/app/locale-settings`
-- `/app/mcp`
-- `/app/network`
-- `/app/plugins`
-- `/app/profile`
-- `/app/reports`
-- `/app/report-comments`
-- `/app/rollover`
-- `/app/schedule`
-- `/app/schools`
-- `/app/settings`
-- `/app/shad`
-- `/app/sms`
-- `/app/substitutions`
-- `/app/transfer-requests`
-- `/app/tutor-offers`
-- `/app/users`
-- `/app/website`
-- `/app/forms`
-- `/app/forms/[id]`
-- `/app/print-requests`
-- `/app/languages`
-
-> این دسته‌بندی برای برنامه‌ریزی QA است؛ routeهای دقیق و نهایی باید از filesystem و NAV خوانده شوند. مواردی که در کد وجود ندارند، به‌عنوان route جدید ایجاد نمی‌شوند.
+این فهرست مرجع QA و ردیابی صفحه‌هاست. برای هر route باید role/permission، دادهٔ واقعی، stateهای loading/empty/error، workflow، mobile layout و screenshot QA ثبت شود.
 
 ## 5. صفحه‌های خارج از پنل
 
