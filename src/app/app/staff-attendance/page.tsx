@@ -40,7 +40,8 @@ export default function StaffAttendancePage() {
   const { t } = useLang();
   const confirm = useConfirm();
   const [data, setData] = useState<MgrData | OwnData | null>(null);
-  const [date, setDate] = useState(todayKey());\n  const [dateDraft, setDateDraft] = useState(todayKey());
+  const [date, setDate] = useState(todayKey());
+  const [dateDraft, setDateDraft] = useState(todayKey());
   const [marks, setMarks] = useState<Record<string, StaffMark>>({});
   const [busy, setBusy] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -92,7 +93,25 @@ export default function StaffAttendancePage() {
     }));
   }
 
-  function applyDateDraft() {\n    const normalized = dateDraft.trim();\n    const match = /^(\\d{4})-(\\d{2})-(\\d{2})$/.exec(normalized);\n    if (!match) {\n      toast.error(t("common.invalidDate"));\n      setDateDraft(date);\n      return;\n    }\n    const month = Number(match[2]);\n    const day = Number(match[3]);\n    if (month < 1 || month > 12 || day < 1 || day > 31) {\n      toast.error(t("common.invalidDate"));\n      setDateDraft(date);\n      return;\n    }\n    setDate(normalized);\n  }\n\n  async function save() {
+  function applyDateDraft() {
+    const normalized = dateDraft.trim();
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(normalized);
+    if (!match) {
+      toast.error(t("common.invalidDate"));
+      setDateDraft(date);
+      return;
+    }
+    const month = Number(match[2]);
+    const day = Number(match[3]);
+    if (month < 1 || month > 12 || day < 1 || day > 31) {
+      toast.error(t("common.invalidDate"));
+      setDateDraft(date);
+      return;
+    }
+    setDate(normalized);
+  }
+
+  async function save() {
     if (!data?.manager) return;
     const records = Object.entries(marks)
       .filter(([, mark]) => Boolean(mark.status))
@@ -206,7 +225,8 @@ export default function StaffAttendancePage() {
           onChange={(event) => setDate(event.target.value)}
           placeholder="1404-08-05"
         />
-        <button type="button" className="b-btn b-btn-outline b-btn-sm" onClick={applyDateDraft} disabled={dateDraft === date}>{t("common.apply")}</button>\n        <span className="text-xs text-steel">{markedCount} / {data.staff.length}</span>
+        <button type="button" className="b-btn b-btn-outline b-btn-sm" onClick={applyDateDraft} disabled={dateDraft === date}>{t("common.apply")}</button>
+        <span className="text-xs text-steel">{markedCount} / {data.staff.length}</span>
       </div>
 
       <section className="b-card-sm divide-y divide-hairline-soft">
