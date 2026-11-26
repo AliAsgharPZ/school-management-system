@@ -1,99 +1,79 @@
-# قواعد اجرای رابط کاربری بهار
-نسخه: 2.0
+# قواعد اجرای رابط کاربری بهار — V5
+نسخه: 5.0
 
-این سند راهنمای اجرای روزمره است. مرجع تصمیم دربارهٔ هویت، رنگ، تایپوگرافی، فاصله‌ها، سطح‌ها و حرکت:
-- `docs/design-language.md`
-- `docs/component-contracts.md`
-
-در صورت تعارض، design-language مرجع بصری و component-contracts مرجع رفتار کامپوننت است.
+مرجع بصری: `docs/design-system-v5.md`  
+مرجع API و component: `docs/component-catalog-v5.md`  
+مرجع route coverage و QA: `docs/ui-rebuild-v5.md`
 
 ## 1. ترتیب تصمیم‌گیری
 1. صحت داده و عملیات
-2. وضوح و دسترس‌پذیری
-3. سرعت و تراکم متعادل
-4. انسجام بصری
-5. حرکت و تزئینات
+2. دسترس‌پذیری و امنیت
+3. وضوح سلسله‌مراتب و سرعت
+4. تراکم اطلاعات و responsive behavior
+5. انسجام بصری
+6. حرکت و تزئین
 
-هیچ جلوه‌ای مجاز نیست که عملیات، خوانایی، عملکرد یا قابلیت استفاده با صفحه‌کلید را تضعیف کند.
+## 2. پیش از تغییر صفحه
+- route، API، مدل داده، role/permission و تمام actionها را شناسایی کن.
+- stateهای loading، empty، no-results، error، success، disabled و no-permission را ثبت کن.
+- call siteهای shared component را پیدا کن.
+- behavior فعلی را به‌عنوان regression baseline نگه دار.
+- تغییر ظاهر نباید route، payload، validation دامنه یا access control را حذف کند.
 
-## 2. پیش از تغییر هر صفحه
-- مسیر صفحه، APIها، مدل داده، مجوزها و تمام actionها را شناسایی کن.
-- تمام حالت‌های loading، empty، error، no permission، success و دادهٔ حجیم را پیدا کن.
-- کامپوننت مشترک موجود را استفاده یا اصلاح کن؛ کامپوننت مشابه تازه نساز.
-- برای تغییر، رفتار فعلی و رفتار مورد انتظار را ثبت کن.
-- هیچ route، فیلد، عملیات یا سطح دسترسی را برای ساده‌سازی ظاهری حذف نکن.
-
-## 3. اصول چیدمان
-- صفحه از سربرگ، نوار ابزار، محتوای اصلی و وضعیت‌ها تشکیل شود.
-- تراکم اطلاعات متعادل باشد؛ جدول و فرم نباید به کارت‌های پراکنده و اسکرول غیرضروری تبدیل شوند.
-- کارت فقط برای گروه اطلاعات یا عملیات مستقل استفاده شود.
-- در هر بخش فقط یک action اصلی؛ بقیه secondary یا ghost.
-- از عرض‌های ثابت شکننده و marginهای فیزیکی چپ/راست استفاده نکن.
-- برای RTL از logical properties و کلاس‌های `start/end`، `ms/me`، `ps/pe` و `text-start` استفاده کن.
-- در موبایل، هیچ ستون یا عملیاتی بدون جایگزین حذف نشود.
+## 3. ساختار صفحه
+- PageHeader با عنوان روشن و action اصلی.
+- toolbar و filterها در یک گروه بصری.
+- دادهٔ اصلی در اولویت.
+- کارت فقط برای گروه مستقل؛ نه برای هر بخش کوچک.
+- عرض و spacing از tokenهای V5.
+- RTL با logical properties و start/end.
+- موبایل همهٔ عملیات را با layout جایگزین نگه می‌دارد.
 
 ## 4. کامپوننت و استایل
-- دکمه، ورودی، جدول، کارت، دیالوگ، منو، تب و نشان وضعیت باید از shared components استفاده کنند.
-- برای یک نیاز مشترک، یک کامپوننت مرکزی بساز؛ منطق تکراری داخل صفحه‌ها ممنوع.
-- رنگ و اندازهٔ جدید بدون تعریف توکن اضافه نکن.
-- از hex پراکنده، سایهٔ سنگین، گرادیان نمایشی، capsule بی‌دلیل و hover-only action استفاده نکن.
-- کلاس‌های utility نباید semantics، focus یا اندازهٔ هدف لمس را حذف کنند.
-- برای دکمه‌های داخل فرم، `type` را صریح تعیین کن.
-- آیکون-only باید accessible name داشته باشد.
+- از primitiveهای محلی و shared patternها استفاده کن.
+- رنگ، radius، spacing، shadow و typography فقط از V5 tokenها.
+- فونت فقط Arad.
+- هیچ hex، رنگ status یا font family خام داخل صفحه اضافه نشود.
+- button type صریح؛ icon-only accessible name دارد.
+- Radix behavior را با div سفارشی جایگزین نکن.
 
 ## 5. فرم و داده
-- label مستقل از placeholder باشد.
-- خطا کنار فیلد و با `aria-describedby` متصل شود.
-- مقدار فرم هنگام خطا، retry یا پاسخ شبکه از دست نرود.
-- ارقام فارسی/عربی/لاتین و تاریخ از helper مرکزی عبور کنند.
-- متن، شناسه، URL، شماره و زمان مختلط را با جهت درست نمایش بده.
-- loading نباید بی‌پایان باشد؛ خطا باید retry امن و پیام قابل فهم داشته باشد.
-- success فقط بعد از پاسخ موفق API نمایش داده شود.
-- در عملیات bulk، تعداد انتخاب‌شده و اثر عملیات روشن باشد.
+- label visible؛ placeholder فقط hint.
+- error با aria-invalid و aria-describedby.
+- input هنگام retry و network failure حفظ شود.
+- success فقط پس از response واقعی.
+- ارقام، تاریخ و ارز از formatter مرکزی.
+- bulk operation تعداد و اثر خود را توضیح می‌دهد.
 
 ## 6. جدول و گزارش
-- عنوان، ترتیب، واحد، وضعیت و عملیات ستون‌ها مشخص باشد.
-- sticky header فقط در ظرف اسکرول درست و خارج از print.
-- جدول عریض در موبایل scroll کنترل‌شده یا نمای جایگزین داشته باشد.
-- pagination و filter باید state واقعی داشته باشند.
-- empty state و no-result state از هم تفکیک شوند.
-- گزارش باید بازهٔ زمانی، مدرسه/کلاس و فیلترهای مؤثر را نمایش دهد.
+- header، unit، sorting و alignment روشن.
+- sticky header در scroll container.
+- mobile overflow یا row-card alternative با حفظ تمام داده.
+- pagination و filter state واقعی.
+- report range، school/class context و filterهای مؤثر را نمایش می‌دهد.
 
-## 7. چاپ و خروجی
-- چاپ را به‌عنوان سند مستقل طراحی کن؛ از چاپ مستقیم پوستهٔ داشبورد پرهیز کن.
-- فونت و تصویر مهم پیش از print آماده باشد.
-- توکن CSS در پنجرهٔ مستقل چاپ بدون تعریف استفاده نشود؛ رنگ واقعی یا stylesheet self-contained لازم است.
-- `@page`، اندازهٔ کاغذ، جهت، حاشیه، تکرار header و page break را مشخص کن.
-- ردیف جدول را تا حد امکان نشکن؛ کل گروه بزرگ را با `break-inside: avoid` از جریان صفحه خارج نکن.
-- خروجی PDF، CSV و XLSX را با دادهٔ فارسی، ارقام، سلول خالی، متن چندخطی و چندصفحه‌ای تست کن.
-- popup blocked، font loading failure و دادهٔ خالی باید پیام و مسیر جایگزین داشته باشند.
+## 7. Print
+- خروجی چاپی مستقل از shell.
+- header گزارش، تاریخ، مدرسه و context.
+- تکرار table header و کنترل page breaks.
+- تست PDF فارسی چندصفحه‌ای.
 
-## 8. حرکت
-- فقط opacity و transform برای micro-interactionهای کوتاه.
-- transition معمول 120–200ms؛ از `transition: all` پرهیز کن.
-- حرکت برای توضیح تغییر وضعیت است، نه نمایش.
-- reduced-motion باید انیمیشن غیرضروری را حذف کند.
-- انیمیشن نباید focus، محتوا یا عملیات ضروری را پنهان کند.
-- از parallax، 3D، blur سنگین و stagger طولانی در صفحات اداری استفاده نکن.
+## 8. Motion
+- 120–180ms برای micro-interaction.
+- opacity/transform؛ بدون blur/parallax/3D در پنل.
+- reduced-motion اجباری.
 
-## 9. دسترس‌پذیری و امنیت
-- همهٔ مسیرهای اصلی با صفحه‌کلید قابل استفاده باشند.
-- focus-visible مشخص و در viewport قابل مشاهده باشد.
-- دیالوگ focus را مدیریت کند و پس از بسته‌شدن آن را بازگرداند.
-- منوها، listboxها و tabها مطابق الگوی ARIA رفتار کنند.
-- متن و وضعیت فقط با رنگ منتقل نشوند.
-- API مجوز را enforce کند؛ مخفی‌کردن دکمه جایگزین کنترل سمت سرور نیست.
-- HTML، URL، فایل و دادهٔ ورودی اعتبارسنجی شوند.
+## 9. Accessibility و security
+- keyboard-only، focus-visible، semantic HTML و screen reader.
+- contrast مطابق WCAG 2.2 AA.
+- permission همیشه سمت سرور enforce می‌شود.
+- دادهٔ حساس در DOM/toast/log غیرضروری نمایش داده نشود.
 
-## 10. کنترل کیفیت قبل از ثبت تغییر
-- build، lint و typecheck.
-- بررسی خطای console، hydration، requestهای تکراری و loading بی‌پایان.
-- تست مسیر عادی، دادهٔ خالی، خطای شبکه، نقش غیرمجاز و دادهٔ حجیم.
-- تست RTL/LTR، Light/Dark، موبایل/دسکتاپ و keyboard-only.
-- تست reduced-motion و zoom 200%.
-- تست چاپ در preview و PDF چندصفحه‌ای.
-- جست‌وجوی call siteهای تمام کامپوننت‌های تغییرکرده.
-- تست رگرسیون route، API، permission و داده.
-
-## 11. قانون انتشار
-تغییر فقط وقتی آمادهٔ انتشار است که build واقعی موفق باشد، سناریوهای مرتبط تست شده باشند و preview با محیط production هم‌خوانی داشته باشد. Merge یا commit به‌تنهایی به معنی deploy موفق نیست.
+## 10. تست و انتشار
+- lint، typecheck، build.
+- RTL/LTR، Light/Dark، mobile/desktop.
+- loading/empty/error/permission و دادهٔ حجیم.
+- keyboard، reduced-motion، zoom 200%.
+- screenshot QA واقعی برای صفحات مهاجرت‌شده.
+- تست regression API، permissions، form submission، table operations و print.
+- merge/deploy فقط بعد از CI سبز و تأیید بصری.
