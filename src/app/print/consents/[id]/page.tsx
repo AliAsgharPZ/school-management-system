@@ -48,7 +48,13 @@ function ConsentPrintInner() {
       </main>
     );
   }
-  async function handlePrint() {\n    await document.fonts.ready;\n    await Promise.all(Array.from(document.images).map((image) => image.decode().catch(() => undefined)));\n    window.print();\n  }\n\n  const approved = data.roster.filter((r) => r.status === "APPROVED");
+  async function handlePrint() {
+    await document.fonts.ready;
+    await Promise.all(Array.from(document.images).map((image) => image.decode().catch(() => undefined)));
+    window.print();
+  }
+
+  const approved = data.roster.filter((r) => r.status === "APPROVED");
   const declined = data.roster.filter((r) => r.status === "DECLINED").length;
   const pending = data.roster.length - approved.length - declined;
 
