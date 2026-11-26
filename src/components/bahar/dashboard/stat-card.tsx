@@ -81,7 +81,7 @@ export function StatCard({
           </p>
         </div>
         {Icon ? (
-          <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-spring-tint">
+          <span data-bahar-kpi-icon data-tone={tone} className="flex size-11 shrink-0 items-center justify-center rounded-full bg-spring-tint">
             <Icon size={20} className="text-spring-deep" />
           </span>
         ) : null}
