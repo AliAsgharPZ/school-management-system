@@ -9,6 +9,9 @@ const design = read("../docs/design-system-v4.md");
 const catalog = read("../docs/component-catalog-v4.md");
 const fontLoader = read("../src/app/fonts.ts");
 const layout = read("../src/app/layout.tsx");
+const uiFiles = readFileSync(new URL("../src/components/ui", import.meta.url), { withFileTypes: true }).filter(entry => entry.isFile() && entry.name.endsWith(".tsx")).map(entry => entry.name);
+const structuralOnly = new Set(["aspect-ratio.tsx", "toaster.tsx"]);
+const migratedUiFiles = uiFiles.filter(name => !structuralOnly.has(name));
 
 const checks = [
   ["V4 theme layer exists", css.includes("BAHAR / VISUAL SYSTEM 4.0")],
