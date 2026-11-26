@@ -26,6 +26,37 @@ type SiteResponse = {
 
 type Me = { user: { role: string; school: { name: string } | null; actingSchool: { name: string } | null } };
 
+type ImageFieldProps = {
+  field: string;
+  label: string;
+  hint?: string;
+  value?: string;
+  uploading: boolean;
+  onPick: (field: string) => void;
+};
+
+function ImageField({ field, label, hint, value, uploading, onPick }: ImageFieldProps) {
+  return (
+    <div className="b-card-sm p-3.5 flex items-center gap-3">
+      {value ? (
+        <img src={value} alt={label} className="w-14 h-14 rounded-2xl object-cover border border-hairline shrink-0" />
+      ) : (
+        <span className="w-14 h-14 rounded-2xl bg-cloud flex items-center justify-center text-stone shrink-0">
+          <Upload className="w-5 h-5" />
+        </span>
+      )}
+      <div className="min-w-0 flex-1">
+        <b className="text-xs block">{label}</b>
+        {hint && <span className="text-xs text-steel block truncate">{hint}</span>}
+      </div>
+      <button type="button" className="b-btn b-btn-soft b-btn-sm shrink-0" onClick={() => onPick(field)} disabled={uploading}>
+        {uploading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Upload className="w-3.5 h-3.5" />}
+        آپلود
+      </button>
+    </div>
+  );
+}
+
 export default function WebsiteEditorPage() {
   const { data: me } = useApi<Me>("/api/auth/me");
   const { data, loading, error, refetch } = useApi<SiteResponse>("/api/school-site");
@@ -125,28 +156,7 @@ export default function WebsiteEditorPage() {
   // ورودی فارسی/بزرگ کاربر سمت سرور ترجمیه می‌شود و قبلاً لینک ۴۰۴ می‌داد
   const effectiveSlug = slugify(subdomain) || site.subdomain;
 
-  const ImageField = ({ field, label, hint }: { field: string; label: string; hint?: string }) => (
-    <div className="b-card-sm p-3.5 flex items-center gap-3">
-      {(() => {
-        const url = (config as unknown as Record<string, string>)?.[field];
-        return url ? (
-          <img src={url} alt={label} className="w-14 h-14 rounded-2xl object-cover border border-hairline shrink-0" />
-        ) : (
-          <span className="w-14 h-14 rounded-2xl bg-cloud flex items-center justify-center text-stone shrink-0">
-            <Upload className="w-5 h-5" />
-          </span>
-        );
-      })()}
-      <div className="min-w-0 flex-1">
-        <b className="text-xs block">{label}</b>
-        {hint && <span className="text-xs text-steel block truncate">{hint}</span>}
-      </div>
-      <button type="button" className="b-btn b-btn-soft b-btn-sm shrink-0" onClick={() => pickFile(field)} disabled={uploading === field}>
-        {uploading === field ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Upload className="w-3.5 h-3.5" />}
-        آپلود
-      </button>
-    </div>
-  );
+
 
   const tabs = [
     { id: "template", label: "تمپلیت و رنگ", icon: Palette },
@@ -371,7 +381,7 @@ export default function WebsiteEditorPage() {
               <span className="text-xs font-bold">متن دکمه پیش‌ثبت‌نام</span>
               <input className="b-input" value={config.ctaPrimary} onChange={(e) => patchConfig({ ctaPrimary: e.target.value })} />
             </label>
-            <ImageField field="heroImage" label="تصویر هیرو" hint="نسبت ۴:۳ توصیه می‌شود" />
+            <ImageField field="heroImage" label="تصویر هیرو" hint="نسبت ۴:۳ توصیه می‌شود" value={(config as unknown as Record<string, string | undefined>).heroImage} uploading={uploading === "heroImage"} onPick={pickFile} />
           </div>
 
           <div className="b-card p-5 flex flex-col gap-4">
@@ -384,12 +394,12 @@ export default function WebsiteEditorPage() {
               <span className="text-xs font-bold">متن درباره مدرسه</span>
               <textarea rows={4} className="b-input resize-none" value={config.aboutText} onChange={(e) => patchConfig({ aboutText: e.target.value })} />
             </label>
-            <ImageField field="aboutImage" label="تصویر درباره" />
+            <ImageField field="aboutImage" label="تصویر درباره" value={(config as unknown as Record<string, string | undefined>).aboutImage} uploading={uploading === "aboutImage"} onPick={pickFile} />
             <label className="flex flex-col gap-1.5">
               <span className="text-xs font-bold">پیام مدیر</span>
               <textarea rows={3} className="b-input resize-none" value={config.principalMessage} onChange={(e) => patchConfig({ principalMessage: e.target.value })} />
             </label>
-            <ImageField field="principalPhoto" label="تصویر مدیر" />
+            <ImageField field="principalPhoto" label="تصویر مدیر" value={(config as unknown as Record<string, string | undefined>).principalPhoto} uploading={uploading === "principalPhoto"} onPick={pickFile} />
           </div>
 
           <div className="b-card p-5 flex flex-col gap-4">
