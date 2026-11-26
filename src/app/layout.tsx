@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "./bahar-v5.css";
 import { Toaster } from "@/components/ui/sonner";
 import { SwRegister } from "@/components/sw-register";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -70,6 +71,7 @@ export default async function RootLayout({
   } catch { /* دیفالت ایران */ }
   return (
     <html
+      data-bahar-ui="v5"
       lang={initialProfile?.locale?.split("-")[0] ?? "fa"}
       dir={initialProfile?.direction ?? "rtl"}
       data-scroll-behavior="smooth"
