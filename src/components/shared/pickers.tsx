@@ -74,7 +74,7 @@ export function Select({
         <button
           type="button"
           disabled={disabled}
-          aria-label={ariaLabel}
+          aria-label={ariaLabel ? `${ariaLabel}: ${selected?.label ?? placeholder}` : undefined}
           aria-expanded={open}
           aria-haspopup="listbox"
           className={`b-input flex w-full min-w-0 items-center justify-between gap-2 text-start cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 ${buttonClassName}`}
