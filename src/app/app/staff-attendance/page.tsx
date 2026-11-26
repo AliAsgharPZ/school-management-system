@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { ClipboardCheck, Loader2, Save, Trash2 } from "lucide-react";
 import { apiGet, apiPost, apiDelete } from "@/lib/client";
 import { PageHeader, EmptyState, LoadingBlock, ErrorBox } from "@/components/shared/bits";
-import { Select } from "@/components/shared/pickers";
+import { Select, useConfirm } from "@/components/shared/pickers";
 import { todayKey } from "@/lib/persian";
 import { useLang } from "@/lib/i18n";
 
@@ -37,7 +37,7 @@ const ROLE_TKEY: Record<string, string> = {
 };
 
 export default function StaffAttendancePage() {
-  const { t } = useLang();
+  const { t } = useLang();\n  const confirm = useConfirm();
   const [data, setData] = useState<MgrData | OwnData | null>(null);
   const [date, setDate] = useState(todayKey());
   const [marks, setMarks] = useState<Record<string, StaffMark>>({});
@@ -153,7 +153,7 @@ export default function StaffAttendancePage() {
                         className="b-btn b-btn-ghost b-btn-sm text-destructive"
                         aria-label={t("staffAttendance.hzf-rkvrd")}
                         onClick={async () => {
-                          if (!window.confirm(t("staffAttendance.ayn-rkvrd-hzvr-hzf-shvd"))) return;
+                          const accepted = await confirm({ title: t("staffAttendance.ayn-rkvrd-hzvr-hzf-shvd"), danger: true });\n                          if (!accepted) return;
                           try {
                             await apiDelete(`/api/staff-attendance?id=${encodeURIComponent(record.id)}`);
                             toast.success(t("staffAttendance.hzf-shd"));
