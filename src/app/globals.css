@@ -1332,7 +1332,7 @@ body { background: var(--background); }
   background: var(--cloud);
 }
 [data-bahar-shell] > .flex-1 > div > header,
-[data-bahar-shell] header.lg\\:hidden {
+[data-bahar-shell] header.lg\:hidden {
   background: var(--card);
   backdrop-filter: none;
   border-color: var(--hairline-soft);
@@ -1566,7 +1566,7 @@ html[dir="rtl"] [data-bahar-shell] > .flex-1 > aside a[aria-current="page"] { bo
   min-height:40px; border-radius:var(--bahar-radius-sm); padding-inline:1rem; font-weight:650; letter-spacing:0;
   box-shadow:none; transition:transform 150ms var(--ease-spring),background-color 150ms var(--ease-standard),border-color 150ms var(--ease-standard),box-shadow 150ms var(--ease-standard);
 }
-#main-content .b-btn-spring,[data-slot="button"]:not([data-variant="outline"]):not([data-variant="secondary"]):not([data-variant="ghost"]):not([data-variant="link"]) {
+#main-content .b-btn-spring,[data-slot="button"][data-variant="default"] {
   background:var(--spring); color:#fff; box-shadow:0 2px 0 color-mix(in srgb,var(--spring-deep) 72%,#000 28%);
 }
 #main-content .b-btn-spring:hover,[data-slot="button"]:hover { filter:brightness(1.035); }
