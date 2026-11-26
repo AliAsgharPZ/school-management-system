@@ -82,7 +82,7 @@ export function StatCard({
     warning: "bg-warning text-warning-foreground",
   };
   return (
-    <article className="b-card-sm b-rise b-card-hover bahar-stat-card p-4 sm:p-5 flex items-center gap-3 sm:gap-4">
+    <article data-bahar-kpi data-tone={tone} className="b-card-sm b-rise b-card-hover bahar-stat-card p-4 sm:p-5 flex items-center gap-3 sm:gap-4">
       <span className={`bahar-stat-icon w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 ${tones[tone]}`}>
         <Icon className="w-5 h-5" />
       </span>

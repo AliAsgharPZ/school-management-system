@@ -323,6 +323,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
                   href={n.href}
                   title={collapsed ? (n.tKey ? t(n.tKey) : n.label) : undefined}
                   aria-current={active ? "page" : undefined}
+                  data-bahar-nav-link
                   className={`relative flex items-center gap-3 rounded-full ${collapsed ? "justify-center py-2.5 px-0" : "py-2.5 px-4"} text-[14px] font-bold z-[1] transition-colors duration-200 ${
                     active
                       ? "text-invert-foreground"
@@ -425,7 +426,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
     <div data-bahar-shell className="min-h-screen bg-background flex flex-col">
       <SkipLink />
       {/* هدر موبایل — بدون همبرگر؛ ناوبری موبایل = لانچر app-screen داخل داشبورد */}
-      <header className="lg:hidden sticky top-0 z-40 bg-background border-b border-hairline-soft flex items-center justify-between gap-1 px-3 h-16 no-print">
+      <header data-bahar-mobile-topbar className="lg:hidden sticky top-0 z-40 bg-background border-b border-hairline-soft flex items-center justify-between gap-1 px-3 h-16 no-print">
         <div className="flex items-center gap-1.5 min-w-0">
           <button
             onClick={() => setMobileNavOpen(true)}
@@ -540,6 +541,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
       <div className="flex-1 flex">
         {/* سایدبار دسکتاپ — جمع‌شونده با افکت rubber band */}
         <motion.aside
+          data-bahar-sidebar
           className="hidden lg:block shrink-0 border-e border-hairline-soft bg-background sticky top-0 h-screen overflow-hidden no-print"
           animate={{ width: collapsed ? 76 : 248 }}
           transition={{ type: "spring", stiffness: 480, damping: 30, mass: 0.9 }}
@@ -562,7 +564,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
         {/* محتوا — ستون عمودی: هدر دسکتاپ + صفحه */}
         <div className="flex-1 min-w-0 flex flex-col">
           {/* هدر دسکتاپ (راند ۱۸) — چیپ پنل مدرسه + جستجو + زنگ اعلان‌ها */}
-          <header className="hidden lg:flex sticky top-0 z-40 h-14 shrink-0 items-center gap-2 px-6 bg-background border-b border-hairline-soft no-print">
+          <header data-bahar-topbar className="hidden lg:flex sticky top-0 z-40 h-14 shrink-0 items-center gap-2 px-6 bg-background border-b border-hairline-soft no-print">
             {inSchoolPanel && (
               <button
                 onClick={exitSchoolPanel}
@@ -601,7 +603,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
               />
             )}
           </header>
-          <main id="main-content" tabIndex={-1} className="flex-1 min-w-0 px-4 md:px-8 py-6 md:py-8 pb-10 lg:pb-8 w-full">
+          <main id="main-content" data-bahar-main tabIndex={-1} className="flex-1 min-w-0 px-4 md:px-8 py-6 md:py-8 pb-10 lg:pb-8 w-full">
             <div className="max-w-6xl mx-auto b-page-in" key={pathname}>
               {/* سربرگ رسمی چاپ — فقط روی کاغذ/PDF دیده می‌شود */}
               <div className="print-only b-print-head" aria-hidden>
@@ -698,6 +700,7 @@ function AppShellInner({ user, children }: { user: ShellUser; children: React.Re
                             href={n.href}
                             onClick={() => setMobileNavOpen(false)}
                             aria-current={active ? "page" : undefined}
+                  data-bahar-nav-link
                             className={`flex items-center gap-3 rounded-2xl px-2.5 py-2 text-[14px] font-bold transition-colors ${
                               active
                                 ? "bg-spring-tint text-spring-deep"
